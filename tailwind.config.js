@@ -24,7 +24,7 @@ export default {
   ],
 
   flyonui: {
-    themes: true,
+    themes: ["light", "dark", "gourmet", "corporate", "luxury", "soft"],
     darkTheme: "dark",
     base: true,
     styled: true,

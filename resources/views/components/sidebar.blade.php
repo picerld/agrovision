@@ -3,22 +3,22 @@
     class="fixed lg:sticky lg:top-16 flex flex-col bg-white border-r h-[calc(100vh-4rem)] w-64 lg:w-auto">
     <div class="flex flex-col flex-1 overflow-y-auto">
         <nav class="flex-1 px-2 py-4 space-y-2">
-            <a href="#" class="flex items-center px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">
+            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 <span class="icon-[tabler--home] mr-3"></span>
                 Dashboard
-            </a>
-            <a href="#" class="flex items-center px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">
+            </x-nav-link>
+            <x-nav-link :href="route('commodities.index')" :active="request()->routeIs('commodities.index')">
                 <span class="icon-[tabler--leaf] mr-3"></span>
                 Komoditas
-            </a>
-            <a href="#" class="flex items-center px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">
-                <span class="icon-[tabler--sun] mr-3"></span>
+            </x-nav-link>
+            <x-nav-link :href="route('seed-distributions.index')" :active="request()->routeIs('seed-distributions.index')">
+                <span class="icon-[tabler--droplet] mr-3"></span>
                 Distribusi Bibit
-            </a>
-            <a href="#" class="flex items-center px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">
+            </x-nav-link>
+            <x-nav-link :href="route('fertilizer-distributions.index')" :active="request()->routeIs('fertilizer-distributions.index')">
                 <span class="icon-[tabler--droplet] mr-3"></span>
                 Distribusi Pupuk
-            </a>
+            </x-nav-link>
         </nav>
     </div>
 </aside>

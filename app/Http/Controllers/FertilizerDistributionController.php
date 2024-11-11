@@ -12,7 +12,7 @@ class FertilizerDistributionController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.fertilizer.index');
     }
 
     /**
