@@ -3,16 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\FertilizerDistribution;
+use App\Services\FertilizerDistributionService;
+use App\Services\SchoolService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FertilizerDistributionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected $fertilizerDistributionService;
+    protected $schoolService;
+
+    public function __construct(FertilizerDistributionService $fertilizerDistributionService, SchoolService $schoolService)
+    {
+        $this->schoolService = $schoolService;
+        $this->fertilizerDistributionService = $fertilizerDistributionService;
+    }
+
     public function index()
     {
-        return view('pages.fertilizer.index');
+        $search = request('search');
+        $schools = DB::table('schools')->get();
+        $fertilizers = $search ? $this->fertilizerDistributionService->search($search) : $this->fertilizerDistributionService->getAll();
+
+        return view('pages.fertilizer.index', [
+            'schools' => $schools,
+            'fertilizers' => $fertilizers
+        ]);
     }
 
     /**
@@ -28,7 +44,20 @@ class FertilizerDistributionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'school_id' => 'required|exists:schools,id',
+                'fertilizer_qty' => 'required|numeric',
+                'date' => 'required|date',
+                'pic' => 'required|string|min:5|max:50',
+            ]);
+
+            $this->fertilizerDistributionService->store($validated);
+            return redirect()->route('fertilizer-distributions.index')->with('success', 'Fertilizer distribution created successfully');
+
+        } catch (\Throwable $th) {
+            return redirect()->route('fertilizer-distributions.index')->with('error', $th->getMessage());
+        }
     }
 
     /**
