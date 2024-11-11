@@ -17,7 +17,7 @@
 </head>
 
 <body class="overflow-x-hidden font-sans antialiased">
-    <div class="flex flex-col min-h-screen bg-gray-100">
+    <div class="flex flex-col min-h-screen bg-gray-50">
         @include('layouts.navigation')
 
         <div class="grid lg:grid-cols-[256px_1fr] flex-1 mt-16 w-full">
