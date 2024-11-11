@@ -45,7 +45,6 @@ class CommodityController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         try {
             $validated = $request->validate([
                 'name' => 'required|string|min:5|max:50',
@@ -55,9 +54,19 @@ class CommodityController extends Controller
 
             $this->commodityService->store($validated, $request);
 
-            return redirect()->route('commodities.index')->with('success', 'Commodity created successfully');
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'Commodity created successfully'
+            ]);
+
+            return redirect()->route('commodities.index');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $e->getMessage()
+            ]);
+
+            return redirect()->back();
         }
     }
 
@@ -99,9 +108,18 @@ class CommodityController extends Controller
             }
 
             $this->commodityService->update($id, $validated);
-            return redirect()->route('commodities.index')->with('success', 'Commodity updated successfully');
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'Commodity updated successfully'
+            ]);
+
+            return redirect()->route('commodities.index');
         } catch (\Throwable $th) {
-            return redirect()->route('commodities.index')->with('error', $th->getMessage());
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+            return redirect()->route('commodities.index');
         }
 
         return redirect()->route('commodities.index')->with('success', 'Commodity updated successfully');
@@ -119,9 +137,20 @@ class CommodityController extends Controller
                 $this->commodityService->deleteImage($commodity->image);
             }
             $this->commodityService->delete($commodity->id);
-            return redirect()->route('commodities.index')->with('success', 'Commodity deleted successfully');
+
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'Commodity deleted successfully'
+            ]);
+
+            return redirect()->route('commodities.index');
         } catch (\Throwable $th) {
-            return redirect()->route('commodities.index')->with('error', $th->getMessage());
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->route('commodities.index');
         }
     }
 }

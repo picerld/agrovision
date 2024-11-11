@@ -16,24 +16,30 @@ class Stats extends Component
     public $title;
     public $model;
     public $icon;
+    public $color;
     public $value;
 
-    public function __construct($title, $model, $icon)
+    public function __construct($title, $model, $icon, $color = 'success')
     {
         $this->title = $title;
         $this->icon = $icon;
+        $this->color = $color;
+
         $modelClass = '\App\Models\\' . $model;
 
         if ($model) {
+            $query = DB::table((new $modelClass)->getTable());
+
             if (Schema::hasColumn((new $modelClass)->getTable(), 'seed_qty')) {
-                $this->value = $modelClass::sum('seed_qty');
+                $this->value = $query->sum('seed_qty');
             } elseif (Schema::hasColumn((new $modelClass)->getTable(), 'fertilizer_qty')) {
-                $this->value = $modelClass::sum('fertilizer_qty');
+                $this->value = $query->sum('fertilizer_qty');
             } else {
-                $this->value = $modelClass::count();
+                $this->value = $query->count();
             }
         }
     }
+
 
     /**
      * Get the view / contents that represent the component.

@@ -30,6 +30,10 @@
 
                 <main class="p-4">
                     {{ $slot }}
+
+                    <x-utils.toast />
+
+                    <x-footer />
                 </main>
             </div>
         </div>
