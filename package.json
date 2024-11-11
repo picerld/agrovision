@@ -19,6 +19,7 @@
     "dependencies": {
         "apexcharts": "^4.0.0",
         "flyonui": "^1.1.0",
-        "lodash": "^4.17.21"
+        "lodash": "^4.17.21",
+        "notyf": "^3.10.0"
     }
 }
