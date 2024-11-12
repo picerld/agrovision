@@ -55,7 +55,6 @@
                     </div>
                 </div>
             </div>
-            {{-- End Header --}}
 
             @if ($commodities->isEmpty())
                 <div class="py-8 text-center">

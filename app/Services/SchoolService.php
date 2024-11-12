@@ -8,7 +8,7 @@ class SchoolService
 {
     public function getAll($perPage = 5)
     {
-        return DB::table('schools')->orderBy('created_at', 'ASC')->paginate($perPage);
+        return DB::table('schools')->orderBy('created_at', 'DESC')->paginate($perPage);
     }
 
     public function getOne($id)

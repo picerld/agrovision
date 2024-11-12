@@ -51,9 +51,19 @@ class SchoolController extends Controller
 
             $this->schoolService->store($validated);
 
-            return redirect()->route('schools.index')->with('success', 'School created successfully');
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'School created successfully'
+            ]);
+
+            return redirect()->route('schools.index');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $e->getMessage()
+            ]);
+
+            return redirect()->back();
         }
     }
 
@@ -88,9 +98,19 @@ class SchoolController extends Controller
 
             $this->schoolService->update($school->id, $validated);
 
-            return redirect()->route('schools.index')->with('success', 'School updated successfully');
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'School updated successfully'
+            ]);
+
+            return redirect()->route('schools.index');
         } catch (\Throwable $th) {
-            return redirect()->route('schools.index')->with('error', $th->getMessage());
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->route('schools.index');
         }
     }
 
@@ -99,6 +119,22 @@ class SchoolController extends Controller
      */
     public function destroy(School $school)
     {
-        //
+        try {
+            $this->schoolService->delete($school->id);
+
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'School deleted successfully'
+            ]);
+
+            return redirect()->route('schools.index');
+        } catch (\Throwable $th) {
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->route('schools.index');
+        }
     }
 }

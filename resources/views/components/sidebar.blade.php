@@ -11,13 +11,17 @@
                 <span class="icon-[tabler--leaf] mr-3"></span>
                 Komoditas
             </x-nav-link>
-            <x-nav-link :href="route('seed-distributions.index')" :active="request()->routeIs('seed-distributions.index')">
-                <span class="icon-[tabler--droplet] mr-3"></span>
-                Distribusi Bibit
+            <x-nav-link :href="route('schools.index')" :active="request()->routeIs('schools.index')">
+                <span class="icon-[tabler--leaf] mr-3"></span>
+                Sekolah
             </x-nav-link>
             <x-nav-link :href="route('fertilizer-distributions.index')" :active="request()->routeIs('fertilizer-distributions.index')">
                 <span class="icon-[tabler--droplet] mr-3"></span>
                 Distribusi Pupuk
+            </x-nav-link>
+            <x-nav-link :href="route('seed-distributions.index')" :active="request()->routeIs('seed-distributions.index')">
+                <span class="icon-[tabler--droplet] mr-3"></span>
+                Distribusi Bibit
             </x-nav-link>
         </nav>
     </div>

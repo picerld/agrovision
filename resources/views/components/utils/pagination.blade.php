@@ -4,7 +4,7 @@
         <span class="font-semibold text-gray-800">{{ $paginator->firstItem() }}-{{ $paginator->lastItem() }}</span>
         of
         <span class="font-semibold text-gray-800">{{ $paginator->total() }}</span>
-        pages
+        items
     </div>
     <nav class="flex items-center gap-x-1">
         @if ($paginator->onFirstPage())

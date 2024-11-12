@@ -2,7 +2,7 @@
     <div class="w-full card">
         <div class="card-body">
             <h5 class="card-title mb-2.5">Distribution Chart</h5>
-            <div id="apex-multiple-area-charts-compare"></div>
+            <div id="distributionChart"></div>
         </div>
     </div>
 </div>
@@ -16,7 +16,7 @@
             const fertilizerData = @json($fertilizerData);
             const totalDistribution = @json($totalDistribution);
 
-            const chart = new ApexCharts(document.querySelector("#apex-multiple-area-charts-compare"), {
+            const chart = new ApexCharts(document.querySelector("#distributionChart"), {
                 chart: {
                     height: 400,
                     type: "area",
@@ -178,7 +178,7 @@
             chart.render();
         };
 
-        if (document.querySelector("#apex-multiple-area-charts-compare")) {
+        if (document.querySelector("#distributionChart")) {
             initDistributionChart();
         }
     });
