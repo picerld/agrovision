@@ -17,11 +17,11 @@
                 </div>
                 <input name="name" value="{{ $school->name }}" type="text" class="input" />
             </label>
-            <label class="mb-4 form-control sm:w-96">
+            <label class="mb-4 form-control">
                 <div class="label">
                     <span class="label-text">Alamat</span>
                 </div>
-                <textarea name="address" class="textarea w-80">{{ $school->address }}</textarea>
+                <textarea name="address" class="textarea ">{{ $school->address }}</textarea>
             </label>
             <label class="mb-4 form-control">
                 <div class="label">
