@@ -22,7 +22,7 @@ class SeedDistributionController extends Controller
         $commodities = DB::table('commodities')->get();
         $seeds = $this->seedDistributionService->getAll();
 
-        return view('pages.seed.index',[
+        return view('pages.seed.index', [
             'schools' => $schools,
             'commodities' => $commodities,
             'seeds' => $seeds
@@ -53,9 +53,20 @@ class SeedDistributionController extends Controller
             ]);
 
             $this->seedDistributionService->store($validated);
-            return redirect()->route('seed-distributions.index')->with('success', 'Seed distribution created successfully');
+
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'Seed Distribution created successfully'
+            ]);
+
+            return redirect()->route('seed-distributions.index');
         } catch (\Throwable $th) {
-            return redirect()->route('seed-distributions.index')->with('error', $th->getMessage());
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->route('seed-distributions.index');
         }
     }
 
