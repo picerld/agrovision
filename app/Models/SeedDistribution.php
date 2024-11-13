@@ -9,4 +9,8 @@ class SeedDistribution extends Model
 {
     /** @use HasFactory<\Database\Factories\SeedDistributionFactory> */
     use HasFactory;
+
+    protected $casts = [
+        'date' => 'datetime',  // Ensures that date is a Carbon instance
+    ];
 }

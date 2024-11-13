@@ -8,6 +8,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    {{-- Datepicker --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
