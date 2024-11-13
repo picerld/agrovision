@@ -31,7 +31,7 @@
             </label>
             <label class="mb-4 form-control">
                 <div class="label">
-                    <span class="label-text">Nomor Telepon</span>
+                     <span class="label-text">Nomor Telepon</span>
                 </div>
                 <input name="phone_number" value="{{ $school->phone_number }}" type="text" class="input" />
             </label>
