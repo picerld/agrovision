@@ -89,9 +89,34 @@ class SeedDistributionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SeedDistribution $seedDistribution)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'school_id' => 'required|exists:schools,id',
+                'type_of_seed' => 'required|exists:commodities,id',
+                'seed_qty' => 'required|numeric',
+                'date' => 'required|date',
+                'unit' => 'required|string',
+                'pic' => 'required|string|min:5|max:50',
+            ]);
+
+            $this->seedDistributionService->update($id, $validated);
+
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'Seed Distribution updated successfully'
+            ]);
+
+            return redirect()->route('seed-distributions.index');
+        } catch (\Throwable $th) {
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->route('seed-distributions.index');
+        }
     }
 
     /**
@@ -99,6 +124,22 @@ class SeedDistributionController extends Controller
      */
     public function destroy(SeedDistribution $seedDistribution)
     {
-        //
+        try {
+            $this->seedDistributionService->delete($seedDistribution->id);
+
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'Seed Distribution deleted successfully'
+            ]);
+
+            return redirect()->route('seed-distributions.index');
+        } catch (\Throwable $th) {
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->route('seed-distributions.index');
+        }
     }
 }

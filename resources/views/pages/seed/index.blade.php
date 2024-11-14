@@ -22,36 +22,36 @@
 
             <x-utils.stats title="Distribusi Bibit" model="SeedDistribution" icon="paper-bag" color="primary" />
         </div>
-        <div class="grid grid-cols-3 pt-4 gap-4">
+        <div class="grid grid-cols-3 gap-4 pt-4">
             <x-ui.seed.form :schools="$schools" :commodities="$commodities" />
 
             <x-ui.seed.chart />
         </div>
 
-        <div class="py-6 px-4 bg-white rounded-xl shadow-sm mt-4">
+        <div class="px-4 py-6 mt-4 bg-white shadow-sm rounded-xl">
             <div class="flex justify-between pb-6">
                 <div>
                     <h5 class="text-lg font-semibold text-primary">Bibit Terdistribusi</h5>
                     <p class="text-sm text-base-content/70">Terdapat <b>90</b> transaksi bibit</p>
                 </div>
-                <label class="input-group items-center max-w-xs ">
+                <label class="items-center max-w-xs input-group ">
                     <span class="input-group-text">
                         <span class="icon-[tabler--search] text-base-content/80 size-4"></span>
                     </span>
                     <input name="search" type="search" class="input input-md grow" placeholder="Search" />
-                    <span class="input-group-text gap-2">
+                    <span class="gap-2 input-group-text">
                         <kbd class="kbd kbd-sm">⌘</kbd>
                         <kbd class="kbd kbd-sm">K</kbd>
                     </span>
                 </label>
             </div>
             <hr>
-            <div class="accordion accordion-shadow w-full pt-4    ">
+            <div class="w-full pt-4 accordion accordion-shadow ">
                 {{-- Accordion Loop --}}
                 @foreach ($seeds as $seed)
-                    <x-ui.seed.card-list :seed="$seed"/>
+                    <x-ui.seed.card-list :seed="$seed" />
 
-                    <x-ui.seed.drawer :commodities="$commodities" :schools="$schools" :seed="$seed"/>
+                    <x-ui.seed.drawer :commodities="$commodities" :schools="$schools" :seed="$seed" />
                 @endforeach
                 {{-- End Accordion Loop --}}
             </div>

@@ -39,6 +39,7 @@ class SchoolService
     public function update($id, $data)
     {
         $data['updated_at'] = now();
+        
         return DB::table('schools')->where('id', $id)->update($data);
     }
 
