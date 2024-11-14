@@ -16,11 +16,15 @@ class SeedDistributionController extends Controller
         $this->seedDistributionService = $seedDistributionService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+        $perPage = $request->input('perPage', 6);
+
         $schools = DB::table('schools')->get();
         $commodities = DB::table('commodities')->get();
-        $seeds = $this->seedDistributionService->getAll();
+        $seeds = $search ? $this->seedDistributionService->search($search)
+            : $this->seedDistributionService->getAll($perPage);
 
         return view('pages.seed.index', [
             'schools' => $schools,

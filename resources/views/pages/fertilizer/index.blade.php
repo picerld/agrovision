@@ -23,7 +23,6 @@
             <x-utils.stats title="Distribusi Pupuk" model="FertilizerDistribution" icon="plant" color="warning" />
         </div>
 
-
         <div class="grid grid-cols-3 pt-4 gap-4">
             <x-ui.fertilizer.form :schools="$schools"/>
 
