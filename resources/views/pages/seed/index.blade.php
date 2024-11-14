@@ -34,26 +34,23 @@
                     <h5 class="text-lg font-semibold text-primary">Bibit Terdistribusi</h5>
                     <p class="text-sm text-base-content/70">Terdapat <b>90</b> transaksi bibit</p>
                 </div>
-                <label class="items-center max-w-xs input-group ">
-                    <span class="input-group-text">
-                        <span class="icon-[tabler--search] text-base-content/80 size-4"></span>
-                    </span>
-                    <input name="search" type="search" class="input input-md grow" placeholder="Search" />
-                    <span class="gap-2 input-group-text">
-                        <kbd class="kbd kbd-sm">⌘</kbd>
-                        <kbd class="kbd kbd-sm">K</kbd>
-                    </span>
-                </label>
+                <form action="{{ route('seed-distributions.index') }}" method="GET">
+                    <x-utils.search-input />
+                </form>
             </div>
             <hr>
-            <div class="w-full pt-4 accordion accordion-shadow ">
-                {{-- Accordion Loop --}}
-                @foreach ($seeds as $seed)
+            <div class="w-full pt-4 accordion accordion-shadow">
+                @forelse ($seeds as $seed)
                     <x-ui.seed.card-list :seed="$seed" />
 
                     <x-ui.seed.drawer :commodities="$commodities" :schools="$schools" :seed="$seed" />
-                @endforeach
-                {{-- End Accordion Loop --}}
+                @empty
+                    <x-utils.empty-card />
+                @endforelse
+            </div>
+
+            <div class="mx-2">
+                {{ $seeds->links('components.utils.pagination') }}
             </div>
         </div>
     </div>

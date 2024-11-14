@@ -24,13 +24,13 @@
         </div>
 
 
-        <div class="grid grid-cols-3 pt-4 gap-4">
+        <div class="grid grid-cols-3 gap-4 pt-4">
             <div class="col-span-2">
-                <div class="card w-full h-full bg-white">
+                <div class="w-full h-full bg-white card">
                     <div class="card-header">
                         <h5 class="card-title">Tambah Pupuk</h5>
                     </div>
-                    <div class="card-body items-center">
+                    <div class="items-center card-body">
 
                         <div class="grid grid-cols-3 gap-3">
                             <div class="col-span-2">
@@ -57,7 +57,7 @@
                             </div>
 
                             <div>
-                                <label class="input-group w-full">
+                                <label class="w-full input-group">
                                     {{-- <span class="input-group-text">$</span> --}}
                                     <input type="number" class="input grow" placeholder="00.00" />
                                     <span class="input-group-text">KG</span>
@@ -66,10 +66,10 @@
 
                         </div>
 
-                        <div class="grid grid-cols-3 mt-3 gap-3">
+                        <div class="grid grid-cols-3 gap-3 mt-3">
 
                             <div class="col-span-2">
-                                <label class="input-group w-full">
+                                <label class="w-full input-group">
                                     <span class="input-group-text">
                                         <span class="icon-[tabler--user] text-base-content/80 size-4"></span>
                                     </span>
@@ -83,7 +83,7 @@
 
                             <div>
                                 <div class="form-control">
-                                    <input name="date" type="text" class="input max-w-sm"
+                                    <input name="date" type="text" class="max-w-sm input"
                                         placeholder="Month DD, YYYY" id="flatpickr-human-friendly" />
                                 </div>
 
@@ -103,14 +103,14 @@
                         </div>
 
                     </div>
-                    <div class="flex justify-between card-footer text-start items-center">
+                    <div class="flex items-center justify-between card-footer text-start">
                         <p class="text-base-content/50">Klik untuk menambahkan.</p>
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card w-full bg-white">
+            <div class="w-full bg-white card">
                 <div class="card-body">
                     <div id="apex-doughnut-chart"></div>
 
@@ -198,25 +198,17 @@
             </div>
         </div>
 
-        <div class="py-6 px-4 bg-white rounded-xl shadow-sm mt-4">
+        <div class="px-4 py-6 mt-4 bg-white shadow-sm rounded-xl">
             <div class="flex justify-between pb-6">
                 <div>
                     <h5 class="text-lg font-semibold text-primary">Bibit Terdistribusi</h5>
                     <p class="text-sm text-base-content/70">Terdapat <b>90</b> transaksi bibit</p>
                 </div>
-                <label class="input-group items-center max-w-xs ">
-                    <span class="input-group-text">
-                        <span class="icon-[tabler--search] text-base-content/80 size-4"></span>
-                    </span>
-                    <input name="search" type="search" class="input input-md grow" placeholder="Search" />
-                    <span class="input-group-text gap-2">
-                        <kbd class="kbd kbd-sm">⌘</kbd>
-                        <kbd class="kbd kbd-sm">K</kbd>
-                    </span>
-                </label>
+                <form action="{{ route('fertilizer-distributions.index') }}" method="GET">
+                    <x-utils.search-input />
+                </form>
             </div>
             <hr>
-            {{-- pt-4 --}}
         </div>
     </div>
 </x-app-layout>

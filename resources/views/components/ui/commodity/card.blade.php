@@ -2,13 +2,13 @@
     @forelse ($commodities as $commodity)
         <div class="card sm:max-w-sm">
             <figure class="w-full overflow-hidden rounded h-42">
-                <img class="object-cover w-full transition-all duration-300 ease-in hover:scale-110 hover:bg-gray-50"
+                <img class="object-cover w-full h-48 transition-all duration-300 ease-in hover:scale-110 hover:bg-gray-50"
                     src="{{ asset('storage/commodities/' . $commodity->image) }}" alt="{{ $commodity->name }}" />
             </figure>
 
             <div class="card-body">
-                <p class="h-8 mb-1 text-xl font-bold text-gray-700">{{ Str::limit($commodity->name, 20) }}</p>
-                <p class="flex items-center gap-1 mb-1">
+                <p class="h-8 text-xl font-bold text-gray-700">{{ Str::limit($commodity->name, 20) }}</p>
+                <p class="flex items-center mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="shrink-0 size-4">
@@ -21,7 +21,8 @@
                     {{ $commodity->harvest_date }}
                 </p>
                 <button type="button" class="btn btn-primary" aria-haspopup="dialog" aria-expanded="false"
-                    aria-controls="commodityDetailModal-{{ $commodity->id }}" data-overlay="#commodityDetailModal-{{ $commodity->id }}">Detail</button>
+                    aria-controls="commodityDetailModal-{{ $commodity->id }}"
+                    data-overlay="#commodityDetailModal-{{ $commodity->id }}">Detail</button>
             </div>
         </div>
 
