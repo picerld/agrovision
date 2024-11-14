@@ -6,18 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Form extends Component
+class Chart extends Component
 {
     /**
      * Create a new component instance.
      */
-
-    public $schools;
-    public $commodities;
-    public function __construct($schools, $commodities)
+    public function __construct()
     {
-        $this->schools = $schools;
-        $this->commodities = $commodities;
+        //
     }
 
     /**
@@ -25,6 +21,6 @@ class Form extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.ui.seed.form');
+        return view('components.ui.seed.chart');
     }
 }
