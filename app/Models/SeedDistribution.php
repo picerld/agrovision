@@ -11,6 +11,6 @@ class SeedDistribution extends Model
     use HasFactory;
 
     protected $casts = [
-        'date' => 'datetime',  // Ensures that date is a Carbon instance
+        'date' => 'datetime',
     ];
 }

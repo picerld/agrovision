@@ -22,7 +22,6 @@
 
             <x-utils.stats title="Distribusi Bibit" model="SeedDistribution" icon="paper-bag" color="primary" />
         </div>
-
         <div class="grid grid-cols-3 pt-4 gap-4">
             <x-ui.seed.form :schools="$schools" :commodities="$commodities" />
 
@@ -57,6 +56,5 @@
                 {{-- End Accordion Loop --}}
             </div>
         </div>
-
     </div>
 </x-app-layout>
