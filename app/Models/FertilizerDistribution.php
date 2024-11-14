@@ -9,4 +9,10 @@ class FertilizerDistribution extends Model
 {
     /** @use HasFactory<\Database\Factories\FertilizerDistributionFactory> */
     use HasFactory;
+
+    protected $casts = [
+        'date' => 'datetime',
+    ];
+    
+
 }
