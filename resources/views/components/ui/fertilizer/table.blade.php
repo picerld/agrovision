@@ -4,20 +4,19 @@
             <!-- head -->
             <thead>
                 <tr>
-                    <th>
-                        <input type="checkbox" class="checkbox checkbox-primary checkbox-sm"
-                            aria-label="product" />
+                    <th scope="button">
+                        <input type="checkbox" class="checkbox checkbox-primary checkbox-sm" aria-label="product" />
                     </th>
-                    <th>Sekolah</th>
-                    <th class="text-center">Jumlah</th>
-                    <th class="text-center">Tanggal</th>
-                    <th class="text-center">Aksi</th>
+                    <th scope="school">Sekolah</th>
+                    <th scope="quantity" class="text-center">Jumlah</th>
+                    <th scope="date" class="text-center">Tanggal</th>
+                    <th scope="action" class="text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($fertilizers as $fertilizer)
+                @forelse ($fertilizers as $fertilizer)
                     <tr>
-                        <th>
+                        <th scope="button">
                             <label>
                                 <input type="checkbox" class="checkbox checkbox-primary checkbox-sm"
                                     aria-label="product" />
@@ -34,45 +33,30 @@
                         <td class="text-center">{{ $fertilizer->fertilizer_qty }} KG</td>
                         <td class="text-center">{{ $fertilizer->date }}</td>
                         <td class="text-center">
-                            <button class="btn btn-circle btn-text btn-sm" aria-haspopup="dialog"
-                                aria-expanded="false" aria-controls="overlay-example"
-                                data-overlay="#fertilizerDrawer-{{ $fertilizer->id }}"><span
-                                    class="icon-[tabler--pencil]"></span></button>
-                            <button class="btn btn-circle btn-text btn-sm"
-                                aria-label="Action button"><span
-                                    class="icon-[tabler--trash]"></span></button>
-                            <button class="btn btn-circle btn-text btn-sm"
-                                aria-label="Action button"><span
-                                    class="icon-[tabler--dots-vertical]"></span></button>
+                            <div class="flex justify-center">
+                                <button class="btn btn-circle btn-text btn-sm" aria-haspopup="dialog"
+                                    aria-expanded="false" aria-controls="overlay-example"
+                                    data-overlay="#fertilizerDrawer-{{ $fertilizer->id }}"><span
+                                        class="icon-[tabler--pencil]"></span></button>
+                                <form action="{{ route('fertilizer-distributions.destroy', $fertilizer->id) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-circle btn-text btn-sm"
+                                        aria-label="Action button"><span class="icon-[tabler--trash]"></span></button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
 
-                   <x-ui.fertilizer.drawer :fertilizer="$fertilizer" :schools="$schools" />
-                @endforeach
+                    <x-ui.fertilizer.drawer :fertilizer="$fertilizer" :schools="$schools" />
+
+                @empty
+                    <h1>Data Kosong</h1>
+                @endforelse
             </tbody>
         </table>
     </div>
 
-    <div class="flex flex-wrap items-center justify-between gap-2 py-4 pt-6">
-        <div class="block max-w-sm text-sm font-normal text-gray-500 me-2 sm:mb-0">
-            Showing
-            <span class="font-semibold text-gray-900">1-4</span>
-            of
-            <span class="font-semibold">20</span>
-            products
-        </div>
-        <nav class="flex items-center gap-x-1">
-            <button type="button" class="btn btn-sm btn-outline">Previous</button>
-            <div class="flex items-center gap-x-1">
-                <button type="button"
-                    class="btn btn-sm btn-outline btn-square aria-[current='page']:text-border-primary aria-[current='page']:bg-primary/10">1</button>
-                <button type="button"
-                    class="btn btn-sm btn-outline btn-square aria-[current='page']:text-border-primary aria-[current='page']:bg-primary/10"
-                    aria-current="page">2</button>
-                <button type="button"
-                    class="btn btn-sm btn-outline btn-square aria-[current='page']:text-border-primary aria-[current='page']:bg-primary/10">3</button>
-            </div>
-            <button type="button" class="btn btn-sm btn-outline">Next</button>
-        </nav>
-    </div>
+    {{ $fertilizers->links('components.utils.pagination') }}
 </div>

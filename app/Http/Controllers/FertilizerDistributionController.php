@@ -22,8 +22,10 @@ class FertilizerDistributionController extends Controller
     public function index()
     {
         $search = request('search');
+        $perPage = request('perPage', 6);
+
         $schools = DB::table('schools')->get();
-        $fertilizers = $search ? $this->fertilizerDistributionService->search($search) : $this->fertilizerDistributionService->getAll();
+        $fertilizers = $search ? $this->fertilizerDistributionService->search($search) : $this->fertilizerDistributionService->getAll($perPage);
 
         return view('pages.fertilizer.index', [
             'schools' => $schools,
@@ -53,10 +55,20 @@ class FertilizerDistributionController extends Controller
             ]);
 
             $this->fertilizerDistributionService->store($validated);
-            return redirect()->route('fertilizer-distributions.index')->with('success', 'Fertilizer distribution created successfully');
 
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'Fertilizer Distribution created successfully'
+            ]);
+
+            return redirect()->route('fertilizer-distributions.index');
         } catch (\Throwable $th) {
-            return redirect()->route('fertilizer-distributions.index')->with('error', $th->getMessage());
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->route('fertilizer-distributions.index');
         }
     }
 
@@ -79,9 +91,32 @@ class FertilizerDistributionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FertilizerDistribution $fertilizerDistribution)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'school_id' => 'required|exists:schools,id',
+                'fertilizer_qty' => 'required|numeric',
+                'date' => 'required|date',
+                'pic' => 'required|string|min:5|max:50',
+            ]);
+
+            $this->fertilizerDistributionService->update($validated, $id);
+
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'Fertilizer Distribution updated successfully'
+            ]);
+
+            return redirect()->route('fertilizer-distributions.index');
+        } catch (\Throwable $th) {
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->route('fertilizer-distributions.index');
+        }
     }
 
     /**
@@ -89,6 +124,22 @@ class FertilizerDistributionController extends Controller
      */
     public function destroy(FertilizerDistribution $fertilizerDistribution)
     {
-        //
+        try {
+            $this->fertilizerDistributionService->delete($fertilizerDistribution->id);
+
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'Fertilizer Distribution deleted successfully'
+            ]);
+
+            return redirect()->route('fertilizer-distributions.index');
+        } catch (\Throwable $th) {
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->route('fertilizer-distributions.index');
+        }
     }
 }
