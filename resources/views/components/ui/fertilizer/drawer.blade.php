@@ -11,6 +11,7 @@
             </button>
         </div>
         <div class="drawer-body">
+            <!-- School Selection -->
             <label class="mb-4 form-control">
                 <div class="label">
                     <span class="label-text">Sekolah</span>
@@ -20,29 +21,54 @@
                         <div class="max-w-sm">
                             <select
                                 data-select='{
-                              "placeholder": "Nama Sekolah",
-                              "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
-                              "toggleClasses": "advance-select-toggle",
-                              "hasSearch": true,
-                              "dropdownClasses": "advance-select-menu max-h-52 pt-0 vertical-scrollbar rounded-scrollbar",
-                              "optionClasses": "advance-select-option selected:active",
-                              "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"icon-[tabler--check] flex-shrink-0 size-4 text-primary hidden selected:block \"></span></div>",
-                              "extraMarkup": "<span class=\"icon-[tabler--caret-up-down] flex-shrink-0 size-4 text-base-content/90 absolute top-1/2 end-3 -translate-y-1/2 \"></span>"
-                              }'
+                          "placeholder": "Nama Sekolah",
+                          "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                          "toggleClasses": "advance-select-toggle",
+                          "hasSearch": true,
+                          "dropdownClasses": "advance-select-menu max-h-52 pt-0 vertical-scrollbar rounded-scrollbar",
+                          "optionClasses": "advance-select-option selected:active",
+                          "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"icon-[tabler--check] flex-shrink-0 size-4 text-primary hidden selected:block \"></span></div>",
+                          "extraMarkup": "<span class=\"icon-[tabler--caret-up-down] flex-shrink-0 size-4 text-base-content/90 absolute top-1/2 end-3 -translate-y-1/2 \"></span>"
+                          }'
                                 class="hidden" name="school_id">
+                                <option value="{{ $fertilizer->school_id }}" hidden>{{ $fertilizer->school_name }}
+                                </option>
                                 @foreach ($schools as $school)
                                     <option value="{{ $school->id }}">{{ $school->name }}</option>
                                 @endforeach
                             </select>
+
+                            <input type="hidden" name="school_id" id="fallback-school-id"
+                                value="{{ $fertilizer->school_id }}">
                         </div>
                     </div>
+                    <!-- Date Input -->
                     <div class="form-control">
                         <input name="date" type="text" class="max-w-sm input" value="{{ $fertilizer->date }}"
                             placeholder="Month DD, YYYY" id="flatpickr-human-friendly" />
+
+                        <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                flatpickr('#flatpickr-human-friendly', {
+                                    altInput: true,
+                                    altFormat: 'F j, Y', // Display format (Month Day, Year)
+                                    dateFormat: 'Y-m-d' // Actual value format (Year-Month-Day)
+                                });
+
+                                document.querySelectorAll('select[data-select]').forEach(select => {
+                                    select.addEventListener('change', function() {
+                                        document.getElementById('fallback-school-id').value = this.value;
+                                    });
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </label>
 
+            <!-- PIC Input -->
             <label class="mb-4 form-control">
                 <div class="label">
                     <span class="label-text">PIC</span>
@@ -58,6 +84,7 @@
                 </label>
             </label>
 
+            <!-- Fertilizer Quantity -->
             <label class="mb-4 form-control">
                 <div class="label">
                     <span class="label-text">Jumlah Bibit</span>
@@ -69,6 +96,7 @@
                 </label>
             </label>
         </div>
+
         <div class="drawer-footer">
             <button type="submit" class="btn btn-primary">Perbarui</button>
         </div>

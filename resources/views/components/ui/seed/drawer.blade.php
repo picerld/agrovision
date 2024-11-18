@@ -30,6 +30,7 @@
                               "extraMarkup": "<span class=\"icon-[tabler--caret-up-down] flex-shrink-0 size-4 text-base-content/90 absolute top-1/2 end-3 -translate-y-1/2 \"></span>"
                               }'
                                 class="hidden" name="school_id">
+                                <option value="{{ $seed->school_id }}" hidden>{{ $seed->school_name }}</option>
                                 @foreach ($schools as $school)
                                     <option value="{{ $school->id }}">{{ $school->name }}</option>
                                 @endforeach

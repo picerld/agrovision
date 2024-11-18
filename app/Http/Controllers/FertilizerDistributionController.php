@@ -101,7 +101,7 @@ class FertilizerDistributionController extends Controller
                 'pic' => 'required|string|min:5|max:50',
             ]);
 
-            $this->fertilizerDistributionService->update($validated, $id);
+            $this->fertilizerDistributionService->update($id, $validated);
 
             session()->flash('toast', [
                 'type' => 'primary',

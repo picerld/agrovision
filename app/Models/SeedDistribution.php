@@ -10,6 +10,10 @@ class SeedDistribution extends Model
     /** @use HasFactory<\Database\Factories\SeedDistributionFactory> */
     use HasFactory;
 
+    public $table = 'seed_distributions';
+
+    protected $guarded = ['id'];
+
     protected $casts = [
         'date' => 'datetime',
     ];
