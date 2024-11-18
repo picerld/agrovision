@@ -19,12 +19,14 @@ class DatabaseSeeder extends Seeder
             CommoditySeeder::class,
             SeedDistributionSeeder::class,
             FertilizerDistributionSeeder::class,
+            UserSeeder::class
         ]);
 
         User::factory()->create([
             'name' => 'Silfi',
             'username' => 'silfi@agrovision',
             'password' => Hash::make('password'),
+            'phone_number' => '08211111'
         ]);
 
         User::factory()->create([

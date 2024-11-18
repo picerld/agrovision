@@ -5,6 +5,7 @@ use App\Http\Controllers\FertilizerDistributionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SeedDistributionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,6 +23,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('schools', SchoolController::class);
     Route::resource('commodities', CommodityController::class);
+    Route::resource('users', UserController::class);
     Route::resource('seed-distributions', SeedDistributionController::class);
     Route::resource('fertilizer-distributions', FertilizerDistributionController::class);
 });

@@ -1,4 +1,4 @@
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
     <div class="w-full">
         <select name="perPage" onchange="this.form.submit()"
             data-select='{
