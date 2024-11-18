@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('fertilizer_distributions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('school_id')->nullable();
+            $table->unsignedBigInteger('school_id');
             $table->integer('fertilizer_qty');
             $table->date('date');
             $table->string('pic', 50);

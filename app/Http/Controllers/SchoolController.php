@@ -3,16 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\School;
+use App\Services\SchoolService;
 use Illuminate\Http\Request;
 
 class SchoolController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $schoolService;
+
+    public function __construct(SchoolService $schoolService)
     {
-        //
+        $this->schoolService =  $schoolService;
+    }
+
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+
+        $schools = $search ? $this->schoolService->search($search)
+            : $this->schoolService->getAll($perPage);
+
+        return view('pages.school.index', [
+            'schools' => $schools
+        ]);
     }
 
     /**
@@ -28,7 +41,30 @@ class SchoolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|min:5|max:50',
+                'address' => 'required|string|min:5|max:100',
+                'pic' => 'required|string|min:5|max:50',
+                'phone_number' => 'required|string|min:5|max:25',
+            ]);
+
+            $this->schoolService->store($validated);
+
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'School created successfully'
+            ]);
+
+            return redirect()->route('schools.index');
+        } catch (\Exception $e) {
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $e->getMessage()
+            ]);
+
+            return redirect()->back();
+        }
     }
 
     /**
@@ -52,7 +88,30 @@ class SchoolController extends Controller
      */
     public function update(Request $request, School $school)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|min:5|max:50',
+                'address' => 'required|string|min:5|max:100',
+                'pic' => 'required|string|min:5|max:50',
+                'phone_number' => 'required|string|min:5|max:25',
+            ]);
+
+            $this->schoolService->update($school->id, $validated);
+
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'School updated successfully'
+            ]);
+
+            return redirect()->route('schools.index');
+        } catch (\Throwable $th) {
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->route('schools.index');
+        }
     }
 
     /**
@@ -60,6 +119,22 @@ class SchoolController extends Controller
      */
     public function destroy(School $school)
     {
-        //
+        try {
+            $this->schoolService->delete($school->id);
+
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'School deleted successfully'
+            ]);
+
+            return redirect()->route('schools.index');
+        } catch (\Throwable $th) {
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->route('schools.index');
+        }
     }
 }

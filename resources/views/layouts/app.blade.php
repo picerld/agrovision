@@ -8,15 +8,14 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    {{-- Datepicker --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="overflow-x-hidden font-sans antialiased">
+<body class="overflow-x-hidden antialiased font-poppins">
     <div class="flex flex-col min-h-screen bg-gray-100">
         @include('layouts.navigation')
 
@@ -34,6 +33,10 @@
 
                 <main class="p-4">
                     {{ $slot }}
+
+                    <x-utils.toast />
+
+                    <x-footer />
                 </main>
             </div>
         </div>
