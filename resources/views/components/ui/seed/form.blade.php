@@ -85,12 +85,12 @@
                             <input name="seed_qty" class="w-full input join-item shrink" type="number"
                                 placeholder="00.00" />
                             <select name="unit" class="select join-item" aria-label="select">
-                                <option value="Gram">Gram</option>
-                                <option value="Mililiter">Mililiter</option>
-                                <option value="Tray">Tray</option>
-                                <option value="Polybag">Polybag</option>
-                                <option value="PCS">Pcs</option>
-                                <option value="Plastik">Plastik</option>
+                                <option value="gram">Gram</option>
+                                <option value="mililiter">Mililiter</option>
+                                <option value="tray">Tray</option>
+                                <option value="polybag">Polybag</option>
+                                <option value="pcs">Pcs</option>
+                                <option value="plastik">Plastik</option>
                             </select>
                         </div>
                     </div>

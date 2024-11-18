@@ -28,30 +28,7 @@
             <x-ui.seed.chart />
         </div>
 
-        <div class="px-4 py-6 mt-4 bg-white shadow-sm rounded-xl">
-            <div class="flex justify-between pb-6">
-                <div>
-                    <h5 class="text-lg font-semibold text-primary">Bibit Terdistribusi</h5>
-                    <p class="text-sm text-base-content/70">Terdapat <b>90</b> transaksi bibit</p>
-                </div>
-                <form action="{{ route('seed-distributions.index') }}" method="GET">
-                    <x-utils.search-input />
-                </form>
-            </div>
-            <hr>
-            <div class="w-full pt-4 accordion accordion-shadow">
-                @forelse ($seeds as $seed)
-                    <x-ui.seed.card-list :seed="$seed" />
+        <x-ui.seed.table :seeds="$seeds" :schools="$schools" :commodities="$commodities"/>
 
-                    <x-ui.seed.drawer :commodities="$commodities" :schools="$schools" :seed="$seed" />
-                @empty
-                    <x-utils.empty-card />
-                @endforelse
-            </div>
-
-            <div class="mx-2">
-                {{ $seeds->links('components.utils.pagination') }}
-            </div>
-        </div>
     </div>
 </x-app-layout>

@@ -25,50 +25,30 @@
 
         <div class="p-2 mt-6 space-y-4 sm:p-2 sm:space-y-6 card">
             {{-- Header --}}
-            <div class="flex items-center justify-between p-5">
-                <x-ui.commodity.header />
+            <div class=" items-center ">
 
-                <div class="flex gap-2">
+                <div class="flex justify-between p-5">
                     <div>
-                        <button class="btn btn-primary waves waves-light" type="button" aria-haspopup="dialog"
-                            aria-expanded="false" aria-controls="formCommodity" data-overlay="#formCommodity">Tambah
-                            +</button>
+                        <h5 class="text-lg font-semibold text-primary">Komoditas</h5>
+                        <p class="text-sm text-base-content/70">Terdapat <b>90</b> komoditas terdaftar</p>
                     </div>
+                    <div class="flex gap-2">
+                        <div>
+                            <button class="btn btn-primary waves waves-light" type="button" aria-haspopup="dialog"
+                                aria-expanded="false" aria-controls="formCommodity" data-overlay="#formCommodity">Tambah
+                                +</button>
+                        </div>
 
-                    <x-ui.commodity.form-commodity />
+                        <x-ui.commodity.form-commodity />
 
-                    <div>
-                        <label class="max-w-sm input-group">
-                            <span class="input-group-text">
-                                <span class="icon-[tabler--search] text-base-content/80 size-4"></span>
-                            </span>
-                            <form id="searchForm" action="{{ route('commodities.index') }}" method="GET">
-                                <input type="search" class="input grow" placeholder="Search" name="search"
-                                    value="{{ request('search') }}" onkeyup="this.form.submit()" />
-                            </form>
-                            <span class="gap-2 input-group-text">
-                                <kbd class="kbd kbd-sm">⌘</kbd>
-                                <kbd class="kbd kbd-sm">K</kbd>
-                            </span>
-                        </label>
-
+                        <form action="{{ route('commodities.index') }}" method="GET">
+                            <x-utils.search-input />
+                        </form>
                     </div>
                 </div>
+
             </div>
-
-            @if ($commodities->isEmpty())
-                <div class="py-8 text-center">
-                    <p class="text-gray-500">
-                        @if (request('search'))
-                            No results found for "{{ request('search') }}"
-                        @else
-                            No commodities available
-                        @endif
-                    </p>
-                </div>
-            @else
-                <x-ui.commodity.card :commodities="$commodities" />
-            @endif
+            <x-ui.commodity.table :commodities="$commodities" />
         </div>
     </div>
 </x-app-layout>
