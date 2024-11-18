@@ -1,7 +1,7 @@
 <nav class="fixed top-0 left-0 right-0 z-50 flex gap-4 shadow navbar bg-base-100">
     <div class="flex items-center flex-1">
         <a class="text-xl font-semibold no-underline link text-base-content/90 link-neutral" href="#">
-            FlyonUI
+            Agrovision
         </a>
     </div>
     <div class="flex items-center gap-4 navbar-end">

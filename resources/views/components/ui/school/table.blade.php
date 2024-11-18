@@ -1,6 +1,5 @@
 <div class="mx-3 my-5 card">
     <div class="card-body">
-        <h5 class="card-title mb-2.5">School Table</h5>
         <div class="w-full">
 
             <x-ui.school.header />

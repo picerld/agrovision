@@ -34,10 +34,6 @@
                         <td class="text-center">{{ $fertilizer->date }}</td>
                         <td class="text-center">
                             <div class="flex justify-center">
-                                <button class="btn btn-circle btn-text btn-sm" aria-haspopup="dialog"
-                                    aria-expanded="false" aria-controls="overlay-example"
-                                    data-overlay="#fertilizerDrawer-{{ $fertilizer->id }}"><span
-                                        class="icon-[tabler--pencil]"></span></button>
                                 <form action="{{ route('fertilizer-distributions.destroy', $fertilizer->id) }}"
                                     method="POST">
                                     @csrf
@@ -45,6 +41,10 @@
                                     <button type="submit" class="btn btn-circle btn-text btn-sm"
                                         aria-label="Action button"><span class="icon-[tabler--trash]"></span></button>
                                 </form>
+                                <button class="btn btn-circle btn-text btn-sm" aria-haspopup="dialog"
+                                aria-expanded="false" aria-controls="overlay-example"
+                                data-overlay="#fertilizerDrawer-{{ $fertilizer->id }}"><span
+                                    class="icon-[tabler--dots-vertical]"></span></button>
                             </div>
                         </td>
                     </tr>
