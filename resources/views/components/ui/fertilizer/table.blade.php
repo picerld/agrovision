@@ -4,9 +4,6 @@
             <!-- head -->
             <thead>
                 <tr>
-                    <th scope="button">
-                        <input type="checkbox" class="checkbox checkbox-primary checkbox-sm" aria-label="product" />
-                    </th>
                     <th scope="school">Sekolah</th>
                     <th scope="quantity" class="text-center">Jumlah</th>
                     <th scope="date" class="text-center">Tanggal</th>
@@ -16,12 +13,6 @@
             <tbody>
                 @forelse ($fertilizers as $fertilizer)
                     <tr>
-                        <th scope="button">
-                            <label>
-                                <input type="checkbox" class="checkbox checkbox-primary checkbox-sm"
-                                    aria-label="product" />
-                            </label>
-                        </th>
                         <td>
                             <div class="flex items-center gap-3">
                                 <div>
