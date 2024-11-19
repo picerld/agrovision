@@ -22,7 +22,7 @@ class CommodityController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $perPage = $request->input('per_page', 6);
+        $perPage = $request->input('perPage', 6);
 
         $commodities = $search ? $this->commodityService->search($search)
             : $this->commodityService->getAll($perPage);

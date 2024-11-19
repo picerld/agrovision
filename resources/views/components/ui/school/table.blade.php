@@ -58,18 +58,22 @@
                                     </td> --}}
                                     <td>{{ Str::limit($school->address, 23) }}</td>
                                     <td class="flex">
-                                        <form action="{{ route('schools.destroy', $school->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-circle btn-text btn-sm"
-                                                aria-label="Action delete"><span
-                                                    class="icon-[tabler--trash]"></span></button>
-                                        </form>
+                                        <x-ui.school.delete-modal :school="$school" />
+
+                                        <button type="button" class="btn btn-circle btn-text btn-sm"
+                                            aria-haspopup="dialog" aria-expanded="false"
+                                            aria-controls="deleteModal-{{ $school->id }}"
+                                            data-overlay="#deleteModal-{{ $school->id }}">
+                                            <span class="icon-[tabler--trash]"></span>
+                                        </button>
+
+
                                         <button class="btn btn-circle btn-text btn-sm" aria-label="Action detail"><span
                                                 class="icon-[tabler--dots-vertical]" aria-haspopup="dialog"
                                                 aria-expanded="false" aria-controls="detailDrawer-{{ $school->id }}"
                                                 data-overlay="#detailDrawer-{{ $school->id }}"></span></button>
-                                                
+
+                                        <x-ui.school.delete-modal :school="$school" />
                                         <x-ui.school.detail :school="$school" />
                                     </td>
                                 </tr>

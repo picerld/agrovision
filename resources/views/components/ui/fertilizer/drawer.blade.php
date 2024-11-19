@@ -31,8 +31,8 @@
                           "extraMarkup": "<span class=\"icon-[tabler--caret-up-down] flex-shrink-0 size-4 text-base-content/90 absolute top-1/2 end-3 -translate-y-1/2 \"></span>"
                           }'
                                 class="hidden" name="school_id">
-                                <option value="{{ $fertilizer->school_id }}" hidden>{{ $fertilizer->school_name }}
-                                </option>
+                                {{-- <option value="{{ $fertilizer->school_id }}" hidden>{{ $fertilizer->school_name }}
+                                </option> --}}
                                 @foreach ($schools as $school)
                                     <option value="{{ $school->id }}">{{ $school->name }}</option>
                                 @endforeach
@@ -98,6 +98,8 @@
         </div>
 
         <div class="drawer-footer">
+            <button type="button" class="btn btn-soft btn-secondary"
+                data-overlay="#fertilizerDrawer-{{ $fertilizer->id }}">Close</button>
             <button type="submit" class="btn btn-primary">Perbarui</button>
         </div>
     </div>

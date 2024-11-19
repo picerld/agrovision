@@ -2,7 +2,8 @@
     <div id="commodityDetailModal-{{ $commodity->id }}" class="hidden overlay modal overlay-open:opacity-100 modal-middle"
         role="dialog" tabindex="-1">
         <div class="modal-dialog overlay-open:opacity-100">
-            <form id="commodity-update-form" action="{{ route('commodities.update', $commodity->id) }}" method="POST" enctype="multipart/form-data">
+            <form id="commodity-update-form" action="{{ route('commodities.update', $commodity->id) }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-content">
@@ -45,7 +46,7 @@
                                 <div>
                                     <div class="mb-4">
                                         <h3 id="modal-title-1" class="text-xl font-semibold text-gray-800">
-                                            Detail {{ $commodity->name }}
+                                            {{ $commodity->name }}
                                         </h3>
                                         <p class="text-gray-500 ">
                                             Edit dan hapus data komoditas
@@ -76,11 +77,26 @@
                     </div>
             </form>
             <div class="modal-footer">
-                <form id="delete-form" action="{{ route('commodities.destroy', $commodity->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" form="delete-form" class="btn btn-error btn-soft">Hapus</button>
-                </form>
+                <div class="tooltip [--trigger:click]">
+                    <div class="tooltip-toggle">
+                        <button class="btn btn-error btn-soft" aria-label="Popover Button">Hapus</button>
+                        <div class="tooltip-content tooltip-shown:opacity-100 tooltip-shown:visible" role="popover">
+                            <div class="max-w-xs p-4 rounded-lg shadow tooltip-body bg-base-100 text-start">
+                                <span class="text-lg font-semibold text-base-content/90">Konfirmasi {{ $commodity->name }}</span>
+                                <p class="py-4 text-base text-base-content/80">
+                                    Apakah anda yakin ingin menghapus komoditas {{ $commodity->name }}?
+                                </p>
+                                <form id="delete-form" action="{{ route('commodities.destroy', $commodity->id) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" form="delete-form"
+                                        class="text-white btn btn-primary">Ya</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <button type="submit" form="commodity-update-form" class="btn btn-primary">Perbarui</button>
             </div>
         </div>
