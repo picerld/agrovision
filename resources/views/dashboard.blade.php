@@ -19,8 +19,8 @@
                         <div class="flex flex-col flex-wrap gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <div class="relative inline-flex dropdown">
                                 <button id="dropdown-default" type="button"
-                                    class="font-normal dropdown-toggle btn btn-outline btn-secondary" aria-haspopup="menu"
-                                    aria-expanded="false" aria-label="Dropdown">
+                                    class="font-normal dropdown-toggle btn btn-outline btn-secondary"
+                                    aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                                     <span class="icon-[tabler--clock]"></span>
                                     Last 30 days
                                     <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
@@ -41,7 +41,7 @@
                                 <input type="search" class="input grow" placeholder="Search" />
                             </label>
                         </div>
-    
+
                         <div class="mt-8 overflow-x-auto">
                             <table class="table">
                                 <!-- head -->
@@ -92,11 +92,14 @@
                                         </td>
                                         <td>$599</td>
                                         <td>
-                                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
+                                            <button class="btn btn-circle btn-text btn-sm"
+                                                aria-label="Action button"><span
                                                     class="icon-[tabler--pencil]"></span></button>
-                                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
+                                            <button class="btn btn-circle btn-text btn-sm"
+                                                aria-label="Action button"><span
                                                     class="icon-[tabler--trash]"></span></button>
-                                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
+                                            <button class="btn btn-circle btn-text btn-sm"
+                                                aria-label="Action button"><span
                                                     class="icon-[tabler--dots-vertical]"></span></button>
                                         </td>
                                     </tr>
@@ -133,9 +136,11 @@
                                         </td>
                                         <td>$999</td>
                                         <td>
-                                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
+                                            <button class="btn btn-circle btn-text btn-sm"
+                                                aria-label="Action button"><span
                                                     class="icon-[tabler--pencil]"></span></button>
-                                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
+                                            <button class="btn btn-circle btn-text btn-sm"
+                                                aria-label="Action button"><span
                                                     class="icon-[tabler--trash]"></span></button>
                                             <button class="btn btn-circle btn-text btn-sm"
                                                 aria-label="Action button"><span
@@ -233,7 +238,7 @@
                                 </tbody>
                             </table>
                         </div>
-    
+
                         <div class="flex flex-wrap items-center justify-between gap-2 py-4 pt-6">
                             <div class="block max-w-sm text-sm font-normal text-gray-500 me-2 sm:mb-0">
                                 Showing
@@ -272,8 +277,8 @@
                         <div class="flex flex-col flex-wrap gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <div class="relative inline-flex dropdown">
                                 <button id="dropdown-default" type="button"
-                                    class="font-normal dropdown-toggle btn btn-outline btn-secondary" aria-haspopup="menu"
-                                    aria-expanded="false" aria-label="Dropdown">
+                                    class="font-normal dropdown-toggle btn btn-outline btn-secondary"
+                                    aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
                                     <span class="icon-[tabler--clock]"></span>
                                     Last 30 days
                                     <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
@@ -294,7 +299,7 @@
                                 <input type="search" class="input grow" placeholder="Search" />
                             </label>
                         </div>
-    
+
                         <div class="mt-8 overflow-x-auto">
                             <table class="table">
                                 <!-- head -->
@@ -345,11 +350,14 @@
                                         </td>
                                         <td>$599</td>
                                         <td>
-                                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
+                                            <button class="btn btn-circle btn-text btn-sm"
+                                                aria-label="Action button"><span
                                                     class="icon-[tabler--pencil]"></span></button>
-                                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
+                                            <button class="btn btn-circle btn-text btn-sm"
+                                                aria-label="Action button"><span
                                                     class="icon-[tabler--trash]"></span></button>
-                                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
+                                            <button class="btn btn-circle btn-text btn-sm"
+                                                aria-label="Action button"><span
                                                     class="icon-[tabler--dots-vertical]"></span></button>
                                         </td>
                                     </tr>
@@ -386,9 +394,11 @@
                                         </td>
                                         <td>$999</td>
                                         <td>
-                                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
+                                            <button class="btn btn-circle btn-text btn-sm"
+                                                aria-label="Action button"><span
                                                     class="icon-[tabler--pencil]"></span></button>
-                                            <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"><span
+                                            <button class="btn btn-circle btn-text btn-sm"
+                                                aria-label="Action button"><span
                                                     class="icon-[tabler--trash]"></span></button>
                                             <button class="btn btn-circle btn-text btn-sm"
                                                 aria-label="Action button"><span
@@ -486,7 +496,7 @@
                                 </tbody>
                             </table>
                         </div>
-    
+
                         <div class="flex flex-wrap items-center justify-between gap-2 py-4 pt-6">
                             <div class="block max-w-sm text-sm font-normal text-gray-500 me-2 sm:mb-0">
                                 Showing
@@ -525,6 +535,22 @@
         <div class="card-body">
             <h5 class="mb-5 card-title">Table Komoditas</h5>
             <x-ui.commodity.table :commodities="$commodities" />
+        </div>
+    </div>
+
+    <div class="grid auto-rows-[192px] grid-cols-4 gap-6 px-3">
+        <div class="row-span-2 p-4 border-2 rounded-xl border-slate-400/10 bg-base-300 dark:bg-neutral-900"></div>
+        <div class="grid grid-cols-2 col-span-2 row-span-3 gap-6">
+            <div
+                class="col-span-2 row-span-1 p-4 border-2 rounded-xl border-slate-400/10 bg-base-300 dark:bg-neutral-900">
+            </div>
+            <div class="row-span-1 p-4 border-2 rounded-xl border-slate-400/10 bg-base-300 dark:bg-neutral-900"></div>
+            <div class="row-span-1 p-4 border-2 rounded-xl border-slate-400/10 bg-base-300 dark:bg-neutral-900"></div>
+        </div>
+        <div class="row-span-3 p-4 border-2 rounded-xl border-slate-400/10 bg-base-300 dark:bg-neutral-900"></div>
+        <div class="row-span-2 p-4 border-2 rounded-xl border-slate-400/10 bg-base-300 dark:bg-neutral-900"></div>
+        <div class="row-span-1 p-4 border-2 rounded-xl border-slate-400/10 bg-base-300 dark:bg-neutral-900"></div>
+        <div class="col-span-2 row-span-1 p-4 border-2 rounded-xl border-slate-400/10 bg-base-300 dark:bg-neutral-900">
         </div>
     </div>
 

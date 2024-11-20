@@ -23,16 +23,19 @@
                         <td class="text-center">{{ $user->phone_number }}</td>
                         <td class="text-center">
                             <div class="flex justify-center">
-                                <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-circle btn-text btn-sm"
-                                        aria-label="Action button"><span class="icon-[tabler--trash]"></span></button>
-                                </form>
+                                <button type="button" class="btn btn-circle btn-text btn-sm" aria-haspopup="dialog"
+                                    aria-expanded="false" aria-controls="deleteModal-{{ $user->id }}"
+                                    data-overlay="#deleteModal-{{ $user->id }}">
+                                    <span class="icon-[tabler--trash]"></span>
+                                </button>
+                                
                                 <button class="btn btn-circle btn-text btn-sm" aria-haspopup="dialog"
                                     aria-expanded="false" aria-controls="userDrawer"
                                     data-overlay="#userDrawer-{{ $user->id }}"><span
                                         class="icon-[tabler--dots-vertical]"></span></button>
+
+                                <x-ui.user.delete-modal :user="$user" />
+                                <x-ui.user.detail :user="$user" />
                             </div>
                         </td>
                     </tr>

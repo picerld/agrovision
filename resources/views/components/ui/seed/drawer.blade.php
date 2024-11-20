@@ -144,11 +144,13 @@
             <button type="button" class="btn btn-error btn-soft" aria-haspopup="dialog" aria-expanded="false"
                 aria-controls="deleteModal-{{ $seed->id }}" data-overlay="#deleteModal-{{ $seed->id }}">
                 <span class="icon-[tabler--trash]"></span>
-            Hapus</button>
-            
-            <x-ui.seed.delete-modal :seed="$seed" />
+                Hapus</button>
+
 
             <button type="submit" class="btn btn-primary">Perbarui</button>
         </div>
+
+        <!-- MODAL DELETE -->
+        <x-ui.seed.delete-modal :seed="$seed" />
     </div>
 </form>

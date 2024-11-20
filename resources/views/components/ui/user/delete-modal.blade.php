@@ -1,4 +1,4 @@
-<div id="deleteModal-{{ $school->id }}" class="hidden overlay modal overlay-open:opacity-100 modal-middle" role="dialog"
+<div id="deleteModal-{{ $user->id }}" class="hidden overlay modal overlay-open:opacity-100 modal-middle" role="dialog"
     tabindex="-1">
     <div class="modal-dialog overlay-open:opacity-100">
         <div class="modal-content">
@@ -12,16 +12,16 @@
                         </svg>
                     </div>
                     <h3 class="mt-4 text-xl font-semibold text-gray-900" id="modal-title">
-                        {{ $school->name }}</h3>
-                    <p class="mt-2 text-base text-gray-600">Ingin menghapus data sekolah
-                        <strong>{{ $school->name }}</strong>?
+                        {{ $user->username }}</h3>
+                    <p class="mt-2 text-base text-gray-600">Ingin menghapus data user
+                        <strong>{{ $user->name }}</strong>?
                     </p>
                 </div>
             </div>
             <div class="justify-center modal-footer">
                 <button type="button" class="btn btn-soft btn-secondary"
-                    data-overlay="#deleteModal-{{ $school->id }}">Close</button>
-                <form action="{{ route('schools.destroy', $school->id) }}" method="POST">
+                    data-overlay="#deleteModal-{{ $user->id }}">Close</button>
+                <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-error btn-soft">Hapus</button>
@@ -30,4 +30,3 @@
         </div>
     </div>
 </div>
-

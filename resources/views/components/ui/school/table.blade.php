@@ -58,8 +58,6 @@
                                     </td> --}}
                                     <td>{{ Str::limit($school->address, 23) }}</td>
                                     <td class="flex">
-                                        <x-ui.school.delete-modal :school="$school" />
-
                                         <button type="button" class="btn btn-circle btn-text btn-sm"
                                             aria-haspopup="dialog" aria-expanded="false"
                                             aria-controls="deleteModal-{{ $school->id }}"

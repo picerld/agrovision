@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -39,7 +40,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'name' => 'required|min:5|max:50',
+                'username' => 'required|min:5|max:50|email',
+                'password' => 'required|min:5|max:50',
+                'phone_number' => 'required|min:11|max:13',
+            ]);
+
+            $this->userService->store($validated);
+
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'User created successfully'
+            ]);
+
+            return redirect()->route('users.index');
+        } catch (\Throwable $th) {
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->back();
+        }
     }
 
     /**
@@ -63,7 +87,35 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'name' => 'required|min:5|max:50',
+                'username' => 'required|min:5|max:50|email',
+                'password' => 'nullable|confirmed',
+                'phone_number' => 'required|min:11|max:13',
+            ]);
+
+            $user = $this->userService->getOne($id);
+
+            $validated['password'] = Hash::make($validated['password'] ?? $user->password);
+
+            $this->userService->update($id, $validated);
+
+            session()->flash('toast', [
+                'type' => 'primary',
+                'message' => 'User updated successfully'
+            ]);
+
+            return redirect()->route('users.index');
+
+        } catch (\Throwable $th) {
+            session()->flash('toast', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            return redirect()->back();
+        }
     }
 
     /**
@@ -71,6 +123,13 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->userService->delete($id);
+
+        session()->flash('toast', [
+            'type' => 'primary',
+            'message' => 'User deleted successfully'
+        ]);
+
+        return redirect()->route('users.index');
     }
 }

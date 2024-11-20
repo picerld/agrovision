@@ -18,7 +18,7 @@ export default {
         },
     },
 
-    plugins: [require("flyonui"), require("flyonui/plugin")],
+    plugins: [require("flyonui"), require("flyonui/plugin"), require("@tailwindcss/forms")],
 
     flyonui: {
         themes: ["light", "dark", "gourmet", "corporate", "luxury", "soft"],
