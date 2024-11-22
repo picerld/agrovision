@@ -19,7 +19,7 @@
                 <div class="grid grid-cols-3 gap-2">
                     <div class="col-span-2">
                         <div class="max-w-sm">
-                            <select
+                            {{-- <select
                                 data-select='{
                           "placeholder": "Nama Sekolah",
                           "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
@@ -39,7 +39,14 @@
                             </select>
 
                             <input type="hidden" name="school_id" id="fallback-school-id"
-                                value="{{ $fertilizer->school_id }}">
+                                value="{{ $fertilizer->school_id }}"> --}}
+                            <select class="max-w-sm appearance-none select" aria-label="Select floating label"
+                                name="school_id">
+                                <option value="{{ $fertilizer->school_id }}" hidden selected>{{ $fertilizer->school_name }}</option>
+                                @foreach ($schools as $school)
+                                    <option value="{{ $school->id }}">{{ $school->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <!-- Date Input -->
@@ -98,6 +105,8 @@
         </div>
 
         <div class="drawer-footer">
+            <button type="button" class="btn btn-soft btn-secondary"
+                data-overlay="#fertilizerDrawer-{{ $fertilizer->id }}">Close</button>
             <button type="submit" class="btn btn-primary">Perbarui</button>
         </div>
     </div>

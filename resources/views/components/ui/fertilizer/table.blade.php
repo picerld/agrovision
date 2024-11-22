@@ -25,21 +25,21 @@
                         <td class="text-center">{{ $fertilizer->date }}</td>
                         <td class="text-center">
                             <div class="flex justify-center">
-                                <form action="{{ route('fertilizer-distributions.destroy', $fertilizer->id) }}"
-                                    method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-circle btn-text btn-sm"
-                                        aria-label="Action button"><span class="icon-[tabler--trash]"></span></button>
-                                </form>
+                                <button type="button" class="btn btn-circle btn-text btn-sm" aria-haspopup="dialog"
+                                    aria-expanded="false" aria-controls="deleteModal-{{ $fertilizer->id }}"
+                                    data-overlay="#deleteModal-{{ $fertilizer->id }}">
+                                    <span class="icon-[tabler--trash]"></span>
+                                </button>
+
                                 <button class="btn btn-circle btn-text btn-sm" aria-haspopup="dialog"
-                                aria-expanded="false" aria-controls="overlay-example"
-                                data-overlay="#fertilizerDrawer-{{ $fertilizer->id }}"><span
-                                    class="icon-[tabler--dots-vertical]"></span></button>
+                                    aria-expanded="false" aria-controls="overlay-example"
+                                    data-overlay="#fertilizerDrawer-{{ $fertilizer->id }}"><span
+                                        class="icon-[tabler--dots-vertical]"></span></button>
                             </div>
                         </td>
                     </tr>
 
+                    <x-ui.fertilizer.delete-modal :fertilizer="$fertilizer" />
                     <x-ui.fertilizer.drawer :fertilizer="$fertilizer" :schools="$schools" />
 
                 @empty
