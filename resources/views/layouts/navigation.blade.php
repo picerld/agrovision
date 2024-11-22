@@ -32,63 +32,6 @@
                             <small class="truncate text-base-content/50">Accepted your connection</small>
                         </div>
                     </div>
-                    <div class="dropdown-item">
-                        <div class="avatar">
-                            <div class="w-10 rounded-full">
-                                <img src="https://cdn.flyonui.com/fy-assets/avatar/avatar-2.png" alt="avatar 2" />
-                            </div>
-                        </div>
-                        <div class="w-60">
-                            <h6 class="text-base truncate">Martian added moved Charts & Maps task to the done board.
-                            </h6>
-                            <small class="truncate text-base-content/50">Today 10:00 AM</small>
-                        </div>
-                    </div>
-                    <div class="dropdown-item">
-                        <div class="avatar online-bottom">
-                            <div class="w-10 rounded-full">
-                                <img src="https://cdn.flyonui.com/fy-assets/avatar/avatar-8.png" alt="avatar 8" />
-                            </div>
-                        </div>
-                        <div class="w-60">
-                            <h6 class="text-base truncate">New Message</h6>
-                            <small class="truncate text-base-content/50">You have new message from Natalie</small>
-                        </div>
-                    </div>
-                    <div class="dropdown-item">
-                        <div class="avatar placeholder">
-                            <div class="w-10 p-2 rounded-full bg-neutral text-neutral-content">
-                                <span class="icon-[tabler--user] size-full"></span>
-                            </div>
-                        </div>
-                        <div class="w-60">
-                            <h6 class="text-base truncate">Application has been approved 🚀</h6>
-                            <small class="text-base-content/50 text-wrap">Your ABC project application has been
-                                approved.</small>
-                        </div>
-                    </div>
-                    <div class="dropdown-item">
-                        <div class="avatar">
-                            <div class="w-10 rounded-full">
-                                <img src="https://cdn.flyonui.com/fy-assets/avatar/avatar-10.png" alt="avatar 10" />
-                            </div>
-                        </div>
-                        <div class="w-60">
-                            <h6 class="text-base truncate">New message from Jane</h6>
-                            <small class="text-base-content/50 text-wrap">Your have new message from Jane</small>
-                        </div>
-                    </div>
-                    <div class="dropdown-item">
-                        <div class="avatar">
-                            <div class="w-10 rounded-full">
-                                <img src="https://cdn.flyonui.com/fy-assets/avatar/avatar-3.png" alt="avatar 3" />
-                            </div>
-                        </div>
-                        <div class="w-60">
-                            <h6 class="text-base truncate">Barry Commented on App review task.</h6>
-                            <small class="truncate text-base-content/50">Today 8:32 AM</small>
-                        </div>
-                    </div>
                 </div>
                 <a href="#" class="justify-center gap-1 dropdown-footer">
                     <span class="icon-[tabler--eye] size-4"></span>
@@ -128,18 +71,6 @@
                     <a class="dropdown-item" href="#">
                         <span class="icon-[tabler--settings]"></span>
                         Settings
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        <span class="icon-[tabler--receipt-rupee]"></span>
-                        Billing
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        <span class="icon-[tabler--help-triangle]"></span>
-                        FAQs
                     </a>
                 </li>
                 <li class="gap-2 dropdown-footer">

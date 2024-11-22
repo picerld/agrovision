@@ -3,8 +3,8 @@
         <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
             <section class="relative flex items-end h-32 bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
                 <img alt=""
-                    src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                    class="absolute inset-0 object-cover w-full h-full opacity-80" />
+                    src="https://images.unsplash.com/photo-1527454803819-fd7364ac2c83?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    class="absolute inset-0 object-cover w-full h-full opacity-50" />
 
                 <div class="hidden lg:relative lg:block lg:p-12">
                     <a class="block text-white" href="#">
@@ -17,12 +17,11 @@
                     </a>
 
                     <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-                        SCM Agrovision
+                        Sebelas Cipta Mandiri
                     </h2>
 
                     <p class="mt-4 leading-relaxed text-white/90">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-                        quibusdam aperiam voluptatum.
+                        Platform digital (Agrovision) yang memberikan kemudahan bagi petani untuk mengelola pendistribusian bibit dan pupuk secara digital.
                     </p>
                 </div>
             </section>

@@ -90,7 +90,7 @@ class SchoolController extends Controller
     {
         try {
             $validated = $request->validate([
-                'name' => 'required|string|min:5|max:50|unique:schools,name' . $school->id,
+                'name' => 'required|string|min:5|max:50|unique:schools,name',
                 'address' => 'required|string|min:5|max:100',
                 'pic' => 'required|string|min:5|max:50',
                 'phone_number' => 'required|string|min:5|max:25',
