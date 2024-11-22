@@ -1,4 +1,4 @@
-<div class="mx-3 my-5 card">
+<div class="my-5 card">
     <div class="card-body">
         <div class="w-full">
             <div class="flex justify-between pb-6">
@@ -10,7 +10,7 @@
                     <x-utils.search-input />
                 </form>
             </div>
-            
+
 
             <div class="mt-8 overflow-x-auto">
                 <table class="table">
@@ -44,8 +44,8 @@
                                 <td>
                                     <div class="flex items-center">
                                         <span class="p-1 rounded-full badge badge-success badge-soft me-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em"
-                                                class="shrink size-4" height="1em" viewBox="0 0 24 24">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" class="shrink size-4"
+                                                height="1em" viewBox="0 0 24 24">
                                                 <g fill="none" stroke="currentColor" stroke-linecap="round"
                                                     stroke-linejoin="round" stroke-width="2">
                                                     <path
@@ -62,22 +62,21 @@
                                 <td>{{ $seed->date }}</td>
                                 <td>
                                     <div class="flex">
-                                        <button class="btn btn-circle btn-text btn-sm"
-                                            aria-label="Action button" aria-haspopup="dialog"
-                                            aria-expanded="false" aria-controls="seedDrawer"
+                                        <button type="button" class="btn btn-circle btn-text btn-sm"
+                                            aria-haspopup="dialog" aria-expanded="false"
+                                            aria-controls="deleteModal-{{ $seed->id }}"
+                                            data-overlay="#deleteModal-{{ $seed->id }}">
+                                            <span class="icon-[tabler--trash]"></span>
+                                        </button>
+                                        
+                                        <button class="btn btn-circle btn-text btn-sm" aria-label="Action button"
+                                            aria-haspopup="dialog" aria-expanded="false" aria-controls="seedDrawer"
                                             data-overlay="#seedDrawer-{{ $seed->seed_id }}"><span
-                                                class="icon-[tabler--pencil]"></span></button>
-                                        <form action="{{ route('seed-distributions.destroy', $seed->seed_id) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-circle btn-text btn-sm"
-                                                aria-label="Action button"><span
-                                                    class="icon-[tabler--trash]"></span></button>
-                                        </form>
+                                                class="icon-[tabler--dots-vertical]"></span></button>
                                     </div>
                                 </td>
 
+                                <x-ui.seed.delete-modal :seed="$seed" />
                                 <x-ui.seed.drawer :seed="$seed" :schools="$schools" :commodities="$commodities" />
                             </tr>
                         @empty
@@ -87,28 +86,7 @@
                 </table>
             </div>
 
-            <div class="flex flex-wrap items-center justify-between gap-2 py-4 pt-6">
-                <div class="block max-w-sm text-sm font-normal text-gray-500 me-2 sm:mb-0">
-                    Showing
-                    <span class="font-semibold text-gray-900">1-4</span>
-                    of
-                    <span class="font-semibold">20</span>
-                    products
-                </div>
-                <nav class="flex items-center gap-x-1">
-                    <button type="button" class="btn btn-sm btn-outline">Previous</button>
-                    <div class="flex items-center gap-x-1">
-                        <button type="button"
-                            class="btn btn-sm btn-outline btn-square aria-[current='page']:text-border-primary aria-[current='page']:bg-primary/10">1</button>
-                        <button type="button"
-                            class="btn btn-sm btn-outline btn-square aria-[current='page']:text-border-primary aria-[current='page']:bg-primary/10"
-                            aria-current="page">2</button>
-                        <button type="button"
-                            class="btn btn-sm btn-outline btn-square aria-[current='page']:text-border-primary aria-[current='page']:bg-primary/10">3</button>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline">Next</button>
-                </nav>
-            </div>
+            {{ $seeds->links('components.utils.pagination') }}
         </div>
     </div>
 </div>

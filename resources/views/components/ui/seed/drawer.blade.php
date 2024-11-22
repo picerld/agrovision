@@ -18,7 +18,9 @@
                 <div class="grid grid-cols-3 gap-2">
                     <div class="col-span-2">
                         <div class="max-w-sm">
-                            <select
+                            <!-- FIX THIS SELECT -->
+
+                            {{-- <select
                                 data-select='{
                               "placeholder": "Nama Sekolah",
                               "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
@@ -29,12 +31,34 @@
                               "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"icon-[tabler--check] flex-shrink-0 size-4 text-primary hidden selected:block \"></span></div>",
                               "extraMarkup": "<span class=\"icon-[tabler--caret-up-down] flex-shrink-0 size-4 text-base-content/90 absolute top-1/2 end-3 -translate-y-1/2 \"></span>"
                               }'
-                                class="hidden" name="school_id">
+                                class="" name="school_id">
                                 <option value="{{ $seed->school_id }}" hidden>{{ $seed->school_name }}</option>
                                 @foreach ($schools as $school)
                                     <option value="{{ $school->id }}">{{ $school->name }}</option>
                                 @endforeach
+
+                                <input type="hidden" name="school_id" id="fallback-school_id"
+                                    value="{{ $seed->school_id }}">
+
+                            </select> --}}
+                            {{-- <script>
+                                document.querySelectorAll('select[data-select]').forEach(select => {
+                                    select.addEventListener('change', function() {
+                                        document.getElementById('fallback-school_id').value = this.value;
+                                    });
+                                });
+                            </script> --}}
+
+                            <!-- FIX THIS SELECT -->
+
+                            <select class="max-w-sm appearance-none select" aria-label="Select floating label"
+                                name="school_id">
+                                <option value="{{ $seed->school_id }}" hidden selected>{{ $seed->school_name }}</option>
+                                @foreach ($schools as $school)
+                                    <option value="{{ $school->id }}">{{ $school->name }}</option>
+                                @endforeach
                             </select>
+
                         </div>
                     </div>
                     <div class="form-control">
@@ -64,7 +88,9 @@
                     <span class="label-text">Jenis Bibit</span>
                 </div>
                 <div class="w-full">
-                    <select name="type_of_seed"
+                    <!-- FIX THIS SELECT -->
+
+                    {{-- <select name="type_of_seed"
                         data-select='{
                       "placeholder": "<span class=\"inline-flex items-center\"><span class=\"icon-[tabler--paper-bag] flex-shrink-0 size-4 me-2\"></span> Bibit </span>",
                       "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
@@ -79,6 +105,16 @@
                         <option value="{{ $seed->commodity_id }}" hidden>{{ $seed->name }}</option>
                         @foreach ($commodities as $commodity)
                             <option value="{{ $commodity->id }}">{{ $commodity->name }}</option>
+                        @endforeach
+                    </select> --}}
+
+                    <!-- FIX THIS SELECT -->
+
+                    <select class="max-w-sm appearance-none select" aria-label="Select floating label"
+                        name="type_of_seed">
+                        <option value="{{ $seed->commodity_id }}" hidden selected>{{ $seed->name }}</option>
+                        @foreach ($commodities as $commodities)
+                            <option value="{{ $commodities->id }}">{{ $commodities->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -105,8 +141,16 @@
             </label>
         </div>
         <div class="drawer-footer">
-            <button type="submit" class="btn btn-soft btn-error" data-overlay="#seedDrawer">Hapus</button>
+            <button type="button" class="btn btn-error btn-soft" aria-haspopup="dialog" aria-expanded="false"
+                aria-controls="deleteModal-{{ $seed->id }}" data-overlay="#deleteModal-{{ $seed->id }}">
+                <span class="icon-[tabler--trash]"></span>
+                Hapus</button>
+
+
             <button type="submit" class="btn btn-primary">Perbarui</button>
         </div>
+
+        <!-- MODAL DELETE -->
+        <x-ui.seed.delete-modal :seed="$seed" />
     </div>
 </form>

@@ -22,7 +22,7 @@ class CommodityController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $perPage = $request->input('per_page', 6);
+        $perPage = $request->input('perPage', 6);
 
         $commodities = $search ? $this->commodityService->search($search)
             : $this->commodityService->getAll($perPage);
@@ -47,7 +47,7 @@ class CommodityController extends Controller
     {
         try {
             $validated = $request->validate([
-                'name' => 'required|string|min:5|max:50',
+                'name' => 'required|string|min:2|max:50',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'harvest_date' => 'required|string',
             ]);
@@ -98,7 +98,7 @@ class CommodityController extends Controller
     {
         try {
             $validated = $request->validate([
-                'name' => 'required|string|min:5|max:50',
+                'name' => 'required|string|min:2|max:50',
                 'harvest_date' => 'required|string',
                 'image' => 'nullable|max:2048',
             ]);

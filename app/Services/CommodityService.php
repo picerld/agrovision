@@ -58,7 +58,10 @@ class CommodityService
 
     public function updateImage($request, $id)
     {
-        $this->deleteImage($this->getOne($id)->image);
+        if ($request->hasFile('image')) {
+            $this->deleteImage($this->getOne($id)->image);
+        }
+
         return ImageHelper::handleImage($request->file('image'));
     }
 }
