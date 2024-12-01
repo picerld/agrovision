@@ -7,10 +7,12 @@
                 <span class="icon-[tabler--home] mr-3"></span>
                 Dashboard
             </x-nav-link>
-            <x-nav-link :href="route('commodities.index')" :active="request()->routeIs('commodities.index')">
-                <span class="icon-[tabler--leaf] mr-3"></span>
-                Komoditas
-            </x-nav-link>
+            @can('view commodity')
+                <x-nav-link :href="route('commodities.index')" :active="request()->routeIs('commodities.index')">
+                    <span class="icon-[tabler--leaf] mr-3"></span>
+                    Komoditas
+                </x-nav-link>
+            @endcan
             <x-nav-link :href="route('schools.index')" :active="request()->routeIs('schools.index')">
                 <span class="icon-[tabler--school] mr-3"></span>
                 Sekolah
@@ -26,6 +28,10 @@
             <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                 <span class="icon-[tabler--user] mr-3"></span>
                 User
+            </x-nav-link>
+            <x-nav-link :href="route('levelings.index')" :active="request()->routeIs('levelings.index')">
+                <span class="icon-[tabler--key] mr-3"></span>
+                Leveling
             </x-nav-link>
         </nav>
     </div>

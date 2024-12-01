@@ -35,7 +35,22 @@ class UserService
         $data['updated_at'] = now();
         $data['email_verified_at'] = now();
 
-        return DB::table('users')->insert($data);
+        $user = DB::table('users')->insert([
+            'name' => $data['name'],
+            'username' => $data['username'],
+            'password' => $data['password'],
+            'phone_number' => $data['phone_number'],
+            'created_at' => $data['created_at'],
+            'updated_at' => $data['updated_at'],
+        ]);
+
+        $user = $this->getOne($user);
+
+        return DB::table('model_has_roles')->insert([
+            'role_id' => $data['role_id'],
+            'model_type' => 'App\Models\User',
+            'model_id' => $user->id,
+        ]);
     }
 
     public function update($id, $data)

@@ -3,7 +3,7 @@
         <h5 class="card-title mb-2.5">Distribusi Pupuk</h5>
         <div class="w-full">
             <div class="mt-8 overflow-x-auto">
-                <table class="table">
+                <table class="table min-h-80">
                     <thead>
                         <tr>
                             <th scope="school" class="font-semibold">Sekolah</th>

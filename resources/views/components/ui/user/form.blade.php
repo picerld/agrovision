@@ -25,6 +25,16 @@
             </div>
             <input name="password" type="password" placeholder="********" class="input" />
         </label>
+        <label class="mb-4 form-control">
+            <div class="label">
+                <span class="label-text">Role</span>
+            </div>
+            <select class="max-w-sm appearance-none select" aria-label="Select floating label" name="role_id">
+                @foreach ($roles as $role)
+                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                @endforeach
+            </select>
+        </label>
     </div>
     <div class="drawer-footer">
         <button type="button" class="btn btn-soft btn-secondary" data-overlay="#drawerUser">Close</button>
