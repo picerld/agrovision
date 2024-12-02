@@ -43,9 +43,10 @@ class UserController extends Controller
         try {
             $validated = $request->validate([
                 'name' => 'required|min:5|max:50',
-                'username' => 'required|min:5|max:50|email',
+                'username' => 'required|min:5|max:50',
                 'password' => 'required|min:5|max:50',
                 'phone_number' => 'required|min:11|max:13',
+                'role_id' => 'required|exists:roles,id',
             ]);
 
             $this->userService->store($validated);
@@ -90,7 +91,7 @@ class UserController extends Controller
         try {
             $validated = $request->validate([
                 'name' => 'required|min:5|max:50',
-                'username' => 'required|min:5|max:50|email',
+                'username' => 'required|min:5|max:50',
                 'password' => 'nullable|confirmed',
                 'phone_number' => 'required|min:11|max:13',
             ]);

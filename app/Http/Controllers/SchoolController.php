@@ -18,7 +18,7 @@ class SchoolController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $perPage = $request->input('per_page', 5);
+        $perPage = $request->input('perPage', 5);
 
         $schools = $search ? $this->schoolService->search($search)
             : $this->schoolService->getAll($perPage);
