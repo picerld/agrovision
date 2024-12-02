@@ -9,10 +9,11 @@
                 <div class="hidden lg:relative lg:block lg:p-12">
                     <a class="block text-white" href="#">
                         <span class="sr-only">Home</span>
-                        <svg class="h-8 sm:h-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12 2C9.24 2 7 4.24 7 7C7 8.11 7.28 9.17 7.78 10.1C6.56 10.44 5.5 11.29 4.79 12.5C3.31 15.1 4.47 18.34 7.1 19.82C9.07 20.91 11.6 20.8 13.5 19.61C15.4 20.8 17.93 20.91 19.9 19.82C22.53 18.34 23.69 15.1 22.21 12.5C21.5 11.29 20.44 10.44 19.22 10.1C19.72 9.17 20 8.11 20 7C20 4.24 17.76 2 15 2H12ZM12 4H15C16.66 4 18 5.34 18 7C18 8.66 16.66 10 15 10H12C10.34 10 9 8.66 9 7C9 5.34 10.34 4 12 4ZM9 12H15C16.66 12 18 13.34 18 15C18 16.66 16.66 18 15 18H9C7.34 18 6 16.66 6 15C6 13.34 7.34 12 9 12Z"
-                                fill="currentColor" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" class="shrink size-9" height="1em" viewBox="0 0 24 24">
+                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                <path d="M8 3h8a2 2 0 0 1 2 2v1.82a5 5 0 0 0 .528 2.236l.944 1.888A5 5 0 0 1 20 13.18V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-5.82a5 5 0 0 1 .528-2.236L6 8V5a2 2 0 0 1 2-2"></path>
+                                <path d="M12 15a2 2 0 1 0 4 0a2 2 0 1 0-4 0m-6 6a2 2 0 0 0 2-2v-5.82a5 5 0 0 0-.528-2.236L6 8m5-1h2"></path>
+                            </g>
                         </svg>
                     </a>
 
@@ -21,47 +22,32 @@
                     </h2>
 
                     <p class="mt-4 leading-relaxed text-white/90">
-                        Platform digital (Agrovision) yang memberikan kemudahan bagi petani untuk mengelola pendistribusian bibit dan pupuk secara digital.
+                        Platform digital (Agrovision) yang memberikan kemudahan bagi petani untuk mengelola
+                        pendistribusian bibit dan pupuk secara digital.
                     </p>
                 </div>
             </section>
 
             <main
                 class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
-                <div class="max-w-xl lg:max-w-3xl">
-                    <div class="relative block -mt-16 lg:hidden">
-                        <a class="inline-flex items-center justify-center text-blue-600 bg-white rounded-full size-16 sm:size-20"
-                            href="#">
-                            <span class="sr-only">Home</span>
-                            <svg class="h-8 sm:h-10" viewBox="0 0 28 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0.41 10.3847C1.14777 7.4194 2.85643 4.7861 5.2639 2.90424C7.6714 1.02234 10.6393 0 13.695 0C16.7507 0 19.7186 1.02234 22.1261 2.90424C24.5336 4.7861 26.2422 7.4194 26.98 10.3847H25.78C23.7557 10.3549 21.7729 10.9599 20.11 12.1147C20.014 12.1842 19.9138 12.2477 19.81 12.3047H19.67C19.5662 12.2477 19.466 12.1842 19.37 12.1147C17.6924 10.9866 15.7166 10.3841 13.695 10.3841C11.6734 10.3841 9.6976 10.9866 8.02 12.1147C7.924 12.1842 7.8238 12.2477 7.72 12.3047H7.58C7.4762 12.2477 7.376 12.1842 7.28 12.1147C5.6171 10.9599 3.6343 10.3549 1.61 10.3847H0.41ZM23.62 16.6547C24.236 16.175 24.9995 15.924 25.78 15.9447H27.39V12.7347H25.78C24.4052 12.7181 23.0619 13.146 21.95 13.9547C21.3243 14.416 20.5674 14.6649 19.79 14.6649C19.0126 14.6649 18.2557 14.416 17.63 13.9547C16.4899 13.1611 15.1341 12.7356 13.745 12.7356C12.3559 12.7356 11.0001 13.1611 9.86 13.9547C9.2343 14.416 8.4774 14.6649 7.7 14.6649C6.9226 14.6649 6.1657 14.416 5.54 13.9547C4.4144 13.1356 3.0518 12.7072 1.66 12.7347H0V15.9447H1.61C2.39051 15.924 3.154 16.175 3.77 16.6547C4.908 17.4489 6.2623 17.8747 7.65 17.8747C9.0377 17.8747 10.392 17.4489 11.53 16.6547C12.1468 16.1765 12.9097 15.9257 13.69 15.9447C14.4708 15.9223 15.2348 16.1735 15.85 16.6547C16.9901 17.4484 18.3459 17.8738 19.735 17.8738C21.1241 17.8738 22.4799 17.4484 23.62 16.6547ZM23.62 22.3947C24.236 21.915 24.9995 21.664 25.78 21.6847H27.39V18.4747H25.78C24.4052 18.4581 23.0619 18.886 21.95 19.6947C21.3243 20.156 20.5674 20.4049 19.79 20.4049C19.0126 20.4049 18.2557 20.156 17.63 19.6947C16.4899 18.9011 15.1341 18.4757 13.745 18.4757C12.3559 18.4757 11.0001 18.9011 9.86 19.6947C9.2343 20.156 8.4774 20.4049 7.7 20.4049C6.9226 20.4049 6.1657 20.156 5.54 19.6947C4.4144 18.8757 3.0518 18.4472 1.66 18.4747H0V21.6847H1.61C2.39051 21.664 3.154 21.915 3.77 22.3947C4.908 23.1889 6.2623 23.6147 7.65 23.6147C9.0377 23.6147 10.392 23.1889 11.53 22.3947C12.1468 21.9165 12.9097 21.6657 13.69 21.6847C14.4708 21.6623 15.2348 21.9135 15.85 22.3947C16.9901 23.1884 18.3459 23.6138 19.735 23.6138C21.1241 23.6138 22.4799 23.1884 23.62 22.3947Z"
-                                    fill="currentColor" />
-                            </svg>
-                        </a>
-
-                        <h1 class="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                            SCM Agrovision
-                        </h1>
-
-                        <p class="mt-4 leading-relaxed text-gray-500">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-                            quibusdam aperiam voluptatum.
-                        </p>
+                <div class="w-full max-w-md">
+                    <!-- Form title -->
+                    <div class="flex flex-col items-center">
+                        <h2 class="mb-4 text-3xl font-semibold text-gray-800">Login to Agrovision</h2>
+                        <p class="text-gray-600">Enter your username below to login to your account.</p>
                     </div>
 
                     <form action="{{ route('login') }}" method="POST" class="grid grid-cols-6 gap-6 mt-8">
                         @csrf
                         <div class="col-span-6">
-                            <label for="Username" class="block text-sm font-medium text-gray-700"> Email </label>
+                            <label for="Username" class="block text-sm font-medium text-gray-700"> Username </label>
 
-                            <input type="email" id="Username" name="username"
+                            <input type="text" id="Username" name="username"
                                 class="w-full mt-1 text-sm text-gray-700 bg-white border-gray-200 rounded-md shadow-sm" />
                             <x-input-error :messages="$errors->get('username')" class="mt-2" />
                         </div>
 
-                        <div class="col-span-6 sm:col-span-3">
+                        <div class="col-span-6">
                             <label for="Password" class="block text-sm font-medium text-gray-700"> Password </label>
 
                             <input type="password" id="Password" name="password"
@@ -69,21 +55,11 @@
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
 
-                        <div class="col-span-6 sm:col-span-3">
-                            <label for="PasswordConfirmation" class="block text-sm font-medium text-gray-700">
-                                Password Confirmation
-                            </label>
-
-                            <input type="password" id="PasswordConfirmation" name="password_confirmation"
-                                class="w-full mt-1 text-sm text-gray-700 bg-white border-gray-200 rounded-md shadow-sm" />
-                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-                        </div>
-
                         {{-- <div class="col-span-6">
                             <label for="MarketingAccept" class="flex gap-4">
                                 <input type="checkbox" id="MarketingAccept" name="marketing_accept"
                                     class="bg-white border-gray-200 rounded-md shadow-sm size-5" />
-
+    
                                 <span class="text-sm text-gray-700">
                                     I want to receive emails about events, product updates and company announcements.
                                 </span>
@@ -92,7 +68,7 @@
 
                         <div class="col-span-6">
                             <p class="text-sm text-gray-500">
-                                By creating an account, you agree to our
+                                By logging in, you agree to our
                                 <a href="#" class="text-gray-700 underline"> terms and conditions </a>
                                 and
                                 <a href="#" class="text-gray-700 underline">privacy policy</a>.
@@ -100,14 +76,10 @@
                         </div>
 
                         <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                            <button class="btn btn-accent btn-wide">
-                                Sign In
+                            <button
+                                class="w-full text-sm font-medium text-white normal-case bg-black rounded-lg shadow-md btn hover:bg-gray-800 btn-lg">
+                                Sign in with Username
                             </button>
-
-                            <p class="mt-4 text-sm text-gray-500 sm:mt-0">
-                                Don't have an account?
-                                <a href="{{ route('register') }}" class="text-gray-700 underline">Sign Up</a>.
-                            </p>
                         </div>
                     </form>
                 </div>
