@@ -5,7 +5,7 @@
             @csrf
             <div class="w-full mb-4 form-control">
                 <label for="roleName" class="label">
-                    <span class="text-[1.2rem] font-semibold label-text">Nama Role</span>
+                    <span class="text-[1.2rem] font-semibold label-text mb-1">Nama Role</span>
                 </label>
                 <input type="text" name="name" id="roleName" class="w-full input input-primary"
                     placeholder="Admin, User, etc.." required />
@@ -14,16 +14,17 @@
             <div class="w-full mb-4 form-control">
                 <h4 class="my-4 font-semibold text-[1.2rem] label-text">Permissions</h4>
                 @foreach ($permissions as $group => $groupedPermissions)
-                    <div class="mb-4">
+                    <div class="mb-3">
+                        <!-- OPTIONAL -->
                         <h4 class="mb-2 text-lg font-normal">{{ $group }}</h4>
-                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                             @foreach ($groupedPermissions as $permission)
                                 <label class="flex gap-2 form-control">
                                     <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"
-                                        class="checkbox checkbox-primary" checked />
+                                        class="checkbox checkbox-primary checkbox-sm" checked />
                                     <span class="flex-col items-start pt-0 -mt-1 cursor-pointer label">
                                         <span class="text-base label-text">{{ $permission->name }}</span>
-                                        <span class="label-text-alt">Notify me when this action happens.</span>
+                                        {{-- <span class="label-text-alt">Notify me when this action happens.</span> --}}
                                     </span>
                                 </label>
                             @endforeach
@@ -58,8 +59,9 @@
                                         @method('PUT')
                                         @foreach ($permissions as $group => $groupedPermissions)
                                             <div class="mb-4">
-                                                <h4 class="mb-2 text-lg font-semibold">{{ $group }}</h4>
-                                                <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
+                                                <!-- optional -->
+                                                {{-- <h4 class="mb-2 text-[1.2rem] font-normal">{{ $group }}</h4>  --}}
+                                                <div class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
                                                     @foreach ($groupedPermissions as $permission)
                                                         <label class="flex items-center gap-2 cursor-pointer">
                                                             <input type="checkbox" name="permissions[]"

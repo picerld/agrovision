@@ -6,6 +6,7 @@
         <span class="font-semibold text-gray-800">{{ $paginator->total() }}</span>
         items
     </div>
+
     <nav class="flex items-center gap-x-1">
         @if ($paginator->onFirstPage())
             <button type="button" class="btn btn-sm btn-outline" disabled>Previous</button>
@@ -16,12 +17,9 @@
         <div class="flex items-center gap-x-1">
             @foreach ($paginator->getUrlRange(1, $paginator->lastPage()) as $page => $url)
                 @if ($page == $paginator->currentPage())
-                    <button type="button"
-                        class="btn btn-sm btn-outline btn-square aria-[current='page']:text-border-primary aria-[current='page']:bg-primary/10"
-                        aria-current="page">{{ $page }}</button>
+                    <button type="button" class="btn btn-sm btn-outline btn-square aria-[current='page']:text-border-primary aria-[current='page']:bg-primary/10" aria-current="page">{{ $page }}</button>
                 @else
-                    <a href="{{ $url }}"
-                        class="btn btn-sm btn-outline btn-square aria-[current='page']:text-border-primary aria-[current='page']:bg-primary/10">{{ $page }}</a>
+                    <a href="{{ $url }}" class="btn btn-sm btn-outline btn-square aria-[current='page']:text-border-primary aria-[current='page']:bg-primary/10">{{ $page }}</a>
                 @endif
             @endforeach
         </div>

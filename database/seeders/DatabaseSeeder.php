@@ -16,15 +16,57 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $permissions = ['view commodity', 'edit commodity', 'delete commodity', 'create commodity'];
+        $permissions = [
+            "commodity" => [
+                "view commodity",
+                "create commodity",
+                "update commodity",
+                "delete commodity",
+            ],
+            "school" => [
+                "view school",
+                "create school",
+                "update school",
+                "delete school",
+            ],
+            "seed distribution" => [
+                "view seed",
+                "create seed",
+                "update seed",
+                "delete seed",
+            ],
+            "fertilizer distribution" => [
+                "view fertilizer",
+                "create fertilizer",
+                "update fertilizer",
+                "delete fertilizer",
+            ],
+            "user" => [
+                "view user",
+                "create user",
+                "update user",
+                "delete user",
+            ],
+            "leveling" => [
+                "view leveling",
+                "create leveling",
+                "update leveling",
+                "delete leveling",
+            ]
+        ];
 
-        foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission, 'group' => 'commodity']);
+        foreach ($permissions as $group => $permissionList) {
+            foreach ($permissionList as $value) {
+                Permission::create([
+                    'name' => $value,
+                    'group' => $group
+                ]);
+            }
         }
 
         $role = Role::create(['name' => 'Admin']);
         $role->givePermissionTo($permissions);
-        
+
         $this->call([
             SchoolSeeder::class,
             CommoditySeeder::class,

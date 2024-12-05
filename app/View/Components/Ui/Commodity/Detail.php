@@ -11,11 +11,11 @@ class Detail extends Component
     /**
      * Create a new component instance.
      */
-    public $commodities;
+    public $commodity;
 
-    public function __construct($commodities)
+    public function __construct($commodity)
     {
-        $this->commodities = $commodities;
+        $this->commodity = $commodity;
     }
 
     /**

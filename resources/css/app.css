@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .dataTables_filter input {
+        @apply input grow;
+    }
+
+    #commodities-table_info {
+        @apply text-sm
+    }
+
+    .pagination {
+        @apply flex justify-end gap-2 py-2;
+    }
+
+    .paginate_button.page-item.previous.disabled {
+        @apply btn btn-sm btn-outline;
+    }
+    
+    .paginate_button.page-item.previous {
+        @apply btn btn-sm btn-primary;
+    }
+
+    .paginate_button.page-item.next {
+        @apply btn btn-sm btn-primary;
+    }
+
+    .paginate_button.page-item {
+        @apply btn btn-sm btn-outline;
+    }
+
+    .paginate_button.page-item.active {
+        @apply btn btn-sm btn-outline btn-square text-border-primary bg-primary/10;
+    }
+}
