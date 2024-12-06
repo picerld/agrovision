@@ -1,4 +1,8 @@
 <x-app-layout>
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('css/datatable.css') }}">
+    @endpush
+
     <div class="mx-3 my-5">
         <div class="grid grid-cols-3 gap-4">
             <x-utils.information-card title="Komoditas" subtitle="Komoditas Terdata" />
@@ -11,7 +15,6 @@
 
                 <div class="flex gap-2">
                     <div class="flex gap-4 mb-4">
-                        <input id="nameFilter" type="text" placeholder="Filter by Name" class="input input-md grow">
                         <select id="categoryFilter" class="select select-md">
                             <option value="">All Categories</option>
                             <option value="Fruits">Fruits</option>
@@ -129,8 +132,6 @@
         <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/v/bs5/dt-1.13.8/datatables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/2.3.7/js/dataTables.buttons.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/2.3.7/js/buttons.html5.min.js"></script>
 
         <script>
             $(document).ready(function() {

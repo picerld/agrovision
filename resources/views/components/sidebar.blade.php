@@ -31,14 +31,18 @@
                     Distribusi Bibit
                 </x-nav-link>
             @endcan
-            <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                <span class="icon-[tabler--user] mr-3"></span>
-                User
-            </x-nav-link>
-            <x-nav-link :href="route('levelings.index')" :active="request()->routeIs('levelings.index')">
-                <span class="icon-[tabler--key] mr-3"></span>
-                Leveling
-            </x-nav-link>
+            @can('view user')
+                <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                    <span class="icon-[tabler--user] mr-3"></span>
+                    User
+                </x-nav-link>
+            @endcan
+            @can('view leveling')
+                <x-nav-link :href="route('levelings.index')" :active="request()->routeIs('levelings.index')">
+                    <span class="icon-[tabler--key] mr-3"></span>
+                    Leveling
+                </x-nav-link>
+            @endcan
         </nav>
     </div>
 </aside>
