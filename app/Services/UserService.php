@@ -30,7 +30,7 @@ class UserService
     public function store($data)
     {
         $data['password'] = bcrypt($data['password']);
-        
+
         $data['created_at'] = now();
         $data['updated_at'] = now();
         $data['email_verified_at'] = now();

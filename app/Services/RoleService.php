@@ -30,23 +30,29 @@ class RoleService
 
     public function store($data)
     {
-        $data['guard_name'] = $data['guard_name'] ?? 'web';
-        $timestamps = now();
+        $data['guard_name'] = 'web';
+        $data['created_at'] = now();
+        $data['updated_at'] = now();
+
+        $role = DB::table('roles')->insertGetId([
             'name' => $data['name'],
             'guard_name' => $data['guard_name'],
-            'created_at' => $timestamps,
-            'updated_at' => $timestamps,
+            'created_at' => $data['created_at'],
+            'updated_at' => $data['updated_at'],
         ]);
 
         $this->storePermissionsModel($role, $data);
 
+        return $role;
+    }
+
+    public function storePermissionsModel($id, $data)
+    {
         foreach ($data['permissions'] as $permission) {
             DB::table('role_has_permissions')->insert([
+                'role_id' => $id,
                 'permission_id' => $permission,
-                'role_id' => $role->id,
             ]);
         }
-
-        return $role;
     }
 }
