@@ -18,22 +18,14 @@ class CommodityApiController extends Controller
 
     public function index(Request $request)
     {
-        // $commodities = $this->commodityService->getAll();
+        $search = $request->input('search');
 
-        // return response()->json([
-        //     'data' => $commodities->items(),
-        //     'status' => 'success',
-        // ], 200);
+        $commodities = $search ? $this->commodityService->search($search) : $this->commodityService->getPaginate(6);
 
-        $commodities = Commodity::orderBy('created_at', 'DESC')->select([
-            'id',
-            'name',
-            'harvest_date',
-            'created_at',
-            'updated_at',
-        ])->get();
-
-        return DataTables::of($commodities)->addColumn('action', fn($commodity) => view('components.ui.commodity.action', compact('commodity')))->toJson();
+        return response()->json([
+            'commodities' => $commodities,
+            'status' => 'success',
+        ], 200);
     }
 
     /**

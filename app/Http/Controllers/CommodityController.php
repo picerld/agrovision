@@ -24,26 +24,22 @@ class CommodityController extends Controller
 
     public function index(Request $request)
     {
-        // $search = $request->input('search');
-        // $perPage = $request->input('perPage', 6);
-
-        // $commodities = $search ? $this->commodityService->search($search)
-        //     : $this->commodityService->getAll($perPage);
-
-        // return view('pages.commodity.index', [
-        //     'commodities' => $commodities
-        // ]);
-
         $commodities = $this->commodityService->getAll();
 
         if ($request->ajax()) {
             return DataTables::of($commodities)
-                ->addColumn('action', fn($commodity) => view('components.ui.commodity.action', compact('commodity')))
+                ->addColumn('action', function ($commodity) {
+                    return '<button class="btn btn-circle btn-text btn-lg view-details" data-id="' . $commodity->id . '" aria-label="View Details">
+                                <span class="icon-[tabler--eye]"></span>
+                            </button>';
+                })
                 ->rawColumns(['action'])
                 ->make(true);
         }
 
-        return view('pages.commodity.index');
+        return view('pages.commodity.index', [
+            'commodities' => $commodities
+        ]);
     }
 
     /**
@@ -89,8 +85,12 @@ class CommodityController extends Controller
      */
     public function show($id)
     {
-        $commodity = $this->commodityService->getOne($id);
-        dd($commodity);
+        $commodity = Commodity::findOrFail($id);
+
+        // Return the Blade component view for the modal
+        return response()->json([
+            'modalHtml' => view('components.ui.commodity.detail', compact('commodity'))->render(),
+        ]);
     }
 
     /**
