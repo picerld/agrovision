@@ -35,7 +35,7 @@ class UserService
         $data['updated_at'] = now();
         $data['email_verified_at'] = now();
 
-        $user = DB::table('users')->insert([
+        $user = DB::table('users')->insertGetId([
             'name' => $data['name'],
             'username' => $data['username'],
             'password' => $data['password'],
@@ -44,12 +44,10 @@ class UserService
             'updated_at' => $data['updated_at'],
         ]);
 
-        $user = $this->getOne($user);
-
         return DB::table('model_has_roles')->insert([
             'role_id' => $data['role_id'],
             'model_type' => 'App\Models\User',
-            'model_id' => $user->id,
+            'model_id' => $user,
         ]);
     }
 
