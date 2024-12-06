@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\CommoditiesDataTable;
 use App\Http\Requests\CommodityStoreRequest;
 use App\Http\Requests\CommodityUpdateRequest;
+use App\Models\Commodity;
 use App\Services\CommodityService;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class CommodityController extends Controller
 {
@@ -21,15 +24,26 @@ class CommodityController extends Controller
 
     public function index(Request $request)
     {
-        $search = $request->input('search');
-        $perPage = $request->input('perPage', 6);
+        // $search = $request->input('search');
+        // $perPage = $request->input('perPage', 6);
 
-        $commodities = $search ? $this->commodityService->search($search)
-            : $this->commodityService->getAll($perPage);
+        // $commodities = $search ? $this->commodityService->search($search)
+        //     : $this->commodityService->getAll($perPage);
 
-        return view('pages.commodity.index', [
-            'commodities' => $commodities
-        ]);
+        // return view('pages.commodity.index', [
+        //     'commodities' => $commodities
+        // ]);
+
+        $commodities = $this->commodityService->getAll();
+
+        if ($request->ajax()) {
+            return DataTables::of($commodities)
+                ->addColumn('action', fn($commodity) => view('components.ui.commodity.action', compact('commodity')))
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('pages.commodity.index');
     }
 
     /**

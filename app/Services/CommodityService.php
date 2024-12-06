@@ -3,14 +3,15 @@
 namespace App\Services;
 
 use App\Helpers\ImageHelper;
+use App\Models\Commodity;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class CommodityService
 {
-    public function getAll($perPage = 6)
+    public function getAll()
     {
-        return DB::table('commodities')->orderBy('created_at', 'DESC')->paginate($perPage);
+        return Commodity::all();
     }
 
     public function getOne($id)

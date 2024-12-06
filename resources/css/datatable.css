@@ -8,7 +8,7 @@
     }
 
     #commodities-table_info {
-        @apply text-sm
+        @apply text-sm;
     }
 
     .pagination {

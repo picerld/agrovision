@@ -18,11 +18,11 @@
         </div>
     </div>
 
-    <div class="mx-3 my-5 card">
+    {{-- <div class="mx-3 my-5 card">
         <div class="card-body">
             <h5 class="mb-5 card-title">Table Komoditas</h5>
             <x-ui.commodity.table :commodities="$commodities" />
         </div>
-    </div>
+    </div> --}}
 
 </x-app-layout>

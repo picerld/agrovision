@@ -16,16 +16,13 @@
                     Komoditas
                 </x-nav-link>
             @endcan
-
-            <!-- Sekolah -->
             @can('view school')
                 <x-nav-link :href="route('schools.index')" :active="request()->routeIs('schools.index')">
                     <span class="icon-[tabler--school] mr-3"></span>
                     Sekolah
                 </x-nav-link>
             @endcan
-
-            <!-- Distribusi Pupuk -->
+            
             @can('view fertilizer')
                 <x-nav-link :href="route('fertilizer-distributions.index')" :active="request()->routeIs('fertilizer-distributions.index')">
                     <span class="icon-[tabler--plant] mr-3"></span>
@@ -33,7 +30,6 @@
                 </x-nav-link>
             @endcan
 
-            <!-- Distribusi Bibit -->
             @can('view seed')
                 <x-nav-link :href="route('seed-distributions.index')" :active="request()->routeIs('seed-distributions.index')">
                     <span class="icon-[tabler--paper-bag] mr-3"></span>
@@ -41,7 +37,6 @@
                 </x-nav-link>
             @endcan
 
-            <!-- User -->
             @can('view user')
                 <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                     <span class="icon-[tabler--user] mr-3"></span>
@@ -49,7 +44,6 @@
                 </x-nav-link>
             @endcan
 
-            <!-- Leveling -->
             @can('view leveling')
                 <x-nav-link :href="route('levelings.index')" :active="request()->routeIs('levelings.index')">
                     <span class="icon-[tabler--key] mr-3"></span>
