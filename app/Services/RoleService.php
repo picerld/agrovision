@@ -32,15 +32,13 @@ class RoleService
     {
         $data['guard_name'] = $data['guard_name'] ?? 'web';
         $timestamps = now();
-
-        $roleId = DB::table('roles')->insertGetId([
             'name' => $data['name'],
             'guard_name' => $data['guard_name'],
             'created_at' => $timestamps,
             'updated_at' => $timestamps,
         ]);
 
-        $role = $this->getOne($roleId);
+        $this->storePermissionsModel($role, $data);
 
         foreach ($data['permissions'] as $permission) {
             DB::table('role_has_permissions')->insert([

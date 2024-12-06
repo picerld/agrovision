@@ -21,12 +21,29 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::resource('schools', SchoolController::class)->middleware('can:view school');
-    Route::resource('commodities', CommodityController::class)->middleware('can:view commodity');
-    Route::resource('users', UserController::class)->middleware('can:view user');
-    Route::resource('seed-distributions', SeedDistributionController::class)->middleware('can:view seed');
-    Route::resource('fertilizer-distributions', FertilizerDistributionController::class)->middleware('can:view fertilizer');
-    Route::resource('levelings', LevelingController::class)->middleware('can:view leveling');
+    Route::middleware('can:view school')->group(function () {
+        Route::resource('schools', SchoolController::class);
+    });
+
+    Route::middleware('can:view commodity')->group(function () {
+        Route::resource('commodities', CommodityController::class);
+    });
+
+    Route::middleware('can:view user')->group(function () {
+        Route::resource('users', UserController::class);
+    });
+
+    Route::middleware('can:view seed')->group(function () {
+        Route::resource('seed-distributions', SeedDistributionController::class);
+    });
+
+    Route::middleware('can:view fertilizer')->group(function () {
+        Route::resource('fertilizer-distributions', FertilizerDistributionController::class);
+    });
+
+    Route::middleware('can:view leveling')->group(function () {
+        Route::resource('levelings', LevelingController::class);
+    });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
