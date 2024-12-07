@@ -10,16 +10,6 @@
                 <x-ui.commodity.header />
 
                 <div class="flex gap-2">
-                    <div class="flex gap-4 mb-4">
-                        <select id="categoryFilter" class="select select-md">
-                            <option value="">All Categories</option>
-                            <option value="Fruits">Fruits</option>
-                            <option value="Vegetables">Vegetables</option>
-                            <option value="Grains">Grains</option>
-                        </select>
-                        <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
-                    </div>
-
                     <button class="px-4 py-2 transition rounded-md shadow-md btn btn-primary hover:bg-primary-dark"
                         type="button" data-overlay="#formCommodity" aria-haspopup="dialog" aria-expanded="false">
                         Tambah +
@@ -62,7 +52,6 @@
 
             <x-ui.commodity.table />
             
-            <!-- Include the dynamic modals here -->
             @foreach ($commodities as $commodity)
                 <x-ui.commodity.detail :commodity="$commodity" />
             @endforeach

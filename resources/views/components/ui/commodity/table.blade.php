@@ -37,7 +37,6 @@
             ajax: {
                 url: '{{ route('commodities.index') }}',
                 data: function(d) {
-                    d.name = $('#nameFilter').val();
                     d.category = $('#categoryFilter').val();
                 }
             },
@@ -104,14 +103,34 @@
                                 <span class="loading loading-spinner text-primary"></span>
                             </div>`
             },
-        });
+            initComplete: function() {
+                // Custom search input filter
+                $('#search').on('keyup', function() {
+                    table.search(this.value).draw();
+                });
 
-        window.addEventListener('click', function(event) {
-            const modal = event.target.closest('.fixed');
-            const modalContent = modal?.querySelector('.modal-content');
-            if (modal && !modalContent.contains(event.target)) {
-                modal.classList.add('hidden');
-            }
+                // Custom length dropdown filter
+                $('#perPage').on('change', function() {
+                    table.page.len($(this).val()).draw();
+                });
+
+                // Custom column filters
+                $('#nameFilter').on('keyup', function() {
+                    table.column(1).search(this.value).draw();
+                });
+
+                $('#categoryFilter').on('change', function() {
+                    table.column(2).search(this.value).draw();
+                });
+            },
         });
+    });
+    
+    window.addEventListener('click', function(event) {
+        const modal = event.target.closest('.fixed');
+        const modalContent = modal?.querySelector('.modal-content');
+        if (modal && !modalContent.contains(event.target)) {
+            modal.classList.add('hidden');
+        }
     });
 </script>
