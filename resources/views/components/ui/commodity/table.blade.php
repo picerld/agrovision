@@ -37,14 +37,12 @@
             ajax: {
                 url: '{{ route('commodities.index') }}',
                 data: function(d) {
-                    d.name = $('#nameFilter').val();
                     d.category = $('#categoryFilter').val();
                 }
             },
             processing: true,
             serverSide: true,
             responsive: true,
-            lengthChange: false,
             columns: [{
                     data: 'image',
                     name: 'image',
@@ -104,14 +102,32 @@
                                 <span class="loading loading-spinner text-primary"></span>
                             </div>`
             },
+            initComplete: function() {
+                $('#search').on('keyup', function() {
+                    table.search(this.value).draw();
+                });
+
+                // Custom length dropdown filter
+                $('#perPage').on('change', function() {
+                    table.page.len($(this).val()).draw();
+                });
+
+                $('#categoryFilter').on('change', function() {
+                    table.column(2).search(this.value).draw();
+                });
+            },
         });
 
         window.addEventListener('click', function(event) {
             const modal = event.target.closest('.fixed');
             const modalContent = modal?.querySelector('.modal-content');
-            if (modal && !modalContent.contains(event.target)) {
+            if (modal && !modalContent?.contains(event.target)) {
                 modal.classList.add('hidden');
             }
         });
+
+        if ($.fn.DataTable.isDataTable('#commodities-table')) {
+            $('#commodities-table').DataTable().destroy();
+        }
     });
 </script>
