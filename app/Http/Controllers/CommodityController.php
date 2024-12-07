@@ -29,9 +29,14 @@ class CommodityController extends Controller
         if ($request->ajax()) {
             return DataTables::of($commodities)
                 ->addColumn('action', function ($commodity) {
-                    return '<button class="btn btn-circle btn-text btn-lg view-details" data-id="' . $commodity->id . '" aria-label="View Details">
-                                <span class="icon-[tabler--eye]"></span>
-                            </button>';
+                    return '
+                    <div class="flex items-center justify-center gap-2">
+                        </button> <button type="button" class="btn btn-circle btn-text btn-sm delete-commodity"
+                        data-id="' . $commodity->id . '" aria-label="Delete Commodity">
+                        <span class="icon-[tabler--trash]"></span></button>
+                        <button class="btn btn-circle btn-text btn-sm view-details" data-id="' . $commodity->id . '" aria-label="View Details">
+                        <span class="icon-[tabler--dots-vertical]"></span>
+                    </div>';
                 })
                 ->rawColumns(['action'])
                 ->make(true);

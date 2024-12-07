@@ -14,7 +14,7 @@
                 <th scope="col" class="px-4 py-2 text-left align-middle cursor-pointer">
                     <span>Ditambahkan</span>
                 </th>
-                <th scope="col" class="px-4 py-2 text-left align-middle cursor-pointer">
+                <th scope="col" class="px-4 py-2 text-left text-center align-middle cursor-pointer">
                     <span>Aksi</span>
                 </th>
             </tr>
@@ -91,6 +91,10 @@
                     $('#commodityDetailModal-' + commodityId).removeClass(
                         'hidden');
                 });
+                $(row).find('.delete-commodity').on('click', function() {
+                    var commodityId = $(this).data('id');
+                    $('#deleteModal-' + commodityId).removeClass('hidden');
+                });
             },
             dom: 'lrtip',
             pageLength: 10,
@@ -104,17 +108,14 @@
                             </div>`
             },
             initComplete: function() {
-                // Custom search input filter
                 $('#search').on('keyup', function() {
                     table.search(this.value).draw();
                 });
 
-                // Custom length dropdown filter
                 $('#perPage').on('change', function() {
                     table.page.len($(this).val()).draw();
                 });
 
-                // Custom column filters
                 $('#nameFilter').on('keyup', function() {
                     table.column(1).search(this.value).draw();
                 });

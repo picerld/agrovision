@@ -54,6 +54,7 @@
             
             @foreach ($commodities as $commodity)
                 <x-ui.commodity.detail :commodity="$commodity" />
+                <x-ui.commodity.delete-modal :commodity="$commodity" />
             @endforeach
         </div>
     </div>
