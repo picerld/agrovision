@@ -19,12 +19,13 @@ class SchoolApiController extends Controller
     {
         $search = $request->input('search');
 
-        $schools = $search ? $this->schoolService->search($search) : $this->schoolService->getPaginate(6);
+        try {
+            $schools = $search ? $this->schoolService->search($search) : $this->schoolService->getPaginate(6);
 
-        return response()->json([
-            'schools' => $schools,
-            'status' => 'success',
-        ], 200);
+            return $this->successResponse('Schools fetched successfully', $schools);
+        } catch (\Exception $e) {
+            return $this->errorResponse('Failed to fetch schools', $e->getMessage());
+        }
     }
 
     /**
@@ -73,5 +74,23 @@ class SchoolApiController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    protected function successResponse(string $message, $data)
+    {
+        return response()->json([
+            'status' => 'success',
+            'message' => $message,
+            'schools' => $data,
+        ], 200);
+    }
+
+    protected function errorResponse(string $message, string $error)
+    {
+        return response()->json([
+            'status' => 'error',
+            'message' => $message,
+            'error' => $error,
+        ], 500);
     }
 }

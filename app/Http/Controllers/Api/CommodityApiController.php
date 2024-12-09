@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CommodityApiController extends Controller
 {
     protected $commodityService;
-    
+
     public function __construct(CommodityService $commodityService)
     {
         $this->commodityService = $commodityService;
@@ -19,12 +19,13 @@ class CommodityApiController extends Controller
     {
         $search = $request->input('search');
 
-        $commodities = $search ? $this->commodityService->search($search) : $this->commodityService->getPaginate(6);
+        try {
+            $commodities = $search ? $this->commodityService->search($search) : $this->commodityService->getPaginate(6);
 
-        return response()->json([
-            'commodities' => $commodities,
-            'status' => 'success',
-        ], 200);
+            return $this->successResponse('Commodities fetched successfully', $commodities);
+        } catch (\Throwable $th) {
+            return $this->errorResponse('Failed to fetch commodities', $th->getMessage());
+        }
     }
 
     /**
@@ -73,5 +74,23 @@ class CommodityApiController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    protected function successResponse(string $message, $data)
+    {
+        return response()->json([
+            'status' => 'success',
+            'message' => $message,
+            'commodities' => $data,
+        ], 200);
+    }
+
+    protected function errorResponse(string $message, string $error)
+    {
+        return response()->json([
+            'status' => 'error',
+            'message' => $message,
+            'error' => $error,
+        ], 500);
     }
 }
