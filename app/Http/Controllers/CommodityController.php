@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\CommoditiesDataTable;
-use App\Http\Requests\CommodityStoreRequest;
-use App\Http\Requests\CommodityUpdateRequest;
 use App\Models\Commodity;
-use App\Services\CommodityService;
 use Illuminate\Http\Request;
+use App\Services\CommodityService;
 use Yajra\DataTables\Facades\DataTables;
 
 class CommodityController extends Controller
@@ -35,7 +32,7 @@ class CommodityController extends Controller
                         data-id="' . $commodity->id . '" aria-label="Delete Commodity">
                         <span class="icon-[tabler--trash]"></span></button>
                         <button class="btn btn-circle btn-text btn-sm view-details" data-id="' . $commodity->id . '" aria-label="View Details">
-                        <span class="icon-[tabler--dots-vertical]"></span>
+                        <span class="icon-[tabler--dots-vertical]"></span></button>
                     </div>';
                 })
                 ->rawColumns(['action'])

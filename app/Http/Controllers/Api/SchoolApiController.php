@@ -3,26 +3,26 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Services\CommodityService;
+use App\Services\SchoolService;
 use Illuminate\Http\Request;
 
-class CommodityApiController extends Controller
+class SchoolApiController extends Controller
 {
-    protected $commodityService;
-    
-    public function __construct(CommodityService $commodityService)
+    protected $schoolService;
+
+    public function __construct(SchoolService $schoolService)
     {
-        $this->commodityService = $commodityService;
+        $this->schoolService = $schoolService;
     }
 
     public function index(Request $request)
     {
         $search = $request->input('search');
 
-        $commodities = $search ? $this->commodityService->search($search) : $this->commodityService->getPaginate(6);
+        $schools = $search ? $this->schoolService->search($search) : $this->schoolService->getPaginate(6);
 
         return response()->json([
-            'commodities' => $commodities,
+            'schools' => $schools,
             'status' => 'success',
         ], 200);
     }

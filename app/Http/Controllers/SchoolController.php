@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\School;
-use App\Services\SchoolService;
 use Illuminate\Http\Request;
+use App\Services\SchoolService;
+use Yajra\DataTables\Facades\DataTables;
 
 class SchoolController extends Controller
 {
@@ -17,11 +18,25 @@ class SchoolController extends Controller
 
     public function index(Request $request)
     {
-        $search = $request->input('search');
-        $perPage = $request->input('perPage', 5);
+        $schools = $this->schoolService->getAll();
 
-        $schools = $search ? $this->schoolService->search($search)
-            : $this->schoolService->getAll($perPage);
+        if($request->ajax()) {
+            return DataTables::of($schools)
+                ->addColumn('action', function ($school) {
+                    return '
+                    <div class="flex items-center justify-center gap-2">
+                        <button type="button" class="btn btn-circle btn-text btn-sm delete-school"
+                        data-id="' . $school->id . '" aria-label="View School">
+                        <span class="icon-[tabler--trash]"></span>
+                        </button>
+                        <button class="btn btn-circle btn-text btn-sm view-school" aria-label="View Details"><span
+                        class="icon-[tabler--dots-vertical]" data-id="' . $school->id . '"></span></button>
+                    </div>
+                    ';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
 
         return view('pages.school.index', [
             'schools' => $schools

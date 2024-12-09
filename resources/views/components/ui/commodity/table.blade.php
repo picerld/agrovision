@@ -33,7 +33,7 @@
 
 <script>
     $(document).ready(function() {
-        const table = new DataTable('#commodities-table', {
+        const table = $('#commodities-table').DataTable({
             ajax: {
                 url: '{{ route('commodities.index') }}',
                 data: function(d) {

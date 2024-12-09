@@ -6,7 +6,12 @@ use Illuminate\Support\Facades\DB;
 
 class SchoolService
 {
-    public function getAll($perPage = 5)
+    public function getAll()
+    {
+        return DB::table('schools')->get();
+    }
+
+    public function getPaginate($perPage = 6)
     {
         return DB::table('schools')->orderBy('created_at', 'DESC')->paginate($perPage);
     }

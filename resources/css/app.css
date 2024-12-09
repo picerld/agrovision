@@ -7,7 +7,7 @@
         @apply input grow;
     }
 
-    #commodities-table_info {
+    .dataTables_info {
         @apply text-sm
     }
 
