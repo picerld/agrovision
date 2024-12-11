@@ -7,6 +7,7 @@ use App\Services\FertilizerDistributionService;
 use App\Services\SchoolService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class FertilizerDistributionController extends Controller
 {
@@ -19,13 +20,29 @@ class FertilizerDistributionController extends Controller
         $this->fertilizerDistributionService = $fertilizerDistributionService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $search = request('search');
-        $perPage = request('perPage', 6);
+        $schools = $this->schoolService->getAll();
+        $fertilizers = $this->fertilizerDistributionService->getAll();
 
-        $schools = DB::table('schools')->get();
-        $fertilizers = $search ? $this->fertilizerDistributionService->search($search) : $this->fertilizerDistributionService->getAll($perPage);
+        if ($request->ajax()) {
+            return DataTables::of($fertilizers)
+                ->addColumn('action', function ($fertilizer) {
+                    return '
+                    <div class="flex items-center justify-center gap-2">
+                <button type="button" class="btn btn-circle btn-text btn-sm delete-fertilizer"
+                        data-id="' . $fertilizer->id . '" aria-label="Delete Fertilizer">
+                    <span class="icon-[tabler--trash]"></span>
+                </button>
+                <button type="button" class="btn btn-circle btn-text btn-sm view-fertilizer" aria-label="View Detail">
+                    <span class="icon-[tabler--dots-vertical]" data-id="' . $fertilizer->id . '"></span>
+                </button>
+            </div>
+            ';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
 
         return view('pages.fertilizer.index', [
             'schools' => $schools,

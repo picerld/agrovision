@@ -31,20 +31,11 @@
     </div>
 </div>
 
-<!-- External Scripts -->
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/v/bs5/dt-1.13.8/datatables.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-
 <script>
     $(document).ready(function() {
         const table = $('#schools-table').DataTable({
             ajax: {
                 url: '{{ route('schools.index') }}',
-                data: function(d) {
-                    d.category = $('#categoryFilter').val();
-                }
             },
             processing: true,
             serverSide: true,
@@ -62,12 +53,13 @@
                     data: 'address',
                     name: 'address',
                     render: function(data) {
-                        const truncated = data.length > 25 ? `${data.substring(0, 25)}...` :
+                        const truncated = data.length > 25 ? data.substring(0, 25) + '...' :
                             data;
                         return `
                             <div class="flex justify-center tooltip" data-tip="${data}">
                                 <p class="text-sm text-center truncate">${truncated}</p>
-                            </div>`;
+                            </div>
+                        `;
                     }
                 },
                 {
@@ -78,9 +70,30 @@
                 },
                 {
                     data: 'created_at',
-                    name: 'created_at',
+                    name: 'created_at'
                 }
             ],
+            rowCallback: function(row, data) {
+                $(row).find('.view-school').on('click', function() {
+                    let schoolId = $(this).find('span').data('id');
+                    let drawer = $('#detailDrawer-' + schoolId);
+
+                    drawer.removeClass('hidden');
+
+                    setTimeout(function() {
+                        drawer.css({
+                            '--tw-translate-x': '0',
+                            'opacity': '1'
+                        });
+                    }, 10);
+                });
+
+                $(row).find('.delete-school').on('click', function() {
+                    let schoolId = $(this).data('id');
+                    console.log('Deleting school:', schoolId);
+                    $('#deleteModal-' + schoolId).removeClass('hidden');
+                });
+            },
             dom: 'lrtip',
             pageLength: 10,
             order: [
@@ -88,9 +101,17 @@
             ],
             language: {
                 processing: `
-                    <div class="absolute top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-base-100/50">
-                        <span class="loading loading-spinner text-primary"></span>
-                    </div>`
+                <div class="absolute top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-base-100/50">
+                    <span class="loading loading-spinner text-primary"></span>
+                </div>`,
+            },
+            responsive: {
+                details: {
+                    renderer: function(api, rowIdx, columns) {
+                        return columns.map(col => col.hidden ?
+                            `<div>${col.title}: ${col.data}</div>` : '').join('');
+                    }
+                }
             },
             initComplete: function() {
                 $('#search').on('keyup', function() {
@@ -103,7 +124,17 @@
             }
         });
 
-        // Handle closing modal logic
+        window.closeDrawer = function(schoolId) {
+            let drawer = $('#detailDrawer-' + schoolId);
+
+            drawer.css({
+                '--tw-translate-x': '100%',
+                'opacity': '0'
+            });
+
+            drawer.addClass('hidden');
+        };
+
         window.addEventListener('click', function(event) {
             const modal = event.target.closest('.fixed');
             const modalContent = modal?.querySelector('.modal-content');

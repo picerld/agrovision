@@ -7,4 +7,9 @@
     </div>
 
     <x-ui.school.table :schools="$schools" />
+
+    @foreach ($schools as $school)
+        <x-ui.school.detail :school="$school" />
+        <x-ui.school.delete-modal :school="$school" />
+    @endforeach
 </x-app-layout>

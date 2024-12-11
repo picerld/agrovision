@@ -20,23 +20,25 @@ class SchoolController extends Controller
     {
         $schools = $this->schoolService->getAll();
 
-        if($request->ajax()) {
+        if ($request->ajax()) {
             return DataTables::of($schools)
                 ->addColumn('action', function ($school) {
                     return '
-                    <div class="flex items-center justify-center gap-2">
-                        <button type="button" class="btn btn-circle btn-text btn-sm delete-school"
-                        data-id="' . $school->id . '" aria-label="View School">
-                        <span class="icon-[tabler--trash]"></span>
-                        </button>
-                        <button class="btn btn-circle btn-text btn-sm view-school" aria-label="View Details"><span
-                        class="icon-[tabler--dots-vertical]" data-id="' . $school->id . '"></span></button>
-                    </div>
-                    ';
+            <div class="flex items-center justify-center gap-2">
+                <button type="button" class="btn btn-circle btn-text btn-sm delete-school"
+                        data-id="' . $school->id . '" aria-label="Delete School">
+                    <span class="icon-[tabler--trash]"></span>
+                </button>
+                <button type="button" class="btn btn-circle btn-text btn-sm view-school" aria-label="View Detail">
+                    <span class="icon-[tabler--dots-vertical]" data-id="' . $school->id . '"></span>
+                </button>
+            </div>
+            ';
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
+
 
         return view('pages.school.index', [
             'schools' => $schools
