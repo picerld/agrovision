@@ -4,7 +4,7 @@
         <p class="text-sm text-base-content/70">Terdapat <b>{{ $registeredSchools }}</b> sekolah terdaftar</p>
     </div>
     <div class="flex gap-2">
-        <button class="btn btn-primary waves waves-light" type="button" aria-haspopup="dialog" aria-expanded="false"
+        <button class="text-white btn btn-primary waves waves-light" type="button" aria-haspopup="dialog" aria-expanded="false"
             aria-controls="drawerSchool" data-overlay="#drawerSchool">Tambah
             +</button>
 

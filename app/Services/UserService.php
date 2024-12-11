@@ -6,7 +6,12 @@ use Illuminate\Support\Facades\DB;
 
 class UserService
 {
-    public function getAll($perPage = 6)
+    public function getAll()
+    {
+        return DB::table('users')->orderBy('created_at', 'DESC')->get();
+    }
+
+    public function getPaginate($perPage = 6)
     {
         return DB::table('users')->orderBy('created_at', 'DESC')->paginate($perPage);
     }

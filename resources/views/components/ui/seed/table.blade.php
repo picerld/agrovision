@@ -154,8 +154,8 @@
             }
         });
 
-        window.closeDrawer = function(schoolId) {
-            let drawer = $('#fertilizerDrawer-' + fertilizerId);
+        window.closeDrawer = function(seedId) {
+            let drawer = $('#seedDrawer-' + seedId);
 
             drawer.css({
                 '--tw-translate-x': '100%',

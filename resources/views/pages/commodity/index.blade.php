@@ -10,7 +10,7 @@
                 <x-ui.commodity.header />
 
                 <div class="flex gap-2">
-                    <button class="px-4 py-2 transition rounded-md shadow-md btn btn-primary hover:bg-primary-dark"
+                    <button class="px-4 py-2 text-white transition rounded-md shadow-md btn btn-primary hover:bg-primary-dark"
                         type="button" data-overlay="#formCommodity" aria-haspopup="dialog" aria-expanded="false">
                         Tambah +
                     </button>

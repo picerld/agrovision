@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
@@ -17,10 +18,25 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $search = $request->input('search');
-        $perPage = $request->input('perPage', 6);
+        $users = $this->userService->getAll();
 
-        $users = $search ? $this->userService->search($search) : $this->userService->getAll($perPage);
+        if ($request->ajax()) {
+            return DataTables::of($users)
+                ->addColumn('action', function ($user) {
+                    return '
+                    <div class="flex items-center justify-center gap-2">
+                <button type="button" class="btn btn-circle btn-text btn-sm delete-user"
+                        data-id="' . $user->id . '" aria-label="Delete User">
+                    <span class="icon-[tabler--trash]"></span>
+                </button>
+                <button type="button" class="btn btn-circle btn-text btn-sm view-user" aria-label="View Detail">
+                    <span class="icon-[tabler--dots-vertical]" data-id="' . $user->id . '"></span>
+                </button>
+            </div>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
 
         return view('pages.user.index', [
             'users' => $users,
@@ -108,7 +124,6 @@ class UserController extends Controller
             ]);
 
             return redirect()->route('users.index');
-
         } catch (\Throwable $th) {
             session()->flash('toast', [
                 'type' => 'error',

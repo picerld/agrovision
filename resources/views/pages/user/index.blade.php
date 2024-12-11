@@ -6,11 +6,12 @@
         </div>
 
         <div class="px-4 py-6 mt-4 bg-white shadow-sm rounded-xl">
-            <x-ui.user.sub-header />
-
-            <hr>
             <x-ui.user.table :users="$users" />
         </div>
-    </div>
 
+        @foreach ($users as $user)
+            <x-ui.user.detail :user="$user" />
+            <x-ui.user.delete-modal :user="$user" />
+        @endforeach
+    </div>
 </x-app-layout>

@@ -5,7 +5,7 @@
             <div class="label">
                 <span class="label-text">Nama</span>
             </div>
-            <input name="name" type="text" placeholder="Silfi Nuraini" class="input" />
+            <input name="name" type="text" placeholder="Agrovision" class="input" />
         </label>
         <label class="mb-4 form-control">
             <div class="label">
@@ -17,7 +17,7 @@
             <div class="label">
                 <span class="label-text">Username</span>
             </div>
-            <input name="username" type="text" placeholder="silfi@agrovision" class="input" />
+            <input name="username" type="text" placeholder="agrovision" class="input" />
         </label>
         <label class="mb-4 form-control">
             <div class="label">

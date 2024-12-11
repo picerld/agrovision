@@ -124,7 +124,7 @@
             }
         });
 
-        window.closeDrawer = function(schoolId) {
+        window.closeDrawer = function(fertilizerId) {
             let drawer = $('#fertilizerDrawer-' + fertilizerId);
 
             drawer.css({
