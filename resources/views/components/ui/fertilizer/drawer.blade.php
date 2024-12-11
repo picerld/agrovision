@@ -60,8 +60,8 @@
                             document.addEventListener('DOMContentLoaded', function() {
                                 flatpickr('#flatpickr-human-friendly', {
                                     altInput: true,
-                                    altFormat: 'F j, Y', // Display format (Month Day, Year)
-                                    dateFormat: 'Y-m-d' // Actual value format (Year-Month-Day)
+                                    altFormat: 'F j, Y',
+                                    dateFormat: 'Y-m-d'
                                 });
 
                                 document.querySelectorAll('select[data-select]').forEach(select => {
@@ -117,7 +117,7 @@
 
 <script>
     $(document).ready(function() {
-        $(document).on('click', '.view-school', function() {
+        $(document).on('click', '.view-fertilizer', function() {
             let fertilizerId = $(this).find('span').data('id');
             let drawer = $('#fertilizerDrawer-' + fertilizerId);
 

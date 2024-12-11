@@ -1,6 +1,6 @@
-<div id="deleteModal-{{ $fertilizer->id }}" class="hidden overlay modal overlay-open:opacity-100 modal-middle" role="dialog"
-    tabindex="-1">
-    <div class="modal-dialog overlay-open:opacity-100">
+<div id="deleteModal-{{ $fertilizer->id }}"
+    class="fixed inset-0 z-50 flex items-center justify-center hidden p-6 bg-black/50">
+    <div class="w-full max-w-lg overflow-hidden bg-white rounded-lg shadow-xl">
         <div class="modal-content">
             <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
                 <div class="flex flex-col items-center">
@@ -16,12 +16,13 @@
                     <p class="mt-2 text-base text-gray-600">Ingin menghapus data distribusi pupuk ke
                         <strong>{{ $fertilizer->school_name }}</strong>?
                     </p>
-                    <p class="text-base text-gray-600">Dengan total pendistribusian {{ $fertilizer->fertilizer_qty }} KG</p>
+                    <p class="text-base text-gray-600">Dengan total pendistribusian <strong>{{ $fertilizer->fertilizer_qty }} KG </strong>
+                    </p>
                 </div>
             </div>
             <div class="justify-center modal-footer">
                 <button type="button" class="btn btn-soft btn-secondary"
-                    data-overlay="#deleteModal-{{ $fertilizer->id }}">Close</button>
+                    onclick="closeModal('deleteModal-{{ $fertilizer->id }}')">Close</button>
                 <form action="{{ route('fertilizer-distributions.destroy', $fertilizer->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
@@ -32,3 +33,15 @@
     </div>
 </div>
 
+<script>
+    function closeModal(modalId) {
+        document.getElementById(modalId)?.classList?.add('hidden');
+    }
+
+    document.addEventListener('click', function(event) {
+        if (event.target.closest('.delete-fertilizer')) {
+            const modalId = event.target.closest('.delete-fertilizer').dataset.modal;
+            document.getElementById(modalId)?.classList?.remove('hidden');
+        }
+    });
+</script>

@@ -1,4 +1,4 @@
-<div class="w-full p-5">
+<div class="w-full">
 
     <x-ui.fertilizer.sub-header />
 
@@ -136,11 +136,11 @@
         };
 
         window.addEventListener('click', function(event) {
-        const modal = event.target.closest('.fixed');
-        const modalContent = modal?.querySelector('.modal-content');
-        if (modal && !modalContent.contains(event.target)) {
-            modal.classList.add('hidden');
-        }
-    });
+            const modal = event.target.closest('.fixed');
+            const modalContent = modal?.querySelector('.modal-content');
+            if (modal && !modalContent.contains(event.target)) {
+                modal.classList.add('hidden');
+            }
+        });
     });
 </script>

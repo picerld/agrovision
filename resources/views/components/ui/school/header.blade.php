@@ -1,7 +1,7 @@
-<div class="flex flex-col flex-wrap justify-between gap-3 sm:flex-row sm:items-center">
+<div class="flex flex-col flex-wrap justify-between gap-3 mx-4 sm:flex-row sm:items-center">
     <div>
         <h5 class="text-lg font-semibold text-primary">Sekolah Terdata</h5>
-        <p class="text-sm text-base-content/70">Terdapat <b>{{ \App\Models\School::count() }}</b> sekolah</p>
+        <p class="text-sm text-base-content/70">Terdapat <b>{{ $registeredSchools }}</b> sekolah terdaftar</p>
     </div>
     <div class="flex gap-2">
         <button class="btn btn-primary waves waves-light" type="button" aria-haspopup="dialog" aria-expanded="false"

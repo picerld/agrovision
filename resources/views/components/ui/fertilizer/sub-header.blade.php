@@ -1,7 +1,7 @@
-<div class="flex justify-between">
+<div class="flex justify-between mx-4">
     <div>
         <h5 class="text-lg font-semibold text-primary">Pupuk Terdistribusikan</h5>
-        <p class="text-sm text-base-content/70">Terdapat <b>{{ \App\Models\FertilizerDistribution::sum('fertilizer_qty') }} KG </b>pupuk didistribusikan</p>
+        <p class="text-sm text-base-content/70">Terdapat <b>{{ $fertilizerDistributionTotal }} KG </b>pupuk didistribusikan</p>
     </div>
     <div class="flex gap-2">
         <div class="flex items-center gap-2">

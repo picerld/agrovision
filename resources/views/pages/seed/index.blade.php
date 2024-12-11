@@ -12,5 +12,9 @@
 
         <x-ui.seed.table :seeds="$seeds" :schools="$schools" :commodities="$commodities"/>
 
+        @foreach ($seeds as $seed)
+            <x-ui.seed.delete-modal :seed="$seed" />
+            <x-ui.seed.drawer :seed="$seed" :schools="$schools" :commodities="$commodities" />
+        @endforeach
     </div>
 </x-app-layout>

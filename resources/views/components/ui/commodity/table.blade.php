@@ -11,7 +11,7 @@
                 <th scope="col" class="px-4 py-2 text-left align-middle cursor-pointer">
                     <span>Masa Panen</span>
                 </th>
-                <th scope="col" class="px-4 py-2 text-left align-middle cursor-pointer">
+                <th scope="col" class="px-4 py-2 text-center align-middle cursor-pointer">
                     <span>Ditambahkan</span>
                 </th>
                 <th scope="col" class="px-4 py-2 text-left text-center align-middle cursor-pointer">

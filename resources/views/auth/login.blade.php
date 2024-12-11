@@ -42,7 +42,7 @@
                         <div class="col-span-6">
                             <label for="Username" class="block text-sm font-medium text-gray-700"> Username </label>
 
-                            <input type="text" id="Username" name="username"
+                            <input type="text" id="Username" name="username" placeholder="agrovision"
                                 class="w-full mt-1 text-sm text-gray-700 bg-white border-gray-200 rounded-md shadow-sm" />
                             <x-input-error :messages="$errors->get('username')" class="mt-2" />
                         </div>
@@ -50,7 +50,7 @@
                         <div class="col-span-6">
                             <label for="Password" class="block text-sm font-medium text-gray-700"> Password </label>
 
-                            <input type="password" id="Password" name="password"
+                            <input type="password" id="Password" name="password" placeholder="*******"
                                 class="w-full mt-1 text-sm text-gray-700 bg-white border-gray-200 rounded-md shadow-sm" />
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>

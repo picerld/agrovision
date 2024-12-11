@@ -3,7 +3,7 @@
         <div class="w-full">
             <x-ui.school.header />
 
-            <div class="w-full p-5">
+            <div class="w-full mt-8">
                 <table id="schools-table" class="table w-full">
                     <thead>
                         <tr>
