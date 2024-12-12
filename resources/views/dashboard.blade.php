@@ -4,7 +4,7 @@
             <x-utils.stats title="Komoditas" model="Commodity" icon="leaf" color="primary" />
             <x-utils.stats title="Distribusi Pupuk" model="FertilizerDistribution" icon="plant" color="warning" />
             <x-utils.stats title="Distribusi Bibit" model="SeedDistribution" icon="paper-bag" color="primary" />
-            <x-utils.stats title="Sekolah" model="School" icon="school" color="error" />
+            <x-utils.stats title="Sekolah" model="School" icon="school" color="secondary" />
         </div>
     </div>
     

@@ -43,7 +43,19 @@
             lengthChange: false,
             columns: [{
                     data: 'name',
-                    name: 'name'
+                    name: 'name',
+                    render: function(data, type, row) {
+                        return `
+                        <div class="flex items-center">
+                            <span class="p-1 rounded-full badge badge-primary badge-soft me-2">
+                                <span class="icon-[tabler--school]"></span>
+                            </span>
+                            <div>
+                                <div class="font-medium">${data}</div>
+                            </div>
+                        </div>
+                    `;
+                    },
                 },
                 {
                     data: 'pic',

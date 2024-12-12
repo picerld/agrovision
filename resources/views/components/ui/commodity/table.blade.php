@@ -1,4 +1,23 @@
 <div class="w-full px-5">
+    <div class="flex justify-end mb-4">
+        <div class="tooltip [--trigger:click]">
+            <div class="tooltip-toggle">
+                <button class="btn btn-soft btn-primary btn-sm" aria-label="Export Button"><span
+                        class="icon-[tabler--download]"></span> Export</button>
+
+                <div class="tooltip-content tooltip-shown:opacity-100 tooltip-shown:visible" role="popover">
+                    <div class="p-4 rounded-lg shadow tooltip-body bg-base-100 text-base-content/80 text-start">
+                        <div class="flex flex-col gap-3">
+                            <button id="export-commodities" class="text-white btn btn-soft btn-success btn-sm btn-wide">
+                                Excel!
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <table id="commodities-table" class="table w-full">
         <thead>
             <tr class="text-sm font-medium text-gray-500">
@@ -23,6 +42,9 @@
         </tbody>
     </table>
 </div>
+
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -118,8 +140,24 @@
                 });
             },
         });
+
+        $('#export-commodities').on('click', function() {
+            table.button('.buttons-csv').trigger();
+        });
+
+        new $.fn.dataTable.Buttons(table, {
+            buttons: [{
+                extend: 'csv',
+                title: 'Commodities Data',
+                text: 'Export to CSV',
+                exportOptions: {
+                    columns: ':visible:not(.not-exported)'
+                }
+            }]
+        });
     });
-    
+
+
     window.addEventListener('click', function(event) {
         const modal = event.target.closest('.fixed');
         const modalContent = modal?.querySelector('.modal-content');

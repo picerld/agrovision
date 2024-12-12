@@ -48,9 +48,14 @@
                     name: 'school_name',
                     render: function(data, type, row) {
                         return `
-                        <div>
-                            <div class="text-sm opacity-70">${data}</div>
-                            <div class="font-medium">${row.pic}</div>
+                        <div class="flex items-center">
+                            <span class="p-1 rounded-full badge badge-primary badge-soft me-2">
+                                <span class="icon-[tabler--school]"></span>
+                            </span>
+                            <div>
+                                <div class="text-sm opacity-70">${row.pic}</div>
+                                <div class="font-medium">${data}</div>
+                            </div>
                         </div>
                     `;
                     },

@@ -2,7 +2,7 @@
     <div class="mx-3 my-5">
         <div class="grid grid-cols-3 gap-4">
             <x-utils.information-card title="Komoditas" subtitle="Komoditas Terdata" />
-            <x-utils.stats title="Komoditas" model="Commodity" icon="leaf" />
+            <x-utils.stats title="Komoditas" model="Commodity" icon="leaf" color="secondary" />
         </div>
 
         <div class="p-4 mt-6 bg-white card">
