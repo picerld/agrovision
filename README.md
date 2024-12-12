@@ -1,4 +1,4 @@
-# SCM Agrovision Technology
+# 🌾 SCM Agrovision Technology
 
 Agrovision adalah platform berbasis web yang dirancang untuk mendukung digitalisasi sektor pertanian. Proyek ini bertujuan untuk mempermudah manajemen distribusi, pencatatan, dan pelaporan komoditas pertanian dengan menggunakan teknologi modern berbasis Laravel.
 
