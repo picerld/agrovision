@@ -8,7 +8,12 @@ use Illuminate\Support\Facades\Storage;
 
 class CommodityService
 {
-    public function getAll($perPage = 6)
+    public function getAll()
+    {
+        return DB::table('commodities')->get();
+    }
+
+    public function getPaginate($perPage = 6)
     {
         return DB::table('commodities')->orderBy('created_at', 'DESC')->paginate($perPage);
     }

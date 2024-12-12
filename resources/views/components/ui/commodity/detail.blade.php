@@ -1,135 +1,47 @@
-@foreach ($commodities as $commodity)
-    <div id="commodityDetailModal-{{ $commodity->id }}" class="hidden overlay modal overlay-open:opacity-100 modal-middle"
-        role="dialog" tabindex="-1">
-        <div class="modal-dialog overlay-open:opacity-100">
-            <form id="commodity-update-form" action="{{ route('commodities.update', $commodity->id) }}" method="POST"
-                enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="grid grid-cols-2">
-                            <div class="items-center">
-                                <div class="relative">
-
+<div id="commodityDetailModal-{{ $commodity->id }}" class="fixed inset-0 z-50 flex items-center justify-center hidden p-6 bg-black/50">
+    <div class="w-full max-w-lg overflow-hidden bg-white rounded-lg shadow-xl">
+        <form id="commodity-update-form-{{ $commodity->id }}" action="{{ route('commodities.update', $commodity->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="modal-content">
+                <div class="p-6 space-y-6">
+                    <div class="grid grid-cols-2 gap-6 mx-4">
+                        <div class="flex flex-col items-center">
+                            <div class="mb-4 avatar">
+                                <div class="rounded-md size-52" id="image-preview-{{ $commodity->id }}">
+                                    <img src="{{ asset('storage/commodities/' . $commodity->image ?? 'placeholder.jpg') }}" alt="{{ $commodity->name }}" />
                                 </div>
-
-                                <div class="avatar">
-                                    <div class="rounded-md size-52" id="image-preview-{{ $commodity->id }}">
-                                        @if ($commodity->image)
-                                            <img src="{{ asset('storage/commodities/' . $commodity->image) }}"
-                                                alt="{{ $commodity->name }}" />
-                                        @else
-                                            <img src="{{ asset('storage/placeholder.jpg') }}" alt="Placeholder" />
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="flex flex-wrap items-center gap-3 mt-1 sm:gap-5">
-                                    <div class="grow">
-                                        <div class="flex items-center gap-x-2">
-                                            <input type="file" id="image-upload-{{ $commodity->id }}" name="image"
-                                                class="hidden" accept="image/*"
-                                                onchange="previewImage('{{ $commodity->id }}')">
-
-                                            <label for="image-upload-{{ $commodity->id }}" type="button"
-                                                id="image-upload-trigger-{{ $commodity->id }}"
-                                                class="btn btn-primary btn-sm w-52" data-file-upload-trigger="">
-                                                <span class="icon-[tabler--upload] size-3 shrink-0"></span>
-                                                Unggah Gambar
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
-                            <div>
-                                <div>
-                                    <div class="mb-4">
-                                        <h3 id="modal-title-1" class="text-xl font-semibold text-gray-800">
-                                            {{ $commodity->name }}
-                                        </h3>
-                                        <p class="text-gray-500 ">
-                                            Edit dan hapus data komoditas
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="space-y-4">
-                                    {{-- Name Input --}}
-                                    <div class="max-w-sm form-control">
-                                        <input type="text" name="name" value="{{ $commodity->name }}"
-                                            class="bg-white input input-filled peer" />
-                                        <label class="input-filled-label">Nama Komoditas</label>
-                                        <span class="input-filled-focused"></span>
-                                    </div>
-
-                                    {{-- Harvest Date Input --}}
-                                    <div class="max-w-sm form-control">
-                                        <input type="string" name="harvest_date"
-                                            value="{{ $commodity->harvest_date }}"
-                                            class="bg-white input input-filled peer" />
-                                        <label class="input-filled-label">Masa Panen</label>
-                                        <span class="input-filled-focused"></span>
-                                    </div>
-                                </div>
+                            <div class="flex flex-wrap items-center gap-3 mt-1 sm:gap-5">
+                                <label for="image-upload-{{ $commodity->id }}" type="button" class="btn btn-primary btn-sm w-52">
+                                    <span class="icon-[tabler--upload] size-3 shrink-0"></span> Unggah Gambar
+                                </label>
+                                <input type="file" id="image-upload-{{ $commodity->id }}" name="image" class="hidden" accept="image/*" onchange="previewImage('{{ $commodity->id }}')">
                             </div>
                         </div>
-                    </div>
-            </form>
-            <div class="modal-footer">
-                <div class="tooltip [--trigger:click]">
-                    <div class="tooltip-toggle">
-                        <button class="btn btn-error btn-soft" aria-label="Popover Button">Hapus</button>
-                        <div class="tooltip-content tooltip-shown:opacity-100 tooltip-shown:visible" role="popover">
-                            <div class="max-w-xs p-4 rounded-lg shadow tooltip-body bg-base-100 text-start">
-                                <span class="text-lg font-semibold text-base-content/90">Konfirmasi {{ $commodity->name }}</span>
-                                <p class="py-4 text-base text-base-content/80">
-                                    Apakah anda yakin ingin menghapus komoditas {{ $commodity->name }}?
-                                </p>
-                                <form id="delete-form" action="{{ route('commodities.destroy', $commodity->id) }}"
-                                    method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" form="delete-form"
-                                        class="text-white btn btn-primary">Ya</button>
-                                </form>
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-gray-800">{{ $commodity->name }}</h3>
+                            <p class="text-gray-500">Edit dan hapus data komoditas</p>
+
+                            <!-- Name Input -->
+                            <div class="max-w-sm form-control">
+                                <input type="text" name="name" value="{{ $commodity->name }}" class="bg-white input input-filled peer" />
+                                <label class="input-filled-label">Nama Komoditas</label>
+                            </div>
+
+                            <!-- Harvest Date Input -->
+                            <div class="max-w-sm form-control">
+                                <input type="text" name="harvest_date" value="{{ $commodity->harvest_date }}" class="bg-white input input-filled peer" />
+                                <label class="input-filled-label">Masa Panen</label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" form="commodity-update-form" class="btn btn-primary">Perbarui</button>
+
+                <div class="modal-footer">
+                    <button type="submit" form="commodity-update-form-{{ $commodity->id }}" class="btn btn-primary">Perbarui</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
-    </div>
-@endforeach
-
-<script>
-    document.getElementById('image-upload-trigger-{{ $commodity->id }}')
-        .addEventListener('click', () => {
-            document.getElementById('image-upload-{{ $commodity->id }}').click();
-        });
-
-    function previewImage(commodityId) {
-        const fileInput = document.getElementById(`image-upload-${commodityId}`);
-        const previewContainer = document.getElementById(`image-preview-${commodityId}`);
-
-        if (fileInput.files && fileInput.files[0]) {
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                const previewImage = document.createElement('img');
-                previewImage.src = e.target.result;
-                previewImage.alt = 'Preview';
-                previewImage.classList.add('object-contain', 'w-48', 'h-48', 'rounded-xl');
-
-                previewContainer.innerHTML = '';
-                previewContainer.appendChild(previewImage);
-            };
-
-            reader.readAsDataURL(fileInput.files[0]);
-        } else {
-            previewContainer.innerHTML = '';
-        }
-    }
-</script>
+</div>

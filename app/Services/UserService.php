@@ -6,7 +6,12 @@ use Illuminate\Support\Facades\DB;
 
 class UserService
 {
-    public function getAll($perPage = 6)
+    public function getAll()
+    {
+        return DB::table('users')->orderBy('created_at', 'DESC')->get();
+    }
+
+    public function getPaginate($perPage = 6)
     {
         return DB::table('users')->orderBy('created_at', 'DESC')->paginate($perPage);
     }
@@ -30,12 +35,12 @@ class UserService
     public function store($data)
     {
         $data['password'] = bcrypt($data['password']);
-        
+
         $data['created_at'] = now();
         $data['updated_at'] = now();
         $data['email_verified_at'] = now();
 
-        $user = DB::table('users')->insert([
+        $user = DB::table('users')->insertGetId([
             'name' => $data['name'],
             'username' => $data['username'],
             'password' => $data['password'],
@@ -44,12 +49,10 @@ class UserService
             'updated_at' => $data['updated_at'],
         ]);
 
-        $user = $this->getOne($user);
-
         return DB::table('model_has_roles')->insert([
             'role_id' => $data['role_id'],
             'model_type' => 'App\Models\User',
-            'model_id' => $user->id,
+            'model_id' => $user,
         ]);
     }
 

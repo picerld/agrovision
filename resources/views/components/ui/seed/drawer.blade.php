@@ -1,12 +1,12 @@
 <form action="{{ route('seed-distributions.update', $seed->seed_id) }}" method="POST">
     @csrf
     @method('PUT')
-    <div id="seedDrawer-{{ $seed->seed_id }}" class="hidden overlay overlay-open:translate-x-0 drawer drawer-start"
+    <div id="seedDrawer-{{ $seed->id }}" class="hidden overlay overlay-open:translate-x-0 drawer drawer-start"
         role="dialog" tabindex="-1">
         <div class="drawer-header">
             <h3 class="font-semibold drawer-title">Edit Distribusi Bibit</h3>
-            <button type="button" class="absolute btn btn-text btn-circle btn-sm end-3 top-3" aria-label="Close"
-                data-overlay="#seedDrawer">
+            <button type="button" class="absolute btn btn-text btn-circle btn-sm end-3 top-3"
+                onclick="closeDrawer('{{ $seed->id }}')">
                 <span class="icon-[tabler--x] size-5"></span>
             </button>
         </div>
@@ -141,16 +141,47 @@
             </label>
         </div>
         <div class="drawer-footer">
-            <button type="button" class="btn btn-error btn-soft" aria-haspopup="dialog" aria-expanded="false"
-                aria-controls="deleteModal-{{ $seed->id }}" data-overlay="#deleteModal-{{ $seed->id }}">
-                <span class="icon-[tabler--trash]"></span>
-                Hapus</button>
-
-
+            <button type="button"
+                class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
+                onclick="closeDrawer('{{ $seed->id }}')">
+                Close
+            </button>
             <button type="submit" class="btn btn-primary">Perbarui</button>
         </div>
-
-        <!-- MODAL DELETE -->
-        <x-ui.seed.delete-modal :seed="$seed" />
     </div>
 </form>
+
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.view-seed', function() {
+            let seedId = $(this).find('span').data('id');
+            let drawer = $('#seedDrawer-' + seedId);
+
+            drawer.removeClass('translate-x-full hidden');
+
+            setTimeout(function() {
+                drawer.addClass('overlay-open');
+            }, 10);
+        });
+
+        window.closeDrawer = function(seedId) {
+            let drawer = $('#seedDrawer-' + seedId);
+
+            drawer.removeClass('overlay-open');
+            setTimeout(function() {
+                drawer.addClass('translate-x-full hidden');
+            }, 500);
+        };
+
+        // Close the Drawer when clicking outside of it
+        window.addEventListener('click', function(event) {
+            const drawer = event.target.closest('.fixed');
+            const drawerContent = drawer?.querySelector('.drawer-content');
+
+            if (drawer && !drawerContent.contains(event.target)) {
+                const seedId = drawer.id.replace('seedDrawer-', '');
+                closeDrawer(seedId);
+            }
+        });
+    });
+</script>

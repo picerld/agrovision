@@ -6,7 +6,15 @@ use Illuminate\Support\Facades\DB;
 
 class FertilizerDistributionService
 {
-    public function getAll($perPage)
+    public function getAll()
+    {
+        return DB::table('fertilizer_distributions')->select('schools.name as school_name', 'fertilizer_distributions.*')
+            ->join('schools', 'fertilizer_distributions.school_id', '=', 'schools.id')
+            ->orderBy('fertilizer_distributions.created_at', 'DESC')
+            ->get();
+    }
+
+    public function getPaginate($perPage = 6)
     {
         return DB::table('fertilizer_distributions')->select('schools.name as school_name', 'fertilizer_distributions.*')
             ->join('schools', 'fertilizer_distributions.school_id', '=', 'schools.id')
@@ -46,7 +54,7 @@ class FertilizerDistributionService
     public function update($id, $data)
     {
         $data['updated_at'] = now();
-        
+
         return DB::table('fertilizer_distributions')->where('id', $id)->update($data);
     }
 

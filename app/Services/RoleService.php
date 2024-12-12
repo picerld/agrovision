@@ -34,15 +34,14 @@ class RoleService
         $data['created_at'] = now();
         $data['updated_at'] = now();
 
-        DB::table('roles')->insert([
+        $role = DB::table('roles')->insertGetId([
             'name' => $data['name'],
             'guard_name' => $data['guard_name'],
             'created_at' => $data['created_at'],
             'updated_at' => $data['updated_at'],
         ]);
 
-        $role = DB::table('roles')->where('name', $data['name'])->first();
-        $this->storePermissionsModel($role->id, $data);
+        $this->storePermissionsModel($role, $data);
 
         return $role;
     }

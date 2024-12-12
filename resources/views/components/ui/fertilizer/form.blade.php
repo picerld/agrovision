@@ -80,7 +80,7 @@
             </div>
             <div class="flex items-center justify-between card-footer text-start">
                 <p class="text-base-content/50">Klik untuk menambahkan.</p>
-                <button type="submit" class="btn btn-primary">Tambah</button>
+                <button type="submit" class="text-white btn btn-primary">Tambah</button>
             </div>
         </div>
     </form>

@@ -1,53 +1,151 @@
 <div class="w-full">
-    <div class="mt-8 overflow-x-auto">
-        <table class="table">
-            <!-- head -->
+
+    <x-ui.fertilizer.sub-header />
+
+    <div class="mt-8">
+        <table id="fertilizers-table" class="table w-full">
             <thead>
                 <tr>
-                    <th scope="school">Sekolah</th>
-                    <th scope="quantity" class="text-center">Jumlah</th>
-                    <th scope="date" class="text-center">Tanggal</th>
-                    <th scope="action" class="text-center">Aksi</th>
+                    <th scope="col" class="px-4 py-2 text-left align-middle cursor-pointer">
+                        <span>Sekolah</span>
+                    </th>
+                    <th scope="col" class="px-4 py-2 text-left align-middle cursor-pointer">
+                        <span>Jumlah</span>
+                    </th>
+                    <th scope="col" class="px-4 py-2 text-center align-middle cursor-pointer">
+                        <span>Tanggal</span>
+                    </th>
+                    <th scope="col" class="px-4 py-2 text-center align-middle cursor-pointer">
+                        <span>Aksi</span>
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($fertilizers as $fertilizer)
-                    <tr>
-                        <td>
-                            <div class="flex items-center gap-3">
-                                <div>
-                                    <div class="text-sm opacity-50">{{ $fertilizer->pic }}</div>
-                                    <div class="font-medium">{{ $fertilizer->school_name }}</div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-center">{{ $fertilizer->fertilizer_qty }} KG</td>
-                        <td class="text-center">{{ $fertilizer->date }}</td>
-                        <td class="text-center">
-                            <div class="flex justify-center">
-                                <button type="button" class="btn btn-circle btn-text btn-sm" aria-haspopup="dialog"
-                                    aria-expanded="false" aria-controls="deleteModal-{{ $fertilizer->id }}"
-                                    data-overlay="#deleteModal-{{ $fertilizer->id }}">
-                                    <span class="icon-[tabler--trash]"></span>
-                                </button>
-
-                                <button class="btn btn-circle btn-text btn-sm" aria-haspopup="dialog"
-                                    aria-expanded="false" aria-controls="overlay-example"
-                                    data-overlay="#fertilizerDrawer-{{ $fertilizer->id }}"><span
-                                        class="icon-[tabler--dots-vertical]"></span></button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <x-ui.fertilizer.delete-modal :fertilizer="$fertilizer" />
-                    <x-ui.fertilizer.drawer :fertilizer="$fertilizer" :schools="$schools" />
-
-                @empty
-                    <h1>Data Kosong</h1>
-                @endforelse
             </tbody>
         </table>
     </div>
-
-    {{ $fertilizers->links('components.utils.pagination') }}
 </div>
+
+<script>
+    $(document).ready(function() {
+        const table = $('#fertilizers-table').DataTable({
+            ajax: {
+                url: '{{ route('fertilizer-distributions.index') }}',
+            },
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            lengthChange: false,
+            columns: [{
+                    data: 'school_name',
+                    name: 'school_name',
+                    render: function(data, type, row) {
+                        return `
+                            <div class="flex items-center">
+                                <span class="p-1 rounded-full badge badge-primary badge-soft me-2">
+                                    <span class="icon-[tabler--school]"></span>
+                                </span>
+                                <div>
+                                    <div class="text-sm opacity-70">${row.pic}</div>
+                                    <div class="font-medium">${data}</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                },
+                {
+                    data: 'fertilizer_qty',
+                    name: 'fertilizer_qty',
+                    render: function(data) {
+                        return data + ' kg';
+                    }
+                },
+                {
+                    data: 'date',
+                    name: 'date',
+                    className: 'text-center',
+                    render: function(data) {
+                        const date = new Date(data);
+                        const months = ["January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"
+                        ];
+                        return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+                    }
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ],
+            rowCallback: function(row, data) {
+                $(row).find('.view-fertilizer').on('click', function() {
+                    let fertilizerId = $(this).find('span').data('id');
+                    let drawer = $('#fertilizerDrawer-' + fertilizerId);
+
+                    drawer.removeClass('hidden');
+
+                    setTimeout(function() {
+                        drawer.css({
+                            '--tw-translate-x': '0',
+                            'opacity': '1'
+                        });
+                    }, 10);
+                });
+
+                $(row).find('.delete-fertilizer').on('click', function() {
+                    let fertilizerId = $(this).data('id');
+                    $('#deleteModal-' + fertilizerId).removeClass('hidden');
+                });
+            },
+            dom: 'lrtip',
+            pageLength: 10,
+            order: [
+                [3, 'desc']
+            ],
+            language: {
+                processing: `
+                <div class="absolute top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-base-100/50">
+                    <span class="loading loading-spinner text-primary"></span>
+                </div>`,
+            },
+            responsive: {
+                details: {
+                    renderer: function(api, rowIdx, columns) {
+                        return columns.map(col => col.hidden ?
+                            `<div>${col.title}: ${col.data}</div>` : '').join('');
+                    }
+                }
+            },
+            initComplete: function() {
+                $('#search').on('keyup', function() {
+                    table.search(this.value).draw();
+                });
+
+                $('#perPage').on('change', function() {
+                    table.page.len($(this).val()).draw();
+                });
+            }
+        });
+
+        window.closeDrawer = function(fertilizerId) {
+            let drawer = $('#fertilizerDrawer-' + fertilizerId);
+
+            drawer.css({
+                '--tw-translate-x': '100%',
+                'opacity': '0'
+            });
+
+            drawer.addClass('hidden');
+        };
+
+        window.addEventListener('click', function(event) {
+            const modal = event.target.closest('.fixed');
+            const modalContent = modal?.querySelector('.modal-content');
+            if (modal && !modalContent.contains(event.target)) {
+                modal.classList.add('hidden');
+            }
+        });
+    });
+</script>

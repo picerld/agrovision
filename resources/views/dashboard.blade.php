@@ -4,7 +4,7 @@
             <x-utils.stats title="Komoditas" model="Commodity" icon="leaf" color="primary" />
             <x-utils.stats title="Distribusi Pupuk" model="FertilizerDistribution" icon="plant" color="warning" />
             <x-utils.stats title="Distribusi Bibit" model="SeedDistribution" icon="paper-bag" color="primary" />
-            <x-utils.stats title="Sekolah" model="School" icon="school" color="error" />
+            <x-utils.stats title="Sekolah" model="School" icon="school" color="secondary" />
         </div>
     </div>
     
@@ -18,11 +18,11 @@
         </div>
     </div>
 
-    <div class="mx-3 my-5 card">
+    {{-- <div class="mx-3 my-5 card">
         <div class="card-body">
             <h5 class="mb-5 card-title">Table Komoditas</h5>
             <x-ui.commodity.table :commodities="$commodities" />
         </div>
-    </div>
+    </div> --}}
 
 </x-app-layout>

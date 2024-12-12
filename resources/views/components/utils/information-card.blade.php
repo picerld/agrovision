@@ -3,7 +3,7 @@
         <div class="stat-title">{{ $subtitle }}</div>
         <div class="stat-value">{{ $title }}</div>
         <div class="stat-actions">
-            <button class="btn btn-sm btn-primary">{{ $title }}</button>
+            <button class="text-white btn btn-sm btn-primary">{{ $title }}</button>
         </div>
     </div>
 

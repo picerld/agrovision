@@ -5,8 +5,7 @@
         role="dialog" tabindex="-1">
         <div class="drawer-header">
             <h3 class="font-semibold drawer-title">Edit Distribusi Pupuk</h3>
-            <button type="button" class="absolute btn btn-text btn-circle btn-sm end-3 top-3" aria-label="Close"
-                data-overlay="#seedDrawer">
+            <button type="button" class="absolute btn btn-text btn-circle btn-sm end-3 top-3" onclick="closeDrawer('{{ $fertilizer->id }}')">
                 <span class="icon-[tabler--x] size-5"></span>
             </button>
         </div>
@@ -42,7 +41,8 @@
                                 value="{{ $fertilizer->school_id }}"> --}}
                             <select class="max-w-sm appearance-none select" aria-label="Select floating label"
                                 name="school_id">
-                                <option value="{{ $fertilizer->school_id }}" hidden selected>{{ $fertilizer->school_name }}</option>
+                                <option value="{{ $fertilizer->school_id }}" hidden selected>
+                                    {{ $fertilizer->school_name }}</option>
                                 @foreach ($schools as $school)
                                     <option value="{{ $school->id }}">{{ $school->name }}</option>
                                 @endforeach
@@ -60,8 +60,8 @@
                             document.addEventListener('DOMContentLoaded', function() {
                                 flatpickr('#flatpickr-human-friendly', {
                                     altInput: true,
-                                    altFormat: 'F j, Y', // Display format (Month Day, Year)
-                                    dateFormat: 'Y-m-d' // Actual value format (Year-Month-Day)
+                                    altFormat: 'F j, Y',
+                                    dateFormat: 'Y-m-d'
                                 });
 
                                 document.querySelectorAll('select[data-select]').forEach(select => {
@@ -105,9 +105,47 @@
         </div>
 
         <div class="drawer-footer">
-            <button type="button" class="btn btn-soft btn-secondary"
-                data-overlay="#fertilizerDrawer-{{ $fertilizer->id }}">Close</button>
+            <button type="button"
+                class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
+                onclick="closeDrawer('{{ $fertilizer->id }}')">
+                Close
+            </button>
             <button type="submit" class="btn btn-primary">Perbarui</button>
         </div>
     </div>
 </form>
+
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.view-fertilizer', function() {
+            let fertilizerId = $(this).find('span').data('id');
+            let drawer = $('#fertilizerDrawer-' + fertilizerId);
+
+            drawer.removeClass('translate-x-full hidden');
+
+            setTimeout(function() {
+                drawer.addClass('overlay-open');
+            }, 10);
+        });
+
+        window.closeDrawer = function(fertilizerId) {
+            let drawer = $('#fertilizerDrawer-' + fertilizerId);
+
+            drawer.removeClass('overlay-open');
+            setTimeout(function() {
+                drawer.addClass('translate-x-full hidden');
+            }, 500);
+        };
+
+        // Close the Drawer when clicking outside of it
+        window.addEventListener('click', function(event) {
+            const drawer = event.target.closest('.fixed');
+            const drawerContent = drawer?.querySelector('.drawer-content');
+
+            if (drawer && !drawerContent.contains(event.target)) {
+                const fertilizerId = drawer.id.replace('fertilizerDrawer-', '');
+                closeDrawer(fertilizerId);
+            }
+        });
+    });
+</script>

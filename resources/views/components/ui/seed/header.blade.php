@@ -1,15 +1,10 @@
 <div class="flex justify-between mx-4">
     <div>
-        <h5 class="text-lg font-semibold text-primary">User Terdata</h5>
-        <p class="text-sm text-base-content/70">Terdapat <b>{{ $registeredUser }}</b> User</p>
+        <h5 class="text-lg font-semibold text-primary">Bibit Terdistribusi</h5>
+        <p class="text-sm text-base-content/70">Terdapat <b>{{ $seedDistributionTotal }}</b>
+            transaksi bibit</p>
     </div>
     <div class="flex gap-2">
-        <button class="text-white btn btn-primary waves waves-light" type="button" aria-haspopup="dialog" aria-expanded="false"
-            aria-controls="drawerUser" data-overlay="#drawerUser">Tambah
-            +</button>
-
-        <x-ui.user.drawer />
-
         <div class="flex items-center gap-2">
             <div class="w-full">
                 <select id="perPage"

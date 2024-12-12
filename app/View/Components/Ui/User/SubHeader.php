@@ -4,16 +4,16 @@ namespace App\View\Components\Ui\User;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class SubHeader extends Component
 {
-    /**
-     * Create a new component instance.
-     */
+    public $registeredUser;
+
     public function __construct()
     {
-        //
+        $this->registeredUser = DB::table('users')->count();
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Models\SeedDistribution;
 use App\Services\SeedDistributionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class SeedDistributionController extends Controller
 {
@@ -18,13 +19,28 @@ class SeedDistributionController extends Controller
 
     public function index(Request $request)
     {
-        $search = $request->input('search');
-        $perPage = $request->input('perPage', 6);
-
         $schools = DB::table('schools')->get();
         $commodities = DB::table('commodities')->get();
-        $seeds = $search ? $this->seedDistributionService->search($search)
-            : $this->seedDistributionService->getAll($perPage);
+
+        $seeds = $this->seedDistributionService->getAll();
+
+        if ($request->ajax()) {
+            return DataTables::of($seeds)
+                ->addColumn('action', function ($seed) {
+                    return '
+                    <div class="flex items-center justify-center gap-2">
+                <button type="button" class="btn btn-circle btn-text btn-sm delete-seed"
+                        data-id="' . $seed->id . '" aria-label="Delete Seed">
+                    <span class="icon-[tabler--trash]"></span>
+                </button>
+                <button type="button" class="btn btn-circle btn-text btn-sm view-seed" aria-label="View Detail">
+                    <span data-id="' . $seed->id . '">                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0-2 0m0 7a1 1 0 1 0 2 0a1 1 0 1 0-2 0m0-14a1 1 0 1 0 2 0a1 1 0 1 0-2 0"/></svg></span>
+                </button>
+            </div>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
 
         return view('pages.seed.index', [
             'schools' => $schools,

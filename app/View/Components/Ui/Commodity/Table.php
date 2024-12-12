@@ -11,9 +11,9 @@ class Table extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $commodities)
+    public function __construct()
     {
-        $this->commodities=$commodities;
+        //
     }
 
     /**

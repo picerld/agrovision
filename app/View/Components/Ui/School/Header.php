@@ -4,16 +4,16 @@ namespace App\View\Components\Ui\School;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Header extends Component
 {
-    /**
-     * Create a new component instance.
-     */
+    public $registeredSchools;
+
     public function __construct()
     {
-        //
+        $this->registeredSchools = DB::table('schools')->count();
     }
 
     /**

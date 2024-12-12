@@ -11,9 +11,11 @@ class DeleteModal extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $commodity;
+
+    public function __construct($commodity)
     {
-        //
+        $this->commodity = $commodity;
     }
 
     /**

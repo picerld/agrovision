@@ -1,66 +1,182 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SCM Agrovision Technology
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Agrovision adalah platform berbasis web yang dirancang untuk mendukung digitalisasi sektor pertanian. Proyek ini bertujuan untuk mempermudah manajemen distribusi, pencatatan, dan pelaporan komoditas pertanian dengan menggunakan teknologi modern berbasis Laravel.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📝 **Backlog Proyek**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### **Epic 1: Manajemen Komoditas**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Sebagai** admin, **saya ingin** dapat mengelola data komoditas, **sehingga** saya dapat mencatat hasil panen dengan mudah.
 
-## Learning Laravel
+-   **User Story 1.1:** Tambahkan komoditas baru dengan nama, masa panen, dan gambar.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    -   **Acceptance Criteria:**
+        -   Pengguna dapat mengisi form dengan validasi untuk semua field.
+        -   Gambar dapat diunggah menggunakan Dropzone.js.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   **User Story 1.2:** Edit data komoditas yang sudah ada.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    -   **Acceptance Criteria:**
+        -   Pengguna dapat memperbarui informasi komoditas tanpa menghapus data yang ada.
 
-## Laravel Sponsors
+-   **User Story 1.3:** Hapus komoditas.
+    -   **Acceptance Criteria:**
+        -   Pengguna dapat menghapus komoditas dengan konfirmasi sebelum tindakan.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### **Epic 2: Distribusi Benih dan Pupuk**
 
-### Premium Partners
+**Sebagai** admin, **saya ingin** melihat dan mengelola pendistribusian, **sehingga** saya dapat memastikan alokasi yang tepat.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+-   **User Story 2.1:** Tambahkan data distribusi bulanan untuk benih dan pupuk.
 
-## Contributing
+    -   **Acceptance Criteria:**
+        -   Pengguna dapat memilih jenis komoditas, jumlah, dan tanggal distribusi.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+-   **User Story 2.2:** Tampilkan laporan distribusi dalam grafik.
+    -   **Acceptance Criteria:**
+        -   Data distribusi bulanan divisualisasikan dengan ApexCharts.js.
 
-## Code of Conduct
+### **Epic 3: Live Search Menggunakan Datatable**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Sebagai** pengguna, **saya ingin** mencari data secara langsung, **sehingga** saya dapat menemukan informasi lebih cepat.
 
-## Security Vulnerabilities
+-   **User Story 3.1:** Implementasi live search pada tabel data.
+    -   **Acceptance Criteria:**
+        -   Pencarian memberikan hasil sesuai input tanpa reload halaman.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### **Epic 4: Custom Pagination**
 
-## License
+**Sebagai** pengguna, **saya ingin** melihat data dalam tampilan yang teratur, **sehingga** saya dapat menavigasi data dengan mudah.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   **User Story 4.1:** Tambahkan pagination kustom untuk datatable.
+    -   **Acceptance Criteria:**
+        -   Data ditampilkan per halaman dengan opsi untuk mengatur jumlah data per halaman.
+
+### **Epic 5: Ekspor Data**
+
+**Sebagai** pengguna, **saya ingin** mengekspor data ke format PDF atau CSV, **sehingga** saya dapat menggunakannya untuk pelaporan.
+
+-   **User Story 6.1:** Implementasi fitur ekspor data.
+    -   **Acceptance Criteria:**
+        -   Data dapat diunduh dalam format PDF atau CSV sesuai filter yang diterapkan.
+
+---
+
+## 🛠️ **Teknologi yang Digunakan**
+
+-   **Framework**: Laravel 11
+-   **Front-End**: TailwindCSS, FlyonUI
+-   **JavaScript Library**: ApexCharts.js, Dropzone.js, Preline.js
+-   **Database**: MySQL
+
+---
+
+## 📦 **Instalasi dan Konfigurasi**
+
+### Persyaratan
+
+-   PHP >= 8.1
+-   Composer
+-   Node.js & npm/yarn
+-   MySQL
+
+### Langkah Instalasi
+
+1. Clone repositori ini:
+
+    ```bash
+    git clone https://github.com/picerld/agrovision.git
+    cd agrovision
+    ```
+
+2. Instal dependensi menggunakan Composer dan npm:
+
+    ```bash
+    composer install
+    npm install && npm run dev
+    ```
+
+3. Salin file `.env.example` ke `.env` dan sesuaikan konfigurasi database:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+4. Generate aplikasi key:
+
+    ```bash
+    php artisan key:generate
+    ```
+
+5. Migrasi dan seeding database:
+
+    ```bash
+    php artisan migrate --seed
+    ```
+
+6. Jalankan aplikasi:
+
+    ```bash
+    php artisan serve
+    ```
+
+    Akses aplikasi di `http://localhost:8000`
+
+7. Pada `App/Providers/AppServiceProvider`
+    ```bash
+        public function boot(): void
+        {
+            app()->make(PermissionRegistrar::class)->forgetCachedPermissions();
+        }
+    ```
+
+---
+
+## 🎨 **Kontribusi**
+
+Kami selalu terbuka untuk kontribusi! Jika Anda ingin berkontribusi, ikuti langkah-langkah berikut:
+
+1. Fork repositori ini.
+2. Buat branch baru untuk fitur atau perbaikan Anda:
+    ```bash
+    git checkout -b fitur-anda
+    ```
+3. Commit perubahan Anda:
+    ```bash
+    git commit -m "Menambahkan fitur baru"
+    ```
+4. Push ke branch Anda:
+    ```bash
+    git push origin fitur-anda
+    ```
+5. Buat Pull Request.
+
+---
+
+## 📚 **Dokumentasi Tambahan**
+
+-   [Laravel Documentation](https://laravel.com/docs)
+-   [FlyonUI Documentation](https://flyonui.com/)
+-   [TailwindCSS Documentation](https://tailwindcss.com/docs)
+
+---
+
+## 🤝 **Lisensi**
+
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
+
+---
+
+## 🌟 **Dukungan**
+
+Jika Anda menemukan masalah atau memiliki pertanyaan, jangan ragu untuk membuka issue atau menghubungi kami melalui email di info@bedabisa.com.
+
+Terima kasih telah menggunakan Agrovision! 🌾
+
+---
+
+![Logo](https://bedabisa.com/assets/img/logo/logo-bedabisa.png)
+
+
