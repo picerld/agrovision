@@ -1,7 +1,12 @@
-<nav class="fixed top-0 left-0 right-0 z-50 flex gap-4 shadow navbar bg-base-100">
+<nav
+    class="fixed top-0 left-0 right-0 z-40 navbar bg-base-100 max-sm:rounded-box max-sm:shadow sm:border-b border-base-content/25">
+    <button type="button" class="btn btn-text max-sm:btn-square sm:hidden me-2" aria-haspopup="dialog"
+        aria-expanded="false" aria-controls="sidebar" data-overlay="#sidebar">
+        <span class="icon-[tabler--menu-2] size-5"></span>
+    </button>
     <div class="flex items-center flex-1">
         <a class="text-xl font-semibold no-underline link text-base-content/90 link-neutral" href="#">
-            Agrovision
+            Agrovision Technology
         </a>
     </div>
     <div class="flex items-center gap-4 navbar-end">
@@ -20,7 +25,7 @@
                     <h6 class="text-base text-base-content/90">Notifications</h6>
                 </div>
                 <div
-                    class="overflow-auto vertical-scrollbar horizontal-scroll rounded-scrollbar text-base-content/80 max-h-56 max-sm:max-w-60">
+                    class="overflow-auto vertical-scrollbar horizontal-scrollbar rounded-scrollbar text-base-content/80 max-h-56 max-md:max-w-60">
                     <div class="dropdown-item">
                         <div class="avatar away-bottom">
                             <div class="w-10 rounded-full">
@@ -58,7 +63,7 @@
                     </div>
                     <div>
                         <h6 class="text-base font-semibold text-base-content/90">{{ Auth::user()->name }}</h6>
-                        <small class="text-base-content/50">Admin</small>
+                        <small class="text-base-content/50">{{ Auth::user()->username }}</small>
                     </div>
                 </li>
                 <li>

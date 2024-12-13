@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+/* @layer components {
     .dataTables_filter input {
         @apply input grow;
     }
@@ -20,11 +20,11 @@
     }
 
     .paginate_button.page-item.previous {
-        @apply btn btn-sm btn-primary text-white;
+        @apply text-white btn btn-sm btn-primary;
     }
 
     .paginate_button.page-item.next {
-        @apply btn btn-sm btn-primary text-white;
+        @apply text-white btn btn-sm btn-primary;
     }
 
     .paginate_button.page-item {
@@ -37,5 +37,53 @@
 
     .paginate_button.page-item.next.disabled {
         @apply btn btn-sm btn-outline;
+    }
+} */
+
+@layer components {
+    .data-table-btn {
+        @apply px-2.5 py-1 text-sm border rounded;
+    }
+
+    .data-table-btn-primary {
+        @apply text-white bg-indigo-600/80 border-indigo-600/80;
+    }
+
+    .data-table-btn-outline {
+        @apply text-gray-700 bg-white border-gray-300 hover:bg-gray-100;
+    }
+
+    .data-table-btn-disabled {
+        @apply text-gray-500 bg-gray-100 border-gray-300 cursor-not-allowed;
+    }
+
+    .dataTables_filter input {
+        @apply input grow;
+    }
+
+    .dataTables_info {
+        @apply text-sm;
+    }
+
+    .pagination {
+        @apply flex justify-end gap-2 py-2;
+    }
+
+    .paginate_button.page-item.previous.disabled,
+    .paginate_button.page-item.next.disabled {
+        @apply data-table-btn data-table-btn-disabled;
+    }
+
+    .paginate_button.page-item.previous:not(.disabled),
+    .paginate_button.page-item.next:not(.disabled) {
+        @apply data-table-btn data-table-btn-primary;
+    }
+
+    .paginate_button.page-item {
+        @apply data-table-btn data-table-btn-outline;
+    }
+
+    .paginate_button.page-item.active {
+        @apply data-table-btn data-table-btn-primary border-primary bg-primary/10 text-primary;
     }
 }

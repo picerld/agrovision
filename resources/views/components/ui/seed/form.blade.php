@@ -30,14 +30,16 @@
                         </div>
                     </div>
 
-                    <label class="max-w-sm input-group">
-                        <span class="input-group-text">
-                            <span class="icon-[tabler--user] text-base-content/80 size-4"></span>
-                        </span>
-                        <div class="form-control grow">
-                            <input name="pic" type="text" placeholder="John Doe"
-                                class="input input-floating peer" />
-                            <span class="input-floating-label">PIC</span>
+                    <label class="w-full input-group">
+                        <div class="max-w-sm input-group">
+                            <span class="input-group-text">
+                                <span class="icon-[tabler--user] text-base-content/80 size-5"></span>
+                            </span>
+                            <div class="relative grow">
+                                <input type="text" placeholder="Agrovision" class="input input-floating peer"
+                                    id="leadingIconFloating" name="pic" />
+                                <label class="input-floating-label" for="leadingIconFloating">PIC</label>
+                            </div>
                         </div>
                     </label>
                     <div class="form-control">
