@@ -18,9 +18,10 @@ class SchoolApiController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $perPage = $request->input('per_page', 6);
 
         try {
-            $schools = $search ? $this->schoolService->search($search) : $this->schoolService->getPaginate(6);
+            $schools = $search ? $this->schoolService->search($search) : $this->schoolService->getPaginate($perPage);
 
             return $this->successResponse('Schools fetched successfully', $schools);
         } catch (\Exception $e) {
@@ -41,7 +42,20 @@ class SchoolApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|min:5|max:50|unique:schools,name',
+                'address' => 'required|string|min:5|max:100',
+                'pic' => 'required|string|min:5|max:50',
+                'phone_number' => 'required|string|min:5|max:25',
+            ]);
+
+            $this->schoolService->store($validated);
+
+            return $this->successResponse('School created successfully', $validated);
+        } catch (\Throwable $th) {
+            return $this->errorResponse('Failed to create school', $th->getMessage());
+        }
     }
 
     /**
@@ -49,7 +63,13 @@ class SchoolApiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $school = $this->schoolService->getOne($id);
+
+        if(!$school) {
+            return $this->errorResponse('School not found', 'School not found');
+        }
+
+        return $this->successResponse('School fetched successfully', $school);
     }
 
     /**
@@ -65,7 +85,20 @@ class SchoolApiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|min:5|max:50',
+                'address' => 'required|string|min:5|max:100',
+                'pic' => 'required|string|min:5|max:50',
+                'phone_number' => 'required|string|min:5|max:25',
+            ]);
+
+            $this->schoolService->update($id, $validated);
+
+            return $this->successResponse('School updated successfully', $validated);
+        } catch (\Throwable $th) {
+            return $this->errorResponse('Failed to update school', $th->getMessage());
+        }
     }
 
     /**
@@ -73,7 +106,7 @@ class SchoolApiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->schoolService->delete($id);
     }
 
     protected function successResponse(string $message, $data)

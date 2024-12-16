@@ -18,9 +18,10 @@ class FertilizerDistributionApiController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $perPage = $request->input('per_page', 6);
 
         try {
-            $fertilizers = $search ? $this->fertilizerDistributionService->search($search) : $this->fertilizerDistributionService->getPaginate(6);
+            $fertilizers = $search ? $this->fertilizerDistributionService->search($search) : $this->fertilizerDistributionService->getPaginate($perPage);
 
             return $this->successResponse('Fertilizer distributions fetched successfully', $fertilizers);
         } catch (\Throwable $th) {
@@ -33,7 +34,20 @@ class FertilizerDistributionApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'school_id' => 'required|exists:schools,id',
+                'fertilizer_qty' => 'required|numeric',
+                'date' => 'required|date',
+                'pic' => 'required|string|min:5|max:50',
+            ]);
+
+            $this->fertilizerDistributionService->store($validated);
+
+            return $this->successResponse('Fertilizer distribution created successfully', $validated);
+        } catch (\Throwable $th) {
+            return $this->errorResponse('Failed to create fertilizer distribution', $th->getMessage());
+        }
     }
 
     /**
@@ -41,7 +55,13 @@ class FertilizerDistributionApiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $fertilizers = $this->fertilizerDistributionService->getOne($id);
+
+        if (!$fertilizers) {
+            return $this->errorResponse('Fertilizer distribution not found', 'Fertilizer distribution not found');
+        }
+
+        return $this->successResponse('Fertilizer distribution fetched successfully', $fertilizers);
     }
 
     /**
@@ -49,7 +69,20 @@ class FertilizerDistributionApiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'school_id' => 'required|exists:schools,id',
+                'fertilizer_qty' => 'required|numeric',
+                'date' => 'required|date',
+                'pic' => 'required|string|min:5|max:50',
+            ]);
+
+            $this->fertilizerDistributionService->update($id, $validated);
+
+            return $this->successResponse('Fertilizer distribution updated successfully', $validated);
+        } catch (\Throwable $th) {
+            return $this->errorResponse('Failed to update fertilizer distribution', $th->getMessage());
+        }
     }
 
     /**
@@ -57,7 +90,9 @@ class FertilizerDistributionApiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->fertilizerDistributionService->delete($id);
+
+        return $this->successResponse('Fertilizer distribution deleted successfully', null);
     }
 
     protected function successResponse(string $message, $data)

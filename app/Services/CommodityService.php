@@ -48,6 +48,7 @@ class CommodityService
     public function update($id, $data)
     {
         $data['updated_at'] = now();
+        
         return DB::table('commodities')->where('id', $id)->update($data);
     }
 
