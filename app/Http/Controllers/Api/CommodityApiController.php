@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
 use App\Services\CommodityService;
 use Illuminate\Http\Request;
@@ -18,13 +19,18 @@ class CommodityApiController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $perPage = $request->input('per_page', 6);
 
         try {
-            $commodities = $search ? $this->commodityService->search($search) : $this->commodityService->getPaginate(6);
+            $commodities = $search ? $this->commodityService->search($search) : $this->commodityService->getPaginate($perPage);
 
-            return $this->successResponse('Commodities fetched successfully', $commodities);
+            if (!$commodities) {
+                return ApiResponse::error('Commodities not found', [], 404);
+            }
+
+            return ApiResponse::success('Commodities fetched successfully', $commodities);
         } catch (\Throwable $th) {
-            return $this->errorResponse('Failed to fetch commodities', $th->getMessage());
+            return ApiResponse::error('Failed to fetch commodities', $th->getMessage());
         }
     }
 
@@ -41,7 +47,19 @@ class CommodityApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|min:2|max:50',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'harvest_date' => 'required|string',
+            ]);
+
+            $this->commodityService->store($validated, $request);
+
+            return ApiResponse::success('Commodity created successfully', $validated);
+        } catch (\Throwable $th) {
+            return ApiResponse::error('Failed to create commodity', $th->getMessage());
+        }
     }
 
     /**
@@ -49,7 +67,13 @@ class CommodityApiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $commodity = $this->commodityService->getOne($id);
+
+        if (!$commodity) {
+            return ApiResponse::error('Commodity not found', [], 404);
+        }
+
+        return ApiResponse::success('Commodity fetched successfully', $commodity);
     }
 
     /**
@@ -65,7 +89,23 @@ class CommodityApiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|min:2|max:50',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'harvest_date' => 'nullable|string',
+            ]);
+
+            if ($request->hasFile('image')) {
+                $validated['image'] = $this->commodityService->updateImage($request, $id);
+            }
+
+            $this->commodityService->update($id, $validated);
+
+            return ApiResponse::success('Commodity updated successfully', $validated);
+        } catch (\Throwable $th) {
+            return ApiResponse::error('Failed to update commodity', $th->getMessage());
+        }
     }
 
     /**
@@ -73,24 +113,8 @@ class CommodityApiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-    }
+        $this->commodityService->delete($id);
 
-    protected function successResponse(string $message, $data)
-    {
-        return response()->json([
-            'status' => 'success',
-            'message' => $message,
-            'commodities' => $data,
-        ], 200);
-    }
-
-    protected function errorResponse(string $message, string $error)
-    {
-        return response()->json([
-            'status' => 'error',
-            'message' => $message,
-            'error' => $error,
-        ], 500);
+        return ApiResponse::success('Commodity deleted successfully', null);
     }
 }

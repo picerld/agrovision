@@ -18,9 +18,10 @@ class SeedDistributionApiController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $perPage = $request->input('per_page', 6);
 
         try {
-            $seeds = $search ? $this->seedDistributionService->search($search) : $this->seedDistributionService->getPaginate(6);
+            $seeds = $search ? $this->seedDistributionService->search($search) : $this->seedDistributionService->getPaginate($perPage);
 
             return $this->successResponse('Seed distributions fetched successfully', $seeds);
         } catch (\Throwable $th) {
@@ -33,7 +34,22 @@ class SeedDistributionApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'school_id' => 'required|exists:schools,id',
+                'type_of_seed' => 'required|exists:commodities,id',
+                'seed_qty' => 'required|numeric',
+                'date' => 'required|date',
+                'unit' => 'required|string',
+                'pic' => 'required|string|min:5|max:50',
+            ]);
+
+            $this->seedDistributionService->store($validated);
+
+            return $this->successResponse('Seed distribution created successfully', $validated);
+        } catch (\Throwable $th) {
+            return $this->errorResponse('Failed to create seed distribution', $th->getMessage());
+        }
     }
 
     /**
@@ -41,7 +57,13 @@ class SeedDistributionApiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $seed = $this->seedDistributionService->getOne($id);
+
+        if(!$seed) {
+            return $this->errorResponse('Seed distribution not found', 'Seed distribution not found');
+        }
+
+        return $this->successResponse('Seed distribution fetched successfully', $seed);
     }
 
     /**
@@ -49,7 +71,22 @@ class SeedDistributionApiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'school_id' => 'required|exists:schools,id',
+                'type_of_seed' => 'required|exists:commodities,id',
+                'seed_qty' => 'required|numeric',
+                'date' => 'required|date',
+                'unit' => 'required|string',
+                'pic' => 'required|string|min:5|max:50',
+            ]);
+
+            $this->seedDistributionService->update($id, $validated);
+
+            return $this->successResponse('Seed distribution updated successfully', $validated);
+        } catch (\Throwable $th) {
+            return $this->errorResponse('Failed to update seed distribution', $th->getMessage());
+        }
     }
 
     /**
@@ -57,7 +94,7 @@ class SeedDistributionApiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->seedDistributionService->delete($id);
     }
 
     protected function successResponse(string $message, $data)
