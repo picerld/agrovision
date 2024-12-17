@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CommodityCollection;
 use App\Services\CommodityService;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,8 @@ class CommodityApiController extends Controller
                 return ApiResponse::error('Commodities not found', [], 404);
             }
 
-            return ApiResponse::success('Commodities fetched successfully', $commodities);
+            // using collection
+            return ApiResponse::success('Commodities fetched successfully', new CommodityCollection($commodities));
         } catch (\Throwable $th) {
             return ApiResponse::error('Failed to fetch commodities', $th->getMessage());
         }
@@ -113,8 +115,12 @@ class CommodityApiController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->commodityService->delete($id);
+        try {
+            $this->commodityService->delete($id);
 
-        return ApiResponse::success('Commodity deleted successfully', null);
+            return ApiResponse::success('Commodity deleted successfully', null);
+        } catch (\Throwable $th) {
+            return ApiResponse::error('Failed to delete commodity', $th->getMessage());
+        }
     }
 }

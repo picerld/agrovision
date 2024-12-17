@@ -13,12 +13,14 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::controller(AuthApiController::class)->group(function () {
-    Route::get('/login', 'login');
+    Route::post('/login', 'login');
+
+    Route::middleware('auth:sanctum')->post('/logout', 'logout');
 });
 
-// Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('commodities', CommodityApiController::class);
     Route::apiResource('schools', SchoolApiController::class);
     Route::apiResource('seed-distributions', SeedDistributionApiController::class);
     Route::apiResource('fertilizer-distributions', FertilizerDistributionApiController::class);
-// });
+});
