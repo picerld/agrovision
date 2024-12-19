@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\FertilizerDistributionCollection;
 use App\Services\FertilizerDistributionService;
 use Illuminate\Http\Request;
 
@@ -23,9 +25,9 @@ class FertilizerDistributionApiController extends Controller
         try {
             $fertilizers = $search ? $this->fertilizerDistributionService->search($search) : $this->fertilizerDistributionService->getPaginate($perPage);
 
-            return $this->successResponse('Fertilizer distributions fetched successfully', $fertilizers);
+            return ApiResponse::success('Fertilizer distributions fetched successfully', new FertilizerDistributionCollection($fertilizers));
         } catch (\Throwable $th) {
-            return $this->errorResponse('Failed to fetch fertilizer distributions', $th->getMessage());
+            return ApiResponse::error('Failed to fetch fertilizer distributions', $th->getMessage());
         }
     }
 
@@ -44,9 +46,9 @@ class FertilizerDistributionApiController extends Controller
 
             $this->fertilizerDistributionService->store($validated);
 
-            return $this->successResponse('Fertilizer distribution created successfully', $validated);
+            return ApiResponse::success('Fertilizer distribution created successfully', $validated);
         } catch (\Throwable $th) {
-            return $this->errorResponse('Failed to create fertilizer distribution', $th->getMessage());
+            return ApiResponse::error('Failed to create fertilizer distribution', $th->getMessage());
         }
     }
 
@@ -58,10 +60,10 @@ class FertilizerDistributionApiController extends Controller
         $fertilizers = $this->fertilizerDistributionService->getOne($id);
 
         if (!$fertilizers) {
-            return $this->errorResponse('Fertilizer distribution not found', 'Fertilizer distribution not found');
+            return ApiResponse::error('Fertilizer distribution not found', [], 404);
         }
 
-        return $this->successResponse('Fertilizer distribution fetched successfully', $fertilizers);
+        return ApiResponse::success('Fertilizer distribution fetched successfully', $fertilizers);
     }
 
     /**
@@ -79,9 +81,9 @@ class FertilizerDistributionApiController extends Controller
 
             $this->fertilizerDistributionService->update($id, $validated);
 
-            return $this->successResponse('Fertilizer distribution updated successfully', $validated);
+            return ApiResponse::success('Fertilizer distribution updated successfully', $validated);
         } catch (\Throwable $th) {
-            return $this->errorResponse('Failed to update fertilizer distribution', $th->getMessage());
+            return ApiResponse::error('Failed to update fertilizer distribution', $th->getMessage());
         }
     }
 
@@ -90,26 +92,12 @@ class FertilizerDistributionApiController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->fertilizerDistributionService->delete($id);
-
-        return $this->successResponse('Fertilizer distribution deleted successfully', null);
-    }
-
-    protected function successResponse(string $message, $data)
-    {
-        return response()->json([
-            'status' => 'success',
-            'message' => $message,
-            'fertilizers' => $data,
-        ], 200);
-    }
-
-    protected function errorResponse(string $message, string $error)
-    {
-        return response()->json([
-            'status' => 'error',
-            'message' => $message,
-            'error' => $error,
-        ], 500);
+        try {
+            $this->fertilizerDistributionService->delete($id);
+            
+            return ApiResponse::success('Fertilizer distribution deleted successfully', null);
+        } catch (\Throwable $th) {
+            return ApiResponse::error('Failed to delete fertilizer distribution', $th->getMessage());
+        }
     }
 }

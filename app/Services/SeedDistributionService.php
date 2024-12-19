@@ -19,7 +19,7 @@ class SeedDistributionService
     public function getPaginate($perPage = 6)
     {
         return DB::table('seed_distributions')
-            ->select('schools.name as school_name', 'seed_distributions.*', 'seed_distributions.id as seed_id', 'commodities.*', 'commodities.id as commodity_id')
+            ->select('seed_distributions.*', 'schools.name as school_name', 'seed_distributions.id as seed_id', 'commodities.*', 'commodities.id as commodity_id')
             ->join('schools', 'seed_distributions.school_id', '=', 'schools.id')
             ->join('commodities', 'seed_distributions.type_of_seed', '=', 'commodities.id')
             ->orderBy('seed_distributions.created_at', 'DESC')

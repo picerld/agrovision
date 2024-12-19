@@ -152,7 +152,7 @@
                 text: 'Export to CSV',
                 exportOptions: {
                     columns: ':visible:not(.not-exported)'
-                }
+                },
             }]
         });
     });

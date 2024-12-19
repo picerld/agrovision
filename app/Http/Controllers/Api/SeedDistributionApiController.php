@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SeedDistributionCollection;
 use App\Services\SeedDistributionService;
 use Illuminate\Http\Request;
 
@@ -23,9 +25,13 @@ class SeedDistributionApiController extends Controller
         try {
             $seeds = $search ? $this->seedDistributionService->search($search) : $this->seedDistributionService->getPaginate($perPage);
 
-            return $this->successResponse('Seed distributions fetched successfully', $seeds);
+            if (!$seeds) {
+                return ApiResponse::error('Seeds not found', [], 404);
+            }
+
+            return ApiResponse::success('Seeds fetched successfully', new SeedDistributionCollection($seeds));
         } catch (\Throwable $th) {
-            return $this->errorResponse('Failed to fetch seeds', $th->getMessage());
+            return ApiResponse::error('Failed to fetch seeds', $th->getMessage());
         }
     }
 
@@ -46,9 +52,9 @@ class SeedDistributionApiController extends Controller
 
             $this->seedDistributionService->store($validated);
 
-            return $this->successResponse('Seed distribution created successfully', $validated);
+            return ApiResponse::success('Seed distribution created successfully', $validated);
         } catch (\Throwable $th) {
-            return $this->errorResponse('Failed to create seed distribution', $th->getMessage());
+            return ApiResponse::error('Failed to create seed distribution', $th->getMessage());
         }
     }
 
@@ -60,10 +66,10 @@ class SeedDistributionApiController extends Controller
         $seed = $this->seedDistributionService->getOne($id);
 
         if(!$seed) {
-            return $this->errorResponse('Seed distribution not found', 'Seed distribution not found');
+            return ApiResponse::error('Seed distribution not found', [], 404);
         }
 
-        return $this->successResponse('Seed distribution fetched successfully', $seed);
+        return ApiResponse::success('Seed distribution fetched successfully', $seed);
     }
 
     /**
@@ -83,9 +89,9 @@ class SeedDistributionApiController extends Controller
 
             $this->seedDistributionService->update($id, $validated);
 
-            return $this->successResponse('Seed distribution updated successfully', $validated);
+            return ApiResponse::success('Seed distribution updated successfully', $validated);
         } catch (\Throwable $th) {
-            return $this->errorResponse('Failed to update seed distribution', $th->getMessage());
+            return ApiResponse::error('Failed to update seed distribution', $th->getMessage());
         }
     }
 
@@ -94,24 +100,12 @@ class SeedDistributionApiController extends Controller
      */
     public function destroy(string $id)
     {
-        $this->seedDistributionService->delete($id);
-    }
-
-    protected function successResponse(string $message, $data)
-    {
-        return response()->json([
-            'status' => 'success',
-            'message' => $message,
-            'seeds' => $data,
-        ], 200);
-    }
-
-    protected function errorResponse(string $message, string $error)
-    {
-        return response()->json([
-            'status' => 'error',
-            'message' => $message,
-            'error' => $error,
-        ], 500);
+        try {
+            $this->seedDistributionService->delete($id);
+            
+            return ApiResponse::success('Seed distribution deleted successfully', null);
+        } catch (\Throwable $th) {
+            return ApiResponse::error('Failed to delete seed distribution', $th->getMessage());
+        }
     }
 }
