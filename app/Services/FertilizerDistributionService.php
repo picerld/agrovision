@@ -16,7 +16,7 @@ class FertilizerDistributionService
 
     public function getPaginate($perPage = 6)
     {
-        return DB::table('fertilizer_distributions')->select('schools.name as school_name', 'fertilizer_distributions.*')
+        return DB::table('fertilizer_distributions')->select('fertilizer_distributions.*', 'schools.name as school_name')
             ->join('schools', 'fertilizer_distributions.school_id', '=', 'schools.id')
             ->orderBy('fertilizer_distributions.created_at', 'DESC')
             ->paginate($perPage);

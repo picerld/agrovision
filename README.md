@@ -2,7 +2,9 @@
 
 Agrovision adalah platform berbasis web yang dirancang untuk mendukung digitalisasi sektor pertanian. Proyek ini bertujuan untuk mempermudah manajemen distribusi, pencatatan, dan pelaporan komoditas pertanian dengan menggunakan teknologi modern berbasis Laravel.
 
----
+## Other Documentation
+
+For API documentation, you can refer to the [Postman API Documentation](https://documenter.getpostman.com/view/30847196/2sAYJ1mNit#6a2e5b31-72b4-4207-af41-795bcb2d1e66).
 
 ## 📝 **Backlog Proyek**
 

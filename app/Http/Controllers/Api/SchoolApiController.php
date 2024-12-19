@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ApiResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SchoolCollection;
 use App\Services\SchoolService;
 use Illuminate\Http\Request;
 
@@ -18,13 +20,18 @@ class SchoolApiController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $perPage = $request->input('per_page', 6);
 
         try {
-            $schools = $search ? $this->schoolService->search($search) : $this->schoolService->getPaginate(6);
+            $schools = $search ? $this->schoolService->search($search) : $this->schoolService->getPaginate($perPage);
 
-            return $this->successResponse('Schools fetched successfully', $schools);
+            if (!$schools) {
+                return ApiResponse::error('Schools not found', [], 404);
+            }
+
+            return ApiResponse::success('Schools fetched successfully', new SchoolCollection($schools));
         } catch (\Exception $e) {
-            return $this->errorResponse('Failed to fetch schools', $e->getMessage());
+            return ApiResponse::error('Failed to fetch schools', $e->getMessage());
         }
     }
 
@@ -41,7 +48,20 @@ class SchoolApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|min:5|max:50|unique:schools,name',
+                'address' => 'required|string|min:5|max:100',
+                'pic' => 'required|string|min:5|max:50',
+                'phone_number' => 'required|string|min:5|max:25',
+            ]);
+
+            $this->schoolService->store($validated);
+
+            return ApiResponse::success('School created successfully', $validated);
+        } catch (\Throwable $th) {
+            return ApiResponse::error('Failed to create school', $th->getMessage());
+        }
     }
 
     /**
@@ -49,7 +69,13 @@ class SchoolApiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $school = $this->schoolService->getOne($id);
+
+        if(!$school) {
+            return ApiResponse::error('School not found', [], 404);
+        }
+
+        return ApiResponse::success('School fetched successfully', $school);
     }
 
     /**
@@ -65,7 +91,20 @@ class SchoolApiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|min:5|max:50',
+                'address' => 'required|string|min:5|max:100',
+                'pic' => 'required|string|min:5|max:50',
+                'phone_number' => 'required|string|min:5|max:25',
+            ]);
+
+            $this->schoolService->update($id, $validated);
+
+            return ApiResponse::success('School updated successfully', $validated);
+        } catch (\Throwable $th) {
+            return ApiResponse::error('Failed to update school', $th->getMessage());
+        }
     }
 
     /**
@@ -73,24 +112,12 @@ class SchoolApiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-    }
+        try {
+            $this->schoolService->delete($id);
 
-    protected function successResponse(string $message, $data)
-    {
-        return response()->json([
-            'status' => 'success',
-            'message' => $message,
-            'schools' => $data,
-        ], 200);
-    }
-
-    protected function errorResponse(string $message, string $error)
-    {
-        return response()->json([
-            'status' => 'error',
-            'message' => $message,
-            'error' => $error,
-        ], 500);
+            return ApiResponse::success('School deleted successfully', null);
+        } catch (\Throwable $th) {
+            return ApiResponse::error('Failed to delete school', $th->getMessage());
+        }
     }
 }
