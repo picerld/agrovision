@@ -180,6 +180,6 @@ class CommodityController extends Controller
 
     public function exportPdf()
     {
-        return Excel::download(new CommodityExport, 'commodities.pdf');
+        return Excel::download(new CommodityExport, 'commodities.pdf', Excel::TCPDF);
     }
 }

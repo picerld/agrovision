@@ -13,7 +13,17 @@ class CommodityExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return Commodity::all();
+        $commodities = Commodity::query()
+            ->select(['id', 'name', 'image', 'harvest_date'])
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        $commodities->transform(function ($commodity) {
+            $commodity->image = asset('storage/commodities/' . $commodity->image);
+            return $commodity;
+        });
+
+        return $commodities;
     }
 
     public function headings(): array
@@ -23,8 +33,6 @@ class CommodityExport implements FromCollection, WithHeadings
             'Komoditas',
             'Image',
             'Masa Panen',
-            'created_at',
-            'updated_at',
         ];
     }
 }
