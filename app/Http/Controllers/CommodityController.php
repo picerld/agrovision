@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CommodityExport;
 use App\Models\Commodity;
 use Illuminate\Http\Request;
 use App\Services\CommodityService;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class CommodityController extends Controller
@@ -169,5 +171,15 @@ class CommodityController extends Controller
 
             return redirect()->route('commodities.index');
         }
+    }
+
+    public function exportCsv()
+    {
+        return Excel::download(new CommodityExport, 'commodities.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        return Excel::download(new CommodityExport, 'commodities.pdf');
     }
 }
