@@ -29,6 +29,11 @@ class SeedDistributionApiController extends Controller
                 return ApiResponse::error('Seeds not found', [], 404);
             }
 
+            $seeds->getCollection()->transform(function ($seed) {
+                $seed->image_url = asset('storage/commodities/' . $seed->image);
+                return $seed;
+            });
+
             return ApiResponse::success('Seeds fetched successfully', new SeedDistributionCollection($seeds));
         } catch (\Throwable $th) {
             return ApiResponse::error('Failed to fetch seeds', $th->getMessage());

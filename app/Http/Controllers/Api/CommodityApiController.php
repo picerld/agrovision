@@ -25,6 +25,11 @@ class CommodityApiController extends Controller
         try {
             $commodities = $search ? $this->commodityService->search($search) : $this->commodityService->getPaginate($perPage);
 
+            $commodities->getCollection()->transform(function ($commodity) {
+                $commodity->image_url = asset('storage/commodities/' . $commodity->image);
+                return $commodity;
+            });
+
             if (!$commodities) {
                 return ApiResponse::error('Commodities not found', [], 404);
             }
