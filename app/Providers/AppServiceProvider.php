@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
 
         // Permission
-        app()->make(PermissionRegistrar::class)->forgetCachedPermissions();
+        // app()->make(PermissionRegistrar::class)->forgetCachedPermissions();
+        app(PermissionRegistrar::class)->forgetCachedPermissions();
     }
 }

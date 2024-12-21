@@ -1,8 +1,13 @@
 <div class="w-full px-5">
     <div class="flex justify-end mb-4">
-        <button id="export-commodities" class="text-white btn btn-soft btn-success btn-sm">
-            <span class="icon-[tabler--download]"></span> Excel!
-        </button>
+        <div class="flex gap-2">
+            <a href="{{ route('commodities.export.xlsx') }}" class="text-white btn btn-soft btn-success btn-sm">
+                <span class="icon-[tabler--download]"></span> Excel!
+            </a>
+            <a href="{{ route('commodities.export.pdf') }}" class="text-white btn btn-soft btn-error btn-sm">
+                <span class="icon-[tabler--download]"></span> PDF!
+            </a>
+        </div>
         {{-- <div class="tooltip [--trigger:click]">
             <div class="tooltip-toggle">
                 <button class="btn btn-soft btn-primary btn-sm" aria-label="Export Button"><span

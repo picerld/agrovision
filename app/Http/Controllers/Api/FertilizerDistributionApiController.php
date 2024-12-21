@@ -94,7 +94,7 @@ class FertilizerDistributionApiController extends Controller
     {
         try {
             $this->fertilizerDistributionService->delete($id);
-            
+
             return ApiResponse::success('Fertilizer distribution deleted successfully', null);
         } catch (\Throwable $th) {
             return ApiResponse::error('Failed to delete fertilizer distribution', $th->getMessage());

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Commodity;
 use Illuminate\Http\Request;
 use App\Services\CommodityService;
+use Spatie\SimpleExcel\SimpleExcelWriter;
 use Yajra\DataTables\Facades\DataTables;
 
 class CommodityController extends Controller
@@ -169,5 +170,27 @@ class CommodityController extends Controller
 
             return redirect()->route('commodities.index');
         }
+    }
+
+    public function exportXlsx()
+    {
+        $commodities = $this->commodityService->getAll();
+
+        $writer = SimpleExcelWriter::streamDownload('commodities.xlsx');
+
+        foreach($commodities as $commodity) {
+            $writer->addRow([
+                'Nama' => $commodity->name,
+                'Masa Panen' => $commodity->harvest_date,
+                'Gambar' => asset('storage/commodities/' . $commodity->image)
+            ]);
+        }
+
+        $writer->toBrowser();
+    }
+
+    public function exportPdf()
+    {
+        
     }
 }

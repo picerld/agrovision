@@ -14,6 +14,11 @@ Route::get('/', function () {
     return view('auth.login');
 })->middleware('guest');
 
+Route::prefix('commodities/export')->group(function () {
+    Route::get('/xlsx', [CommodityController::class, 'exportXlsx'])->name('commodities.export.xlsx');
+    Route::get('/pdf', [CommodityController::class, 'exportPdf'])->name('commodities.export.pdf');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
